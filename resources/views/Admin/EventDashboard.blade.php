@@ -86,27 +86,57 @@
                 </form>
             </div>
 
-            {{-- <div class="rounded-lg bg-white p-1 shadow-md">
-                <h3 class="mb-6 mr-6 mt-4 text-xl font-semibold text-gray-800">Events List</h3>
-                
-                <div class="overflow-x-aut o grid grid-cols-2 gap-4">  
-                    <div class="group relative grid grid-cols-2 overflow-hidden shadow-lg">
-                        <div class="">
-                            @forelse($events as $event)
-                            <img class="h-[250px] w-[200px] object-cover p-2" src="{{ asset('img/' . $event->eventImage) }}" alt="Event Image"/>
+            <div class="rounded-lg bg-white p-6 shadow-md">
+                <h3 class="mb-6 text-xl font-semibold text-gray-800">Events List</h3>
+            
+                <div class="grid grid-cols-2 gap-6">
+                    @forelse($events as $event)
+                        <div class="flex-col-2 group relative flex overflow-hidden rounded-lg shadow-lg">
+                            <!-- Event Image -->
+                            <div class="h-64 w-full">
+                                <img class="h-full w-1/2 object-cover" src="{{ asset('img/' . $event->eventImage) }}" alt="Event Image"/>
+                            </div>
+            
+                            <!-- Event Details -->
+                            <div class="relative flex flex-col p-4 text-gray-800">
+                                <h3 class="text-lg font-bold">{{ $event->eventName }}</h3>
+                                <p class="mt-2 text-sm">Date: {{ $event->eventDate }}</p>
+                                <p class="mt-1 text-sm">Venue: {{ $event->eventVenue }}</p>
+                                <p class="mt-1 text-sm">Price: LKR {{ number_format($event->ticketPrice, 2) }}</p>
+            
+                                <div class="mt-4 flex space-x-3">
+                                    <!-- Update Button -->
+                                    <a
+                                        href="{{ route('events.edit', $event->_id) }}"
+                                        class="rounded bg-blue-500 px-3 py-1 text-sm text-white hover:bg-blue-600"
+                                    >
+                                        Update
+                                    </a>
+            
+                                    <!-- Delete Button -->
+                                    <form
+                                        action="{{ route('events.destroy', $event->_id) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this event?');"
+                                    >
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="submit"
+                                            class="rounded bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"
+                                        >
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="relative inset-0 z-10 flex flex-col justify-end p-4 text-black">
-                            <h3 class="text-xl font-bold">{{ $event->eventName }}</h3>
-                            <h3 class="text-xl">{{ $event->eventDate}}</h3>
-                            <h3 class="text-xl">{{ $event->eventVenue}}</h3>
-                            <h3 class="text-xl">LKR {{ $event->ticketPrice}}</h3>
-                            <button class="mb-2 rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600">Update</button>
-                            <button class="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">Delete</button>
-                            @endforelse                        
-                        </div>
-                    </div>
+                    @empty
+                        <p class="col-span-2 text-center text-gray-500">No events available.</p>
+                    @endforelse
                 </div>
-            </div> --}}
+            </div>
+            
         </div>
     </div>
     

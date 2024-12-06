@@ -52,6 +52,12 @@ class EventController extends Controller
     }
 
 
+    public function index()
+{
+    $events = Event::all(); // Fetch all events
+    return view('Admin.EventDashboard', compact('events')); // Pass events to the view
+}
+
 
 }
 
