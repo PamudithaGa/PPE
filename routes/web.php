@@ -42,9 +42,9 @@ Route::view('profile', 'profile')
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-    //Events
     
-
+    //Events
+    Route::post('/events', [EventController::class, 'store'])->name('events.store'); 
 
 
     //Route::get('/events', [EventController::class, 'index'])->name('EventDashboard');
