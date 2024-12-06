@@ -86,40 +86,28 @@
                 </form>
             </div>
 
-            <div class="rounded-lg bg-white p-1 shadow-md">
+            {{-- <div class="rounded-lg bg-white p-1 shadow-md">
                 <h3 class="mb-6 mr-6 mt-4 text-xl font-semibold text-gray-800">Events List</h3>
                 
                 <div class="overflow-x-aut o grid grid-cols-2 gap-4">  
                     <div class="group relative grid grid-cols-2 overflow-hidden shadow-lg">
                         <div class="">
-                            <img class="h-[250px] w-[200px] object-cover p-2" src="" alt="Event Image"/>
+                            @forelse($events as $event)
+                            <img class="h-[250px] w-[200px] object-cover p-2" src="{{ asset('img/' . $event->eventImage) }}" alt="Event Image"/>
                         </div>
                         <div class="relative inset-0 z-10 flex flex-col justify-end p-4 text-black">
-                            <h3 class="text-xl font-bold">Event Name</h3>
-                            <h3 class="text-xl">Date</h3>
-                            <h3 class="text-xl">Vanue</h3>
-                            <h3 class="text-xl">Ticket Price</h3>
+                            <h3 class="text-xl font-bold">{{ $event->eventName }}</h3>
+                            <h3 class="text-xl">{{ $event->eventDate}}</h3>
+                            <h3 class="text-xl">{{ $event->eventVenue}}</h3>
+                            <h3 class="text-xl">LKR {{ $event->ticketPrice}}</h3>
                             <button class="mb-2 rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600">Update</button>
                             <button class="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">Delete</button>
+                            @endforelse                        
                         </div>
                     </div>
-                    
-                    <div class="group relative grid grid-cols-2 overflow-hidden shadow-lg">
-                        <div class="">
-                            <img class="h-[250px] w-[200px] object-cover p-2" src="../img/dancer.jpg" alt="Event Image"/>
-                        </div>
-                        <div class="relative inset-0 z-10 flex flex-col justify-end p-4 text-black">
-                            <h3 class="text-xl font-bold">SL 2 World</h3>
-                            <h3 class="text-xl font-semibold">SL 2 World</h3>
-                            <button class="mb-2 rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600">Update</button>
-                            <button class="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">Delete</button>
-                        </div>
-                    </div>
-
-                </div>    
-            </div>  
+                </div>
+            </div> --}}
         </div>
-    </div>
     </div>
     
 
