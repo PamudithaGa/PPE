@@ -24,6 +24,7 @@ Route::view('profile', 'profile')
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
+    Route::get('/eventPage', [HomeController::class, 'eventPage'])->name('eventPage');
     Route::get('/offerings', [OfferController::class, 'index'])->name('offerings');
     
     

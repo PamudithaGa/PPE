@@ -89,52 +89,57 @@
             <div class="rounded-lg bg-white p-6 shadow-md">
                 <h3 class="mb-6 text-xl font-semibold text-gray-800">Events List</h3>
             
-                <div class="grid grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-3">
                     @forelse($events as $event)
-                        <div class="flex-col-2 group relative flex overflow-hidden rounded-lg shadow-lg">
-                            <!-- Event Image -->
-                            <div class="h-64 w-full">
-                                <img class="h-full w-1/2 object-cover" src="{{ asset('img/' . $event->eventImage) }}" alt="Event Image"/>
-                            </div>
-            
-                            <!-- Event Details -->
-                            <div class="relative flex flex-col p-4 text-gray-800">
-                                <h3 class="text-lg font-bold">{{ $event->eventName }}</h3>
-                                <p class="mt-2 text-sm">Date: {{ $event->eventDate }}</p>
-                                <p class="mt-1 text-sm">Venue: {{ $event->eventVenue }}</p>
-                                <p class="mt-1 text-sm">Price: LKR {{ number_format($event->ticketPrice, 2) }}</p>
-            
-                                <div class="mt-4 flex space-x-3">
-                                    <!-- Update Button -->
-                                    <a
-                                        href="{{ route('events.edit', $event->_id) }}"
-                                        class="rounded bg-blue-500 px-3 py-1 text-sm text-white hover:bg-blue-600"
+                    <div class="group relative flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
+                        <!-- Event Image -->
+                        <div class="h-64 w-full">
+                            <img 
+                                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" 
+                                src="{{ asset('img/' . $event->eventImage) }}" 
+                                alt="Event Image" 
+                            />
+                        </div>
+                
+                        <!-- Event Details -->
+                        <div class="p-6 text-gray-800">
+                            <h3 class="mb-2 text-xl font-semibold transition-colors duration-300 group-hover:text-blue-500">{{ $event->eventName }}</h3>
+                            <p class="mb-1 text-sm text-gray-600"><span class="font-semibold">Date:</span> {{ $event->eventDate }}</p>
+                            <p class="mb-1 text-sm text-gray-600"><span class="font-semibold">Venue:</span> {{ $event->eventVenue }}</p>
+                            <p class="text-sm text-gray-600"><span class="font-semibold">Price:</span> LKR {{ number_format($event->ticketPrice, 2) }}</p>
+                
+                            <div class="mt-4 flex space-x-3">
+                                <!-- Update Button -->
+                                <a
+                                    href="{{ route('events.edit', $event->_id) }}"
+                                    class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"
+                                >
+                                    Update
+                                </a>
+                
+                                <!-- Delete Button -->
+                                <form
+                                    action="{{ route('events.destroy', $event->_id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this event?');"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        type="submit"
+                                        class="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600"
                                     >
-                                        Update
-                                    </a>
-            
-                                    <!-- Delete Button -->
-                                    <form
-                                        action="{{ route('events.destroy', $event->_id) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this event?');"
-                                    >
-                                        @csrf
-                                        @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="rounded bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"
-                                        >
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
+                                        Delete
+                                    </button>
+                                </form>
                             </div>
                         </div>
+                    </div>
                     @empty
-                        <p class="col-span-2 text-center text-gray-500">No events available.</p>
+                    <p class="col-span-1 text-center text-gray-500 sm:col-span-2 lg:col-span-3">No events available.</p>
                     @endforelse
                 </div>
+                
             </div>
             
         </div>
