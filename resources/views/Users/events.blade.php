@@ -7,11 +7,7 @@
         @forelse($events as $event)
             <div class="group relative mt-[70px] flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
                 <div class="h-64 w-full">
-                    <img 
-                        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" 
-                        src="{{ asset('img/' . $event->eventImage) }}" 
-                        alt="Event Image" 
-                    />
+                    <img class="h-full w-full object-cover" src="{{ asset('img/' . $event->eventImage) }}" alt="Event Image" />
                 </div>
                 
                 <div class="p-6 text-gray-800">

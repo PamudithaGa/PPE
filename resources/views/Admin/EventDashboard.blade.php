@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Event Dashboard' }}</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> <!-- Assuming Tailwind CSS is installed -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/myscripts.js') }}" defer></script>
     <Script src="https://cdn.tailwindcss.com"></Script>
@@ -12,7 +12,6 @@
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <div class="flex">
-        <!-- Sidebar -->
         <div class="fixed h-screen w-1/5 bg-gray-900 shadow-lg">
             <div class="mt-[140px] flex items-center justify-center">
                 <img class="h-16 w-16 rounded-full" src="https://via.placeholder.com/150" alt="Admin Profile Picture">
@@ -92,12 +91,10 @@
                 <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-3">
                     @forelse($events as $event)
                     <div class="group relative flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
-                        <!-- Event Image -->
                         <div class="h-64 w-full">
                             <img class="object-cove h-full w-full" src="{{ asset('img/' . $event->eventImage) }}" alt="Event Image"/>
                         </div>
                 
-                        <!-- Event Details -->
                         <div class="p-6 text-gray-800">
                             <h3 class="mb-2 text-xl font-semibold transition-colors duration-300 group-hover:text-blue-500">{{ $event->eventName }}</h3>
                             <p class="mb-1 text-sm text-gray-600"><span class="font-semibold">Date:</span> {{ $event->eventDate }}</p>
@@ -105,14 +102,11 @@
                             <p class="text-sm text-gray-600"><span class="font-semibold">Price:</span> LKR {{ number_format($event->ticketPrice, 2) }}</p>
                 
                             <div class="mt-4 flex space-x-3">
-                                <!-- Update Button -->
+                                
                                 <button type="button" class="update-event-button rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"
                                     data-id="{{ $event->_id }}">Update
                                 </button>
-
                                 
-                
-                                <!-- Delete Button -->
                                 <form action="{{ route('events.destroy', $event->_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');">
                                     @csrf
                                     @method('DELETE')
@@ -123,12 +117,8 @@
                             </div>
                                             
                             <div class="event-update-form relative mt-4 hidden rounded-md bg-gray-100 p-4 shadow-md">
-                                <!-- Close Button -->
                                 <button 
-                                    class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600" 
-                                    onclick="closeUpdateForm()"
-                                    title="Close">
-                                    ×
+                                    class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600" onclick="closeUpdateForm()" title="Close">×
                                 </button>
                             
                                 <form action="{{ route('events.update', $event->_id) }}" method="POST" enctype="multipart/form-data">
@@ -161,24 +151,14 @@
                                     <button type="submit" class="mt-4 rounded bg-green-500 px-4 py-2 text-white">Update Event</button>
                                 </form>
                             </div>
-                            
-                            <script>
-                                function closeUpdateForm() {
-                                    const form = document.querySelector('.event-update-form');
-                                    form.classList.add('hidden');
-                                }
-                            </script>
-                            
-                </div>
                         </div>
                     </div>
+                </div>
                     @empty
                     <p class="col-span-1 text-center text-gray-500 sm:col-span-2 lg:col-span-3">No events available.</p>
                     @endforelse
                 </div>
-
             </div>
-            
         </div>
     </div>
     
@@ -247,8 +227,8 @@
 
 
         document.addEventListener('DOMContentLoaded', () => {
-    const updateButtons = document.querySelectorAll('.update-event-button');
-    updateButtons.forEach((button) => {
+            const updateButtons = document.querySelectorAll('.update-event-button');
+            updateButtons.forEach((button) => {
         button.addEventListener('click', (e) => {
             const eventCard = e.target.closest('.group');
             const updateForm = eventCard.querySelector('.event-update-form');
@@ -256,6 +236,19 @@
         });
     });
 });
+
+function closeUpdateForm() {
+                                    const form = document.querySelector('.event-update-form');
+                                    form.classList.add('hidden');
+                                }
+
+                                
+                                document.querySelector('input[name="ticketPrice"]').addEventListener('input', function (e) {
+    if (e.target.value < 1) {
+        e.target.value = 1; // Automatically set the value to 1 if the user enters 0 or a negative number
+    }
+});
+
 
     </script>
 
