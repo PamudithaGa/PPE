@@ -25,4 +25,5 @@ class HomeController extends Controller
         $events = Event::all(); // Fetch all events from the database
         return view('Users.events', compact('events')); // Pass the events to the view
     }
+    
 }

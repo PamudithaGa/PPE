@@ -3,7 +3,7 @@
 @section('content')
 
 <body class="m-0">
-    <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-5">
         @forelse($events as $event)
             <div class="group relative mt-[70px] flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
                 <div class="h-64 w-full">
@@ -20,8 +20,8 @@
                     <p class="mb-1 text-sm text-gray-600"><span class="font-semibold">Venue:</span> {{ $event->eventVenue }}</p>
                     <p class="text-sm text-gray-600"><span class="font-semibold">Price:</span> LKR {{ number_format($event->ticketPrice, 2) }}</p>
                     
-                    <div class="mt-4 flex space-x-3">
-                        <a href="{{ route('events.edit', $event->_id) }}" class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600">
+                    <div class="mt-4 flex w-full">
+                        <a href="" class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600">
                             Get Tickets 
                         </a>
                     </div>

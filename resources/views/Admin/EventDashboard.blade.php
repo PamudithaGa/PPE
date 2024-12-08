@@ -94,11 +94,7 @@
                     <div class="group relative flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
                         <!-- Event Image -->
                         <div class="h-64 w-full">
-                            <img 
-                                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110" 
-                                src="{{ asset('img/' . $event->eventImage) }}" 
-                                alt="Event Image" 
-                            />
+                            <img class="object-cove h-full w-full" src="{{ asset('img/' . $event->eventImage) }}" alt="Event Image"/>
                         </div>
                 
                         <!-- Event Details -->
@@ -110,25 +106,15 @@
                 
                             <div class="mt-4 flex space-x-3">
                                 <!-- Update Button -->
-                                <a
-                                    href="{{ route('events.edit', $event->_id) }}"
-                                    class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"
-                                >
+                                <a href="{{ route('events.edit', $event->_id) }}" class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600">
                                     Update
                                 </a>
                 
                                 <!-- Delete Button -->
-                                <form
-                                    action="{{ route('events.destroy', $event->_id) }}"
-                                    method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this event?');"
-                                >
+                                <form action="{{ route('events.destroy', $event->_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button
-                                        type="submit"
-                                        class="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600"
-                                    >
+                                    <button type="submit" class="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600">
                                         Delete
                                     </button>
                                 </form>

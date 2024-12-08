@@ -53,11 +53,32 @@ class EventController extends Controller
 
 
     public function index()
-{
-    $events = Event::all(); // Fetch all events
-    return view('Admin.EventDashboard', compact('events')); // Pass events to the view
-}
+    {
+        $events = Event::all(); // Fetch all events
+        return view('Admin.EventDashboard', compact('events')); // Pass events to the view
+    }
 
+
+    public function destroy($id)
+    {
+        // Find the event by ID
+        $event = Event::find($id);
+
+        if ($event) {
+            // Remove the event image from the public folder
+            $imagePath = public_path('img/' . $event->eventImage);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            // Delete the event
+            $event->delete();
+
+            return redirect()->route('EventDashboard')->with('success', 'Event deleted successfully!');
+        }
+
+        return redirect()->route('EventDashboard')->with('error', 'Event not found!');
+    }
 
 }
 
