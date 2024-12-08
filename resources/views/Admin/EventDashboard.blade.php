@@ -78,7 +78,7 @@
                             </div>
                         </div>
                 
-                        <input type="file" name="eventImage" class="w-full rounded border px-3 py-2" required>
+                        <input type="file" name="eventImage" id="eventImage" class="w-full rounded border px-3 py-2" required>
                     </div>
                     <p class="border-1 py-1 text-[18px] font-bold text-red-600">Important: When Adding An Event, It Must Be 10 Days After The Date Of Adding The Event.</p>
                     <button class="rounded bg-green-500 px-4 py-2 text-white" type="submit">Add Event</button>
