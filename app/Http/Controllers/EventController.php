@@ -80,5 +80,42 @@ class EventController extends Controller
         return redirect()->route('EventDashboard')->with('error', 'Event not found!');
     }
 
+
+
+    public function update(Request $request, $id)
+{
+    $event = Event::find($id);
+
+    // Validate inputs
+    $request->validate([
+        'eventName' => 'required',
+        'eventType' => 'required',
+        'ticketPrice' => 'required|numeric',
+        'eventDate' => 'required|date',
+        'eventTime' => 'required',
+        'endTime' => 'required',
+        'eventVenue' => 'required',
+        'eventDescription' => 'required',
+        'eventImage' => 'nullable|image',
+    ]);
+
+    // Update event details
+    $event->update($request->all());
+
+    // Handle image upload if present
+    if ($request->hasFile('eventImage')) {
+        $file = $request->file('eventImage');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('img'), $filename);
+        $event->eventImage = $filename;
+        $event->save();
+    }
+
+    return redirect()->back()->with('success', 'Event updated successfully!');
+}
+
+
+
+
 }
 

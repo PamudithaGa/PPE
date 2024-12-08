@@ -48,15 +48,15 @@ Route::view('profile', 'profile')
     Route::post('/eventsAdd', [EventController::class, 'store'])->name('events.store'); 
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
-    Route::get('/events/{id}/edit', [EventController::class, 'edit'])->name('events.edit'); // Show edit form
-    Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update'); // Update event
+    // Route::get('/events/{id}/edit', [EventController::class, 'edit'])->name('events.edit'); // Show edit form
+    // Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update'); // Update event
+    Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
 
 
     //Route::get('/events', [EventController::class, 'index'])->name('EventDashboard');
 
-    //Route::delete('/event/{id}/delete', [EventController::class, 'destroy'])->name('event.destroy');
     //Route::put('/event/{id}/update', [EventController::class, 'update'])->name('event.update');
     
     //Book routes

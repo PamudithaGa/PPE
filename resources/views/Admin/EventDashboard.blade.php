@@ -106,9 +106,11 @@
                 
                             <div class="mt-4 flex space-x-3">
                                 <!-- Update Button -->
-                                <a href="{{ route('events.edit', $event->_id) }}" class="rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600">
-                                    Update
-                                </a>
+                                <button type="button" class="update-event-button rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600"
+                                    data-id="{{ $event->_id }}">Update
+                                </button>
+
+                                
                 
                                 <!-- Delete Button -->
                                 <form action="{{ route('events.destroy', $event->_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');">
@@ -119,17 +121,67 @@
                                     </button>
                                 </form>
                             </div>
+                                            
+                            <div class="event-update-form relative mt-4 hidden rounded-md bg-gray-100 p-4 shadow-md">
+                                <!-- Close Button -->
+                                <button 
+                                    class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600" 
+                                    onclick="closeUpdateForm()"
+                                    title="Close">
+                                    ×
+                                </button>
+                            
+                                <form action="{{ route('events.update', $event->_id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <h3 class="mb-4 text-lg font-semibold text-gray-700">Update Event</h3>
+                            
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <input type="text" name="eventName" value="{{ $event->eventName }}" 
+                                            class="w-full rounded border px-3 py-2" placeholder="Event Name" required>
+                                        <select name="eventType" class="w-full rounded border px-3 py-2" required>
+                                            <option value="musical" {{ $event->eventType == 'musical' ? 'selected' : '' }}>Musical Show</option>
+                                            <option value="dancing" {{ $event->eventType == 'dancing' ? 'selected' : '' }}>Dancing Show</option>
+                                            <option value="conference" {{ $event->eventType == 'conference' ? 'selected' : '' }}>Conference</option>
+                                            <option value="workshop" {{ $event->eventType == 'workshop' ? 'selected' : '' }}>Workshop</option>
+                                        </select>
+                                        <input type="number" name="ticketPrice" value="{{ $event->ticketPrice }}" 
+                                            class="w-full rounded border px-3 py-2" placeholder="Ticket Price" required>
+                                        <input type="date" name="eventDate" value="{{ $event->eventDate }}" 
+                                            class="w-full rounded border px-3 py-2" required>
+                                        <input type="time" name="eventTime" value="{{ $event->eventTime }}" 
+                                            class="w-full rounded border px-3 py-2" required>
+                                        <input type="time" name="endTime" value="{{ $event->endTime }}" 
+                                            class="w-full rounded border px-3 py-2" required>
+                                        <input type="text" name="eventVenue" value="{{ $event->eventVenue }}" 
+                                            class="w-full rounded border px-3 py-2" placeholder="Venue" required>
+                                        <textarea name="eventDescription" class="w-full rounded border px-3 py-2" placeholder="Event Description" required>{{ $event->eventDescription }}</textarea>
+                                        <input type="file" name="eventImage" class="w-full rounded border px-3 py-2">
+                                    </div>
+                                    <button type="submit" class="mt-4 rounded bg-green-500 px-4 py-2 text-white">Update Event</button>
+                                </form>
+                            </div>
+                            
+                            <script>
+                                function closeUpdateForm() {
+                                    const form = document.querySelector('.event-update-form');
+                                    form.classList.add('hidden');
+                                }
+                            </script>
+                            
+                </div>
                         </div>
                     </div>
                     @empty
                     <p class="col-span-1 text-center text-gray-500 sm:col-span-2 lg:col-span-3">No events available.</p>
                     @endforelse
                 </div>
-                
+
             </div>
             
         </div>
     </div>
+    
     
 
     <script>
@@ -192,6 +244,19 @@
                 }
             });
         });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const updateButtons = document.querySelectorAll('.update-event-button');
+    updateButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const eventCard = e.target.closest('.group');
+            const updateForm = eventCard.querySelector('.event-update-form');
+            updateForm.classList.toggle('hidden');
+        });
+    });
+});
+
     </script>
 
     
