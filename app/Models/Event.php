@@ -21,5 +21,6 @@ class Event extends Eloquent
         'eventDescription',
         'artists',
         'imagePath',
+        'ticketQuantity',
     ];
 }

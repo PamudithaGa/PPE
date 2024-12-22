@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Booking;
 use App\Models\bookings;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BookingConfirmation;

@@ -9,10 +9,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\UserController;
 
 
-Route::view('/', 'welcome');
+Route::view('/', 'Users.home');
+
+//Route::view('/', 'Users.home');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -22,9 +24,15 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
     Route::get('/eventPage', [HomeController::class, 'eventPage'])->name('eventPage');
+    Route::get('/serivces', [HomeController::class, 'serivces'])->name('serivces');
+
+
+    // Route::get('/subscribe', [HomeController::class, 'subscribe'])->name('subscribe');
+
     Route::get('/offerings', [OfferController::class, 'index'])->name('offerings');
     
     
@@ -47,30 +55,23 @@ Route::view('profile', 'profile')
     //Events
     Route::post('/eventsAdd', [EventController::class, 'store'])->name('events.store'); 
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
-
-    // Route::get('/events/{id}/edit', [EventController::class, 'edit'])->name('events.edit'); // Show edit form
-    // Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update'); // Update event
     Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
-
-
-    //Route::get('/events', [EventController::class, 'index'])->name('EventDashboard');
-
-    //Route::put('/event/{id}/update', [EventController::class, 'update'])->name('event.update');
     
     //Book routes
-
-
     Route::get('/Bookings', [BookingController::class, 'index'])->name('event');
     Route::post('/Bookings', [BookingController::class, 'store'])->name('bookings.store');
 
 
-    Route::get('/serivces', [HomeController::class, 'serivces'])->name('serivces');
 
 
 
-    
+Route::get('/userdashboard', [UserController::class, 'index'])->name('userdashboard');
+Route::get('/cart', [UserController::class, 'cart'])->name('cart');
+
+
+Route::post('/purchase-ticket', [EventController::class, 'purchaseTicket']);
 
 require __DIR__.'/auth.php';
 

@@ -20,8 +20,8 @@
                 <ul>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Dashboard</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Users</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('ProductDashboard') }}">Product Management Dashboard</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('EventDashboard') }}">Event Management Dashboard</a></li>
+                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('ProductDashboard') }}">Product Management</a></li>
+                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('EventDashboard') }}">Event Management</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Orders</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Logout</a></li>
                 </ul>
@@ -79,6 +79,7 @@
                         </div>
                 
                         <input type="file" name="eventImage" id="eventImage" class="w-full rounded border px-3 py-2" required>
+                        <input type="number" id="ticketQunatity" name="ticketQunatity" class="w-full rounded border px-3 py-2" placeholder="Ticket Qunatity" required>
                     </div>
                     <p class="border-1 py-1 text-[18px] font-bold text-red-600">Important: When Adding An Event, It Must Be 10 Days After The Date Of Adding The Event.</p>
                     <button class="rounded bg-green-500 px-4 py-2 text-white" type="submit">Add Event</button>
@@ -88,7 +89,7 @@
             <div class="rounded-lg bg-white p-6 shadow-md">
                 <h3 class="mb-6 text-xl font-semibold text-gray-800">Events List</h3>
             
-                <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-4">
                     @forelse($events as $event)
                     <div class="group relative flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">
                         <div class="h-64 w-full">
@@ -147,17 +148,19 @@
                                             class="w-full rounded border px-3 py-2" placeholder="Venue" required>
                                         <textarea name="eventDescription" class="w-full rounded border px-3 py-2" placeholder="Event Description" required>{{ $event->eventDescription }}</textarea>
                                         <input type="file" name="eventImage" class="w-full rounded border px-3 py-2">
+                                        <input type="number" id="ticketQunatity" name="ticketQunatity" class="w-full rounded border px-3 py-2" placeholder="Ticket Qunatity" required>
                                     </div>
                                     <button type="submit" class="mt-4 rounded bg-green-500 px-4 py-2 text-white">Update Event</button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                </div>
+                
                     @empty
                     <p class="col-span-1 text-center text-gray-500 sm:col-span-2 lg:col-span-3">No events available.</p>
                     @endforelse
                 </div>
+            </div>
             </div>
         </div>
     </div>

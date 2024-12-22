@@ -60,9 +60,9 @@
                     <ul 
                         class="absolute left-0 mt-2 hidden w-48 rounded bg-white p-2 text-slate-900 shadow-lg group-focus-within:block group-hover:block"
                         aria-label="submenu">
-                        <li class="p-2 font-serif hover:bg-gray-100">
+                        {{-- <li class="p-2 font-serif hover:bg-gray-100">
                             <a href="{{ route('eventPage') }}">Upcoming Events</a>
-                        </li>
+                        </li> --}}
                         <li class="p-2 font-serif hover:bg-gray-100">
                             <a href="{{ route('weddings') }}">Weddings</a>
                         </li>
@@ -82,17 +82,17 @@
             </ul>
                 
             <div class="flex space-x-4">
-                <button class="h-[45px] w-[125px] rounded-md border-none bg-white font-semibold text-slate-900 shadow-md hover:bg-gray-200">
-                    <a href="{{ route('weddings') }}">Sign Up</a>
+                <button class="h-[45px] w-[125px] rounded-md border-none bg-white font-serif font-semibold text-slate-900 shadow-md hover:bg-gray-200">
+                    <a href="{{ route('eventPage') }}">Upcomings</a>
                 </button>
-                <button class="h-[45px] w-[125px] rounded-md border-2 border-white bg-transparent font-semibold text-white shadow-md hover:bg-white hover:text-[#4c4f76]">
+                {{-- <button class="h-[45px] w-[125px] rounded-md border-2 border-white bg-transparent font-semibold text-white shadow-md hover:bg-white hover:text-[#4c4f76]">
                     <a href="{{ route('weddings') }}">Login</a>
-                </button>
+                </button> --}}
             </div>
 
             <div class="hidden space-x-4 md:flex">
-                {{-- <a href="{{ route('user.dashboard') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/user-tie-solid.svg') }}" alt="Account"></a>
-                <a href="{{ route('cart') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/cart-shopping-solid.svg') }}" alt="Cart"></a> --}}
+                <a href="{{ route('dashboard') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/cart-shopping-solid.svg') }}" alt="Cart"></a>
+                <a href="{{ route('dashboard') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/user.png') }}" alt="Account"></a>
             </div>
         </nav>
     </header>

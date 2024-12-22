@@ -11,6 +11,21 @@
             easing: 'ease-in-out', // Animation easing
             once: false, // Animation triggers every time you scroll up/down
         });
+
+                // Dynamic filtering function
+                function filterItems() {
+            const selectedType = document.getElementById('eventType').value.toLowerCase();
+            const cards = document.querySelectorAll('.filter-item');
+
+            cards.forEach(card => {
+                const category = card.dataset.category.toLowerCase();
+                if (selectedType === 'all' || category === selectedType) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
     
 
@@ -22,7 +37,6 @@
             <option value="Photo&Video">Photography & Videography</option>
             <option value="recreation">Recreation</option>
             <option value="decorations">Decorations</option>
-            <option value="workshop">Workshop</option>
         </select>
     </div>
 
@@ -31,7 +45,7 @@
     </div>
     
     <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-lg border bg-white shadow-md">
+        <div class="rounded-lg border bg-white shadow-md" data-category="venues">
             <img src="{{ asset('../img/barnhouse2.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
             <div class="p-4">
                 <div class="mb-2 flex items-center">
@@ -101,7 +115,7 @@
     </div>
     
     <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-lg border bg-white shadow-md">
+        <div class="rounded-lg border bg-white shadow-md" data-category="photo&video">
             <img src="{{ asset('../img/naduncover.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
             <div class="p-4">
                 <div class="mb-2 flex items-center">
@@ -193,7 +207,7 @@
         <p class="font-k2d ml-[60px] text-[42px] text-slate-700">RECREATION</p>
     </div>
     <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-lg border bg-white shadow-md">
+        <div class="rounded-lg border bg-white shadow-md" data-category="recreation">
             <img src="{{ asset('../img/oriyanDJcover.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
             <div class="p-4">
                 <div class="mb-2 flex items-center">
@@ -262,7 +276,7 @@
         <p class="font-k2d ml-[60px] text-[42px] text-slate-700">DECORATIONS</p>
     </div>
     <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-lg border bg-white shadow-md">
+        <div class="rounded-lg border bg-white shadow-md" data-category="decorations">>
             <img src="{{ asset('../img/lassanaFloracover.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
             <div class="p-4">
                 <div class="mb-2 flex items-center">
@@ -362,3 +376,89 @@
 
 
 @endsection
+
+
+
+
+
+
+{{-- @extends('layout')
+
+@section('content')
+
+<body class="m-0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200, 
+            easing: 'ease-in-out',
+            once: false,
+        });
+
+        // Dynamic filtering function
+        function filterItems() {
+            const selectedType = document.getElementById('eventType').value.toLowerCase();
+            const cards = document.querySelectorAll('.filter-item');
+
+            cards.forEach(card => {
+                const category = card.dataset.category.toLowerCase();
+                if (selectedType === 'all' || category === selectedType) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <div class="align-mid flex items-center justify-center pt-[100px] font-serif">
+        <select id="eventType" name="eventType" class="w-1/4 rounded border px-3 py-2" onchange="filterItems()">
+            <option value="all">All</option>
+            <option value="venues">Venues</option>
+            <option value="photo&video">Photography & Videography</option>
+            <option value="recreation">Recreation</option>
+            <option value="decorations">Decorations</option>
+        </select>
+    </div>
+
+    <div>
+        <p class="font-k2d ml-[60px] text-[42px] text-slate-700">Event Services</p>
+    </div>
+    
+    <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Venues -->
+        <div class="filter-item rounded-lg border bg-white shadow-md" data-category="venues">
+            <img src="{{ asset('../img/barnhouse2.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
+            <div class="p-4">
+                <h3 class="font-serif text-lg font-bold">The Barnhouse Studio - Panadura</h3>
+            </div>
+        </div>
+
+        <!-- Photo & Video -->
+        <div class="filter-item rounded-lg border bg-white shadow-md" data-category="photo&video">
+            <img src="{{ asset('../img/naduncover.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
+            <div class="p-4">
+                <h3 class="font-serif text-lg font-bold">Nadun Lakina Photography</h3>
+            </div>
+        </div>
+
+        <!-- Recreation -->
+        <div class="filter-item rounded-lg border bg-white shadow-md" data-category="recreation">
+            <img src="{{ asset('../img/oriyanDJcover.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
+            <div class="p-4">
+                <h3 class="font-serif text-lg font-bold">Oriyan DJ With Sura</h3>
+            </div>
+        </div>
+
+        <!-- Decorations -->
+        <div class="filter-item rounded-lg border bg-white shadow-md" data-category="decorations">
+            <img src="{{ asset('../img/lassanaFloracover.jpg') }}" alt="Event Image" class="h-48 w-full rounded-t-lg object-cover" />
+            <div class="p-4">
+                <h3 class="font-serif text-lg font-bold">Lassana Flora</h3>
+            </div>
+        </div>
+
+        <!-- Add more cards here with appropriate data-category -->
+    </div>
+</body>
+@endsection --}}

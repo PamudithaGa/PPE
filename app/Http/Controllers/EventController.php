@@ -24,6 +24,7 @@ class EventController extends Controller
             'eventDescription' => 'required|string',
             'artists' => 'nullable|array',
             'eventImage' => 'required|file|mimes:jpg,jpeg,png',
+            'ticketQunatity' => 'required|numeric',
         ]);
 
         // Save the data into MongoDB
@@ -37,6 +38,7 @@ class EventController extends Controller
         $event->eventVenue = $request->input('eventVenue');
         $event->description = $request->input('eventDescription');
         $event->artists = $request->input('artists') ?: [];
+        $event->ticketQuantity = $request->input('ticketQuantity');
 
         // Handle the event image upload
         if ($request->hasFile('eventImage')) {
@@ -97,6 +99,7 @@ class EventController extends Controller
         'eventVenue' => 'required',
         'eventDescription' => 'required',
         'eventImage' => 'nullable|image',
+        'ticketQunatity' => 'required|numeric',
     ]);
 
     // Update event details

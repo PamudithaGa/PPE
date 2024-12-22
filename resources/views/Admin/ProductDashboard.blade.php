@@ -22,8 +22,8 @@
                 <ul>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Admins</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Users</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('ProductDashboard') }}">Products Management Dashboard</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('EventDashboard') }}">Event Management Dashboard</a></li>
+                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('ProductDashboard') }}">Products Management</a></li>
+                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('EventDashboard') }}">Event Management</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Orders</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Logout</a></li>
                 </ul>
@@ -116,7 +116,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($product as $product)
+                            @forelse($products as $product)
                                 <tr class="product-row">
                                     <td class="px-4 py-2">{{ $product->_id }}</td>
                                     <td class="product-name px-4 py-2">{{ $product->name }}</td>
