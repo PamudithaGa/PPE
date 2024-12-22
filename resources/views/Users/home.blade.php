@@ -148,7 +148,7 @@
     </div>
             
     <!--crew-->
-    <div class="items-center pb-[30px] pt-[105px]">
+    <div class="items-center pb-[60px] pt-[135px]">
         <h2 class="ml-[80px] text-center font-serif text-[36px]">Our Professioners</h2>
         <div class="mt-[30px] grid grid-cols-5 place-items-center">
             <div class="group relative flex h-[180px] w-[180px] items-center justify-center rounded-full bg-[#717999]">
@@ -203,7 +203,7 @@
     </div>
 
     <!--image-->
-    <div class="relative mt-[100px] h-[450px] bg-[#717999]">
+    <div class="relative mt-[100px] h-[450px] bg-[#717999] pb-[50px]">
         <h2 class="font-just-another-hand pl-[100px] pt-[30px] text-[60px] text-white">Need help planning your event?</h2>
         <h2 class="font-julius-sans-one pl-[210px] pt-[20px] text-[55px] text-white">WE ARE HERE TO HELP YOU.</h2>
         <h2 class="pl-[70px] font-serif text-[20px] text-white">Discuss with experts with years of experience in the field and get your <br> wishes fulfilled.</h2>
@@ -215,7 +215,7 @@
         </div>
     </div>
 
-    <div class="pt-[90px]">
+    <div class="pb-[50px] pt-[90px]">
         <div class="flex items-center justify-between">
           <h2 class="ml-[80px] font-serif text-[36px]">Upcoming Events</h2>
         </div>        

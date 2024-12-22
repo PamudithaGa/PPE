@@ -62,6 +62,10 @@
                 <span class="font-semibold">Total Price:</span> LKR <span id="totalPrice">0</span>
             </p>
             
+            <p class="font-bold">Ticket Policy</p>
+            <p class="text-justify text-gray-700">Only the initial email or SMS provided by Pearl Princess Events will be accepted as proof of purchase, Tickets will not be redeemed for any forwarded or screenshots.<br>          
+                Valid NIC or Passport will be required if needed during the process of Redeeming.</p>
+
             <!-- Purchase Button -->
             <div class="mt-4">
                 <button 

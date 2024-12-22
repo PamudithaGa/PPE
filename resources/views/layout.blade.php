@@ -52,17 +52,29 @@
                 </li>
 
                 <li class="group relative">
-                    
-                    <span class="cursor-pointer font-serif hover:border-b-2 hover:border-[#E7892C] hover:text-gray-200">
+                    <button 
+                        class="cursor-pointer font-serif hover:border-b-2 hover:border-[#E7892C] hover:text-gray-200"
+                        aria-haspopup="true" aria-expanded="false">
                         Events
-                    </span>
-                    
-                    <ul class="absolute left-0 mt-2 hidden w-48 rounded bg-white p-2 text-slate-900 shadow-lg group-hover:block">
-                        <li class="p-2 font-serif hover:bg-gray-100"><a href="{{ route('weddings') }}">Weddings</a></li>
-                        <li class="p-2 font-serif hover:bg-gray-100"><a href="{{ route('weddings') }}">Social Gathering</a></li>
-                        <li class="p-2 font-serif hover:bg-gray-100"><a href="{{ route('weddings') }}">Corporate Events</a></li>
+                    </button>
+                    <ul 
+                        class="absolute left-0 mt-2 hidden w-48 rounded bg-white p-2 text-slate-900 shadow-lg group-focus-within:block group-hover:block"
+                        aria-label="submenu">
+                        <li class="p-2 font-serif hover:bg-gray-100">
+                            <a href="{{ route('eventPage') }}">Upcoming Events</a>
+                        </li>
+                        <li class="p-2 font-serif hover:bg-gray-100">
+                            <a href="{{ route('weddings') }}">Weddings</a>
+                        </li>
+                        <li class="p-2 font-serif hover:bg-gray-100">
+                            <a href="{{ route('weddings') }}">Social Gathering</a>
+                        </li>
+                        <li class="p-2 font-serif hover:bg-gray-100">
+                            <a href="{{ route('weddings') }}">Corporate Events</a>
+                        </li>
                     </ul>
                 </li>
+                
 
                 <li class="inline-block font-serif text-white hover:border-b-2 hover:border-[#E7892C] hover:text-gray-200">
                         <a href="{{ route('bookings.store') }}">Booking</a>
