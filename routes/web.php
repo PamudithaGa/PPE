@@ -47,9 +47,14 @@ Route::view('profile', 'profile')
     Route::get('/EventDashboard', [AdminController::class, 'events'])->name('EventDashboard');
 
     //products routes
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    // Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    // Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+
 
 
     //Events
@@ -57,7 +62,7 @@ Route::view('profile', 'profile')
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
-
+    //Route::get('/eventdashboard', [EventController::class, 'index'])->name('events.index');
     
     //Book routes
     Route::get('/Bookings', [BookingController::class, 'index'])->name('event');

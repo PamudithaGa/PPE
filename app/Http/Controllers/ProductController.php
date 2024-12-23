@@ -9,9 +9,6 @@ class ProductController extends Controller
 {
     /**
      * Store a new product in the database.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -25,43 +22,60 @@ class ProductController extends Controller
         ]);
 
         // Handle image upload
+        $imageName = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('img'), $imageName); // Save image to public/img folder
-        } else {
-            $imageName = null; // Fallback in case no image is uploaded
+            $image->move(public_path('img'), $imageName);
         }
 
-        // Save the product data to the database
-        $product = Product::create([
+        // Save product to the database
+        Product::create([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'category' => $request->input('category'),
             'description' => $request->input('description'),
-            'image' => $imageName, // Save the image name in the database
+            'image' => $imageName,
         ]);
 
-        // Redirect to the Product Dashboard with success message
-        return redirect()->route('ProductDashboard')->with('success', 'Product added successfully!');
+        // Redirect with success message
+        return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
 
     /**
-     * Display the list of products on the dashboard.
-     *
-     * @return \Illuminate\View\View
+     * Display the list of products.
      */
     public function index()
     {
-        // Fetch all products from the database
-        $products = Product::all();
-
-        // Pass the products to the view
+        $products = Product::all(); // Fetch all products
         return view('Admin.ProductDashboard', compact('products'));
-
     }
 
+        /**
+     * Delete a product from the database.
+     *
+     * @param  string  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        // Find the product by its ID
+        $product = Product::find($id);
 
+        // Check if product exists
+        if (!$product) {
+            return redirect()->route('products.index')->with('error', 'Product not found.');
+        }
 
+        // Delete the associated image if it exists
+        if ($product->image && file_exists(public_path('img/' . $product->image))) {
+            unlink(public_path('img/' . $product->image));
+        }
+
+        // Delete the product from the database
+        $product->delete();
+
+        // Redirect with success message
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+    }
 }
-
