@@ -20,8 +20,8 @@
                 <ul>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Dashboard</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Users</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('ProductDashboard') }}">Product Management</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('EventDashboard') }}">Event Management</a></li>
+                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('products.index') }}">Product Management</a></li>
+                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('events.index') }}">Event Management</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Orders</a></li>
                     <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Logout</a></li>
                 </ul>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="ml-[330px] w-4/5 bg-gray-100 p-8">
-            <header class="mb-1 mt-[30px] flex items-center justify-between rounded-lg bg-white p-4 shadow-md">
+            <header class="mb-1 mt-[20px] flex items-center justify-between rounded-lg bg-white p-4 shadow-md">
                 <h1 class="text-2xl font-bold text-gray-700">Event Management Dashboard</h1>
                 <div class="flex items-center">
                     <span class="mr-4 text-gray-700">Welcome, Admin</span>
@@ -77,9 +77,135 @@
                                 </div>
                             </div>
                         </div>
-                
-                        <input type="file" name="eventImage" id="eventImage" class="w-full rounded border px-3 py-2" required>
+                        
                         <input type="number" id="ticketQunatity" name="ticketQunatity" class="w-full rounded border px-3 py-2" placeholder="Ticket Qunatity" required>
+                        
+
+                        <div class="mx-auto w-full max-w-lg rounded border border-gray-300 bg-white p-6 shadow-md">
+                            <div
+                              id="dropZone"
+                              class="flex h-40 flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 transition hover:border-blue-500"
+                              ondragover="event.preventDefault()"
+                              ondrop="handleFileDrop(event)"
+                            >
+                              <img
+                                id="uploadIcon"
+                                src="https://via.placeholder.com/50"
+                                alt="Upload Icon"
+                                class="mb-3 h-12 w-12"
+                              />
+                              <p id="uploadText" class="text-gray-600">
+                                Drop your image here, or
+                                <span
+                                  class="cursor-pointer text-blue-500"
+                                  onclick="document.getElementById('eventImage').click()"
+                                  >browse</span
+                                >
+                              </p>
+                              <p id="fileFormats" class="text-sm text-gray-400">
+                                Supports: JPG, JPEG2000, PNG
+                              </p>
+                              <input
+                                type="file"
+                                name="eventImage"
+                                id="eventImage"
+                                accept="image/*"
+                                class="hidden"
+                                onchange="handleFileInput(event)"
+                              />
+                              <img
+                                id="imagePreview"
+                                class="hidden max-h-40 w-full rounded object-cover"
+                                alt="Image Preview"
+                              />
+                            </div>
+                          
+                            <div id="progressContainer" class="mt-4 hidden">
+                              <div class="mb-2 flex items-center justify-between">
+                                <p class="text-sm text-gray-600">Uploading...</p>
+                                <button
+                                  id="cancelButton"
+                                  onclick="cancelUpload()"
+                                  class="text-sm text-red-500 hover:text-red-600"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                              <div class="relative h-2 w-full rounded bg-gray-200">
+                                <div id="progressBar" class="absolute left-0 top-0 h-2 rounded bg-blue-500" style="width: 0%;"></div>
+                              </div>
+                              <p id="progressText" class="mt-1 text-sm text-gray-500">0% • 0 seconds left</p>
+                            </div>
+                          </div>
+                          
+                          <script>
+                            let uploadInterval;
+                            let uploadProgress = 0;
+                          
+                            function handleFileInput(event) {
+                              const file = event.target.files[0];
+                              if (file) {
+                                displayImage(file);
+                                startUpload(file);
+                              }
+                            }
+                          
+                            function handleFileDrop(event) {
+                              event.preventDefault();
+                              const file = event.dataTransfer.files[0];
+                              if (file) {
+                                displayImage(file);
+                                startUpload(file);
+                              }
+                            }
+                          
+                            function displayImage(file) {
+                              const reader = new FileReader();
+                              reader.onload = function (e) {
+                                const uploadIcon = document.getElementById('uploadIcon');
+                                const uploadText = document.getElementById('uploadText');
+                                const fileFormats = document.getElementById('fileFormats');
+                                const imagePreview = document.getElementById('imagePreview');
+                          
+                                uploadIcon.classList.add('hidden');
+                                uploadText.classList.add('hidden');
+                                fileFormats.classList.add('hidden');
+                          
+                                imagePreview.src = e.target.result;
+                                imagePreview.classList.remove('hidden');
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          
+                            function startUpload(file) {
+                              document.getElementById('progressContainer').classList.remove('hidden');
+                              uploadProgress = 0;
+                              updateProgress();
+                              uploadInterval = setInterval(() => {
+                                uploadProgress += 10;
+                                updateProgress();
+                                if (uploadProgress >= 100) {
+                                  clearInterval(uploadInterval);
+                                  document.getElementById('progressContainer').classList.add('hidden');
+                                }
+                              }, 500);
+                            }
+                          
+                            function updateProgress() {
+                              const progressBar = document.getElementById('progressBar');
+                              const progressText = document.getElementById('progressText');
+                              progressBar.style.width = `${uploadProgress}%`;
+                              progressText.textContent = `${uploadProgress}% • ${5 - Math.floor(uploadProgress / 20)} seconds left`;
+                            }
+                          
+                            function cancelUpload() {
+                              clearInterval(uploadInterval);
+                              uploadProgress = 0;
+                              document.getElementById('progressContainer').classList.add('hidden');
+                            }
+                          </script>                   
+                                           
+                                           
                     </div>
                     <p class="border-1 py-1 text-[18px] font-bold text-red-600">Important: When Adding An Event, It Must Be 10 Days After The Date Of Adding The Event.</p>
                     <button class="rounded bg-green-500 px-4 py-2 text-white" type="submit">Add Event</button>
@@ -241,12 +367,12 @@
 });
 
 function closeUpdateForm() {
-                                    const form = document.querySelector('.event-update-form');
-                                    form.classList.add('hidden');
-                                }
+  const form = document.querySelector('.event-update-form');
+  form.classList.add('hidden');
+}
 
                                 
-                                document.querySelector('input[name="ticketPrice"]').addEventListener('input', function (e) {
+document.querySelector('input[name="ticketPrice"]').addEventListener('input', function (e) {
     if (e.target.value < 1) {
         e.target.value = 1; // Automatically set the value to 1 if the user enters 0 or a negative number
     }

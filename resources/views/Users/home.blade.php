@@ -6,7 +6,7 @@
     <!-- Hero Section -->
     <div class="pb-[200px]">
     <div class="relative">
-        <img class="h-[820px] w-full" src="{{ asset('../img/malcolm-lightbody.jpg') }}" alt="Hero Image">
+        <img class="h-[820px] w-full" src="{{ asset('../img/heroa.jpg') }}" alt="Hero Image">
         <img class="justify-centerh-[350px] absolute left-[50%] top-[75%] flex h-[350px] w-[650px] -translate-x-[50%] -translate-y-[50%] transform items-center" src="{{ asset('../img/pp-01-removebg.png') }}" alt="Logo">
         <h2 class="mt-[-350px] text-center font-mono text-[26px] text-white">An Identity Of Infinite Memories</h2>
     </div>
@@ -105,19 +105,18 @@
                     </div>
                 </div>
         
-                <!-- Catering Card -->
-                <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/catering.jpg" alt="Catering">
-                    <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
-                        <h3 class="text-lg font-bold text-white">Catering</h3>
-                    </div>
-                </div>
-        
                 <!-- Photography Card -->
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
                     <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/photography.jpg" alt="Photography">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
                         <h3 class="text-lg font-bold text-white">Imaging</h3>
+                    </div>
+                </div>
+
+                <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/shanAudi.jpg" alt="Flowers">
+                    <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
+                        <h3 class="text-lg font-bold text-white">Vehicles</h3>
                     </div>
                 </div>
         
@@ -127,13 +126,6 @@
                         <h3 class="text-lg font-bold text-white">Recreation</h3>
                     </div>
                 </div>
- 
-                <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/shanAudi.jpg" alt="Flowers">
-                    <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
-                        <h3 class="text-lg font-bold text-white">Vehicles</h3>
-                    </div>
-                </div>
                 
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
                     <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/flowers.jpg" alt="Flowers">
@@ -141,6 +133,15 @@
                         <h3 class="text-lg font-bold text-white">Decorations</h3>
                     </div>
                 </div>
+
+                <!-- Catering Card -->
+                <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/catering.jpg" alt="Catering">
+                    <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
+                        <h3 class="text-lg font-bold text-white">Catering</h3>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -182,7 +183,7 @@
                     <img class="h-[190px] w-[190px] rounded-full" src="..\img\thamaraSamaravikrama.jpg" alt="">
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-lg font-semibold text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    Thamara <br> Samaravikrama
+                    T Samaravikrama
                 </div>
             </div>
 
@@ -407,7 +408,7 @@
 
 
             
-        <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
         <script>
             const stripe = Stripe('pk_test_51QTd94GPbAuZxiJfSVItiL6TEWbz5UnWUANkJ7d6ZDcizrF0QMUXqMj5y6KTWnqBWGAqXEiMbSqEJksTLONvkNld00ruqmu9Wb');
             const elements = stripe.elements();
@@ -457,4 +458,4 @@
     </div>
 </body>
 
-@endsection <!-- End of content section -->
+@endsection 

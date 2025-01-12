@@ -15,5 +15,17 @@ class Product extends Eloquent
         'category',
         'description',
         'image',
+        'material', 
+        'weight',   
+        'kt',   
     ];
+
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
 }
+
+

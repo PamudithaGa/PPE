@@ -31,13 +31,25 @@ return [
 
     'connections' => [
 
-        'mongodb' => [
-            'driver' => 'mongodb',
-            'dsn' => env('DB_URI', 'mongodb+srv://username:password@<atlas-cluster-uri>/pearlprincessevents?retryWrites=true&w=majority'),
-            'database' => 'pearlprincessevents',
-            env('DB_AUTHENTICATION_DATABASE', 'admin'),
-    ],
+    //     'mongodb' => [
+    //         'driver' => 'mongodb',
+    //         'dsn' => env('DB_URI', 'mongodb+srv://username:password@<atlas-cluster-uri>/pearlprincessevents?retryWrites=true&w=majority'),
+    //         'database' => 'pearlprincessevents',
+    //         env('DB_AUTHENTICATION_DATABASE', 'admin'),
+    // ],
 
+    
+    'mongodb' => [
+        'driver'   => 'mongodb',
+        'dsn'      => env('DB_HOST'),
+        'database' => env('DB_DATABASE'),
+        'username' => env('DB_USERNAME'),
+        'password' => env('DB_PASSWORD'),
+        'options'  => [
+            'ssl' => true,
+            'database' => env('DB_AUTH_DATABASE', 'admin'), // Enables SSL for secure connections
+        ],
+    ],
 
         'sqlite' => [
             'driver' => 'sqlite',

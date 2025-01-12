@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 
 
 Route::view('/', 'Users.home');
@@ -53,6 +54,10 @@ Route::view('profile', 'profile')
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::get('/product/details/{id}', [ProductController::class, 'show'])->name('product.details');
+
 
 
 
@@ -77,6 +82,21 @@ Route::get('/cart', [UserController::class, 'cart'])->name('cart');
 
 
 Route::post('/purchase-ticket', [EventController::class, 'purchaseTicket']);
+
+
+
+
+Route::get('/offerings', [ProductController::class, 'offerings'])->name('offerings');
+
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+});
+
 
 require __DIR__.'/auth.php';
 

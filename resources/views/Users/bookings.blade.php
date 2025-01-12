@@ -7,7 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 py-10">
+<body class="bg-gray-100 bg-[url('E:\PPE\public\img\bookA.jpg')] bg-cover bg-center py-10">
+
     <button type="button" class="ml-10 rounded bg-green-600 p-2 font-bold text-white hover:bg-green-700"><a href="{{ route('home') }}">Back To Home</a></button>
     <div class="mx-auto max-w-3xl rounded-lg bg-white p-8 shadow-lg">
         <div class="mt-[90px]">

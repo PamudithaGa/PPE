@@ -7,12 +7,10 @@ class EventController extends Controller
 {
     public function create()
     {
-        return view('event.create'); // Show the event form
-    }
+        return view('event.create');     }
     
     public function store(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'eventName' => 'required|string|max:255',
             'eventType' => 'required|string',
@@ -27,7 +25,6 @@ class EventController extends Controller
             'ticketQunatity' => 'required|numeric',
         ]);
 
-        // Save the data into MongoDB
         $event = new Event();
         $event->eventName = $request->input('eventName');
         $event->eventType = $request->input('eventType');
@@ -40,45 +37,34 @@ class EventController extends Controller
         $event->artists = $request->input('artists') ?: [];
         $event->ticketQuantity = $request->input('ticketQuantity');
 
-        // Handle the event image upload
         if ($request->hasFile('eventImage')) {
             $imageName = time() . '_' . $request->file('eventImage')->getClientOriginalName();
             $request->file('eventImage')->move(public_path('img'), $imageName);
-            $event->eventImage = $imageName; // Save the image name in the database
+            $event->eventImage = $imageName;
         }
-
-        // Save to database
         $event->save();
-        // Redirect back with a success message
         return redirect()->route('EventDashboard')->with('success', 'Event Added successfully!');
     }
 
 
     public function index()
     {
-        $events = Event::all(); // Fetch all events
-        return view('Admin.EventDashboard', compact('events')); // Pass events to the view
+        $events = Event::all(); 
+        return view('Admin.EventDashboard', compact('events')); 
     }
 
 
     public function destroy($id)
     {
-        // Find the event by ID
         $event = Event::find($id);
-
         if ($event) {
-            // Remove the event image from the public folder
             $imagePath = public_path('img/' . $event->eventImage);
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
-
-            // Delete the event
             $event->delete();
-
             return redirect()->route('EventDashboard')->with('success', 'Event deleted successfully!');
         }
-
         return redirect()->route('EventDashboard')->with('error', 'Event not found!');
     }
 
@@ -87,8 +73,6 @@ class EventController extends Controller
     public function update(Request $request, $id)
 {
     $event = Event::find($id);
-
-    // Validate inputs
     $request->validate([
         'eventName' => 'required',
         'eventType' => 'required',
@@ -101,11 +85,7 @@ class EventController extends Controller
         'eventImage' => 'nullable|image',
         'ticketQunatity' => 'required|numeric',
     ]);
-
-    // Update event details
     $event->update($request->all());
-
-    // Handle image upload if present
     if ($request->hasFile('eventImage')) {
         $file = $request->file('eventImage');
         $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -113,7 +93,6 @@ class EventController extends Controller
         $event->eventImage = $filename;
         $event->save();
     }
-
     return redirect()->back()->with('success', 'Event updated successfully!');
 }
 

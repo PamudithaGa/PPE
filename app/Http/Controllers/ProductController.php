@@ -7,21 +7,21 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    /**
-     * Store a new product in the database.
-     */
+
     public function store(Request $request)
     {
-        // Validate the form data
+
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'category' => 'required|string',
             'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'material' => 'nullable|string',   
+            'weight' => 'nullable|numeric',    
+            'kt' => 'nullable|string',     
         ]);
 
-        // Handle image upload
         $imageName = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -29,25 +29,24 @@ class ProductController extends Controller
             $image->move(public_path('img'), $imageName);
         }
 
-        // Save product to the database
         Product::create([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'category' => $request->input('category'),
             'description' => $request->input('description'),
             'image' => $imageName,
+            'material' => $request->input('category') === 'Jewelry' ? $request->input('material') : null,
+            'weight' => $request->input('category') === 'Jewelry' ? $request->input('weight') : null,
+            'kt' => $request->input('category') === 'Jewelry' ? $request->input('kt') : null,
         ]);
 
-        // Redirect with success message
         return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
 
-    /**
-     * Display the list of products.
-     */
+
     public function index()
     {
-        $products = Product::all(); // Fetch all products
+        $products = Product::all();
         return view('Admin.ProductDashboard', compact('products'));
     }
 
@@ -59,23 +58,86 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        // Find the product by its ID
+        $product = Product::find($id);
+        if (!$product) {
+            return redirect()->route('products.index')->with('error', 'Product not found.');
+        }
+        if ($product->image && file_exists(public_path('img/' . $product->image))) {
+            unlink(public_path('img/' . $product->image));
+        }
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+    }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        if (!$product) 
+        {
+            return redirect()->route('products.index')->with('error', 'Product not found.');
+        }
+
+        return response()->json($product);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'category' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'material' => 'nullable|string',   
+            'weight' => 'nullable|numeric',    
+            'kt' => 'nullable|string',  
+        ]);
+
         $product = Product::find($id);
 
-        // Check if product exists
         if (!$product) {
             return redirect()->route('products.index')->with('error', 'Product not found.');
         }
 
-        // Delete the associated image if it exists
-        if ($product->image && file_exists(public_path('img/' . $product->image))) {
-            unlink(public_path('img/' . $product->image));
+        if ($request->hasFile('image')) {
+            if ($product->image && file_exists(public_path('img/' . $product->image))) 
+            {
+                unlink(public_path('img/' . $product->image));
+            }   
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('img'), $imageName);
+            $product->image = $imageName;
         }
 
-        // Delete the product from the database
-        $product->delete();
+        $product->update([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'category' => $request->input('category'),
+            'description' => $request->input('description'),
+            'image' => $product->image,
+            'material' => $request->input('category') === 'Jewelry' ? $request->input('material') : null,
+            'weight' => $request->input('category') === 'Jewelry' ? $request->input('weight') : null,
+            'kt' => $request->input('category') === 'Jewelry' ? $request->input('kt') : null,
+        ]);
 
-        // Redirect with success message
-        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
+
+    public function offerings()
+    {
+        $productsByCategory = Product::all()->groupBy('category');
+        return view('Users.offerings', compact('productsByCategory'));
+    }
+
+    public function show($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+        return response()->json($product);
+    }
+
 }
