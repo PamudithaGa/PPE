@@ -45,8 +45,8 @@ Route::view('profile', 'profile')
     Route::get('/dulaj', [WeddingController::class, 'dulaj'])->name('dulaj');
     
     //Admin routes
-    Route::get('/ProductDashboard', [AdminController::class, 'dashboard'])->name('ProductDashboard');
-    Route::get('/EventDashboard', [AdminController::class, 'events'])->name('EventDashboard');
+    //Route::get('/ProductDashboard', [AdminController::class, 'dashboard'])->name('ProductDashboard');
+    //Route::get('/EventDashboard', [AdminController::class, 'events'])->name('EventDashboard');
 
     //products routes
 
@@ -86,8 +86,6 @@ Route::post('/purchase-ticket', [EventController::class, 'purchaseTicket']);
 
 
 Route::get('/offerings', [ProductController::class, 'offerings'])->name('offerings');
-
-
 
 
 Route::middleware(['auth'])->group(function () {

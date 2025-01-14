@@ -110,7 +110,7 @@
                     ${data.category === 'Jewelry' ? `
 
 
-                        <table class="w-full table-auto border-collapse border border-gray-300">
+                        <table class="mt-[20px] w-full table-auto border-collapse border border-gray-300">
                             <thead>
                                 <tr>
                                     <th class="border border-gray-300 px-4 py-2">Material</th>
