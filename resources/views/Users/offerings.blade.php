@@ -4,13 +4,11 @@
 {{-- 151E3D --}}
 <body>
     <div class="relative h-[400px] bg-gradient-to-r from-indigo-800 to-[#0492C2]">
-        <!-- Background Overlay -->
         
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         
-        <!-- Content Section -->
-        <div class="relative flex h-full flex-col items-center justify-center text-center">
-            <h2 class="font-serif text-[28px] text-white md:text-[36px]" style="font-family: 'Playfair Display', serif;">
+        <div class="relative flex h-full flex-col items-center justify-center pb-[90px] pt-9 text-center">
+            <h2 class="mt-[100px] font-serif text-[28px] text-white md:text-[36px]" style="font-family: 'Playfair Display', serif;">
                 Pearl Princess Events
             </h2>
             <h2 class="mt-4 font-serif text-[48px] text-white md:text-[56px]" style="font-family: 'Playfair Display', serif;">
