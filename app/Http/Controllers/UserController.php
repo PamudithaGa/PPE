@@ -8,11 +8,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('Users.dashboard'); // Make sure this corresponds to the view you want to display.
+        return view('Users.dashboard');
     }
 
     public function cart()
     {
-        return view('Users.cart'); // Make sure this corresponds to the view you want to display.
+        return view('Users.cart'); 
     }
 }
