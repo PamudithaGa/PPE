@@ -1,71 +1,106 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use MongoDB\Laravel\Sanctum\HasApiTokens;
+
 
 class AuthController extends Controller
 {
-    // Register API
-    public function register(Request $request)
+    public function login (Request $request) : JsonResponse
+    {
+        $request->validate([
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8|max:255',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if(!$user || !Hash::check($request->password, $user->password)){
+            return response()->json([
+                'message' => 'The Provided credentials are incorrect.',
+            ], 401);
+        }
+
+        $token = $user->createToken($user->email.'Auth-Token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Login Successful',
+            'token_type' => 'Bearer',
+            'token' => $token,
+        ], 200);
+    }
+
+
+    public function register (Request $request) : JsonResponse
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|max:255',
         ]);
-    
-        // Create the user
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-    
-        // Create an access token for the user
-        $token = $user->createToken('Personal Access Token')->plainTextToken;
-    
-        return response()->json([
-            'message' => 'User registered successfully',
-            'token' => $token,  // Include the token in the response
-        ], 201);
-    }
-    
 
-    // Login API
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-    
-        // Find the user by email
-        $user = User::where('email', $request->email)->first();
-    
-        // Check if user exists and if password is correct
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'The provided credentials are incorrect.'], 401);
+        if ($user) 
+        {
+            $token = $user->createToken($user->email.'Auth-Token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Registration Successful',
+                'token_type' => 'Bearer',
+                'token' => $token,
+            ], 201);
+        } 
+        else 
+        {
+            return response()->json([
+                'message' => 'Something went wrong! While registration. ',
+            ], 500);
         }
-    
-        // Create a token for the user
-        $token = $user->createToken('Personal Access Token')->plainTextToken;
-    
-        return response()->json([
-            'token' => $token,  // Return the generated token
-        ], 200);
     }
-    
 
-    // Logout API
-    public function logout(Request $request)
+    public function logout (Request $request) : JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
+        $user = User::where('id', $request->user()->id)->first();
+        if ($user) 
+        {
+            $user->tokens()->delete();
+            return response()->json([
+                'message' => 'Logout Successful',
+            ], 200);
+        } 
+        else 
+        {
+            return response()->json([
+                'message' => 'User Not Found',
+            ], 500);
+        }
+    }   
 
-        return response()->json(['message' => 'Logged out successfully'], 200);
+    public function profile (Request $request) : JsonResponse
+    {
+        if($request->user())
+        {
+            return response()->json([
+                'message' => 'Profile Fetched',
+                'data' => $request->user(),
+            ], 200);
+        }
+        else
+        {
+            return response()->json([
+                'message' => 'Not Authenticated',
+            ], 401);
+        }
     }
 }

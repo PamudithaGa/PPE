@@ -11,6 +11,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\SubscriptionController;
 
 
 Route::view('/', 'Users.home');
@@ -96,6 +97,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
     Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
+
+
+
+
+
+Route::post('/subscribe', [SubscriptionController::class, 'store'])->middleware('auth');
+
+
+
+Route::get('/adlogin', [AdminController::class, 'login'])->name('adlogin');
+Route::post('/adlogin', [AdminController::class, 'authenticate'])->name('admin.authenticate');
+
+
 
 
 require __DIR__.'/auth.php';

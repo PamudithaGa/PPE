@@ -55,7 +55,7 @@
     
         <div class="grid grid-cols-3 place-items-center gap-[20px]">
             <div class="group relative h-[270px] w-[270px]">
-                <img class="h-full w-full object-cover" src="..\img\wedding.jpg" alt="">
+                <img class="h-full w-full object-cover" src="{{ asset('..\img\wedding.jpg')}}" alt="weddings">
                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition duration-300 group-hover:bg-opacity-80">
                     <div class="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-slate-900 bg-opacity-0 transition duration-300 group-hover:bg-opacity-30">
                         <span class="font-mono text-[50px] text-white opacity-0 group-hover:opacity-100">
@@ -66,7 +66,7 @@
             </div>
     
             <div class="group relative h-[270px] w-[270px]">
-                <img class="h-full w-full object-cover" src="..\img\socialG.jpg" alt="">
+                <img class="h-full w-full object-cover" src="{{ asset('..\img\socialG.jpg')}}" alt="">
                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition duration-300 group-hover:bg-opacity-80">
                     <div class="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-slate-900 bg-opacity-0 transition duration-300 group-hover:bg-opacity-30">
                         <span class="font-mono text-[50px] text-white opacity-0 group-hover:opacity-100">
@@ -245,6 +245,7 @@
         <!-- Add Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     </div> --}}
+    
 
     <div class="flex flex-wrap items-center justify-center gap-6 p-6 pb-[170px] pt-[170px]">
         <!-- Card 1 -->
@@ -383,9 +384,9 @@
                 <h2 class="mb-6 text-center text-2xl font-semibold text-gray-700">Subscribe Now</h2>
                 <form id="subscriptionForm">
                     <label class="mb-2 block text-gray-600">Full Name</label>
-                    <input type="text" name="name" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <input type="text" name="name" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"  value="{{ auth()->user()->name ?? '' }}"  required>
                     <label class="mb-2 block text-gray-600">Email Address</label>
-                    <input type="email" name="email" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <input type="email" name="email" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ auth()->user()->email ?? '' }}"  required>
                     <label class="mb-2 block text-gray-600">Choose Plan</label>
                     <select name="plan" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                         <option value="basic">Basic - LKR 10000</option>
@@ -407,52 +408,89 @@
 </div>
 
 
-            
-    <script src="https://js.stripe.com/v3/"></script>
-        <script>
-            const stripe = Stripe('pk_test_51QTd94GPbAuZxiJfSVItiL6TEWbz5UnWUANkJ7d6ZDcizrF0QMUXqMj5y6KTWnqBWGAqXEiMbSqEJksTLONvkNld00ruqmu9Wb');
-            const elements = stripe.elements();
-            const card = elements.create('card', { style: { base: { fontSize: '16px' } } });
-            card.mount('#card-element');
-            const openModal = document.getElementById('openModal');
-            const subscriptionModal = document.getElementById('subscriptionModal');
-            const closeModal = document.getElementById('closeModal');
-            
-            openModal.addEventListener('click', () => {
-                subscriptionModal.classList.remove('hidden');
-            });
-            
-            closeModal.addEventListener('click', () => {
-                subscriptionModal.classList.add('hidden');
-            });
-            
-            const form = document.getElementById('subscriptionForm');
-            form.addEventListener('submit', async (event) => {
-                event.preventDefault();    
-                const { token, error } = await stripe.createToken(card);
-                    if (error) {
-                        alert(error.message);
-                    } else {
-                        alert('Token generated: ' + token.id);
-                        // Send token to the backend
-                    fetch('/process-subscription.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            stripeToken: token.id,
-                            name: form.name.value,
-                            email: form.email.value,
-                            plan: form.plan.value
-                        }),
-                    })
-                .then(response => response.text())
-                .then(data => alert(data))
-                .catch(error => console.error('Error:', error));
-                }
-            });
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe('{{ env("STRIPE_KEY") }}');
+    const elements = stripe.elements();
 
-            
-        </script>
+    // Create a card element
+    const card = elements.create('card', {
+        style: {
+            base: {
+                fontSize: '16px',
+                color: '#32325d',
+                '::placeholder': {
+                    color: '#aab7c4',
+                },
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a',
+            },
+        },
+    });
+    card.mount('#card-element');
+
+    const openModal = document.getElementById('openModal');
+    const subscriptionModal = document.getElementById('subscriptionModal');
+    const closeModal = document.getElementById('closeModal');
+
+    openModal.addEventListener('click', () => {
+        subscriptionModal.classList.remove('hidden');
+    });
+
+    closeModal.addEventListener('click', () => {
+        subscriptionModal.classList.add('hidden');
+    });
+
+    // Handle form submission
+    const form = document.getElementById('subscriptionForm');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        // Create a Payment Method using the card
+        const { paymentMethod, error } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: card,
+            billing_details: {
+                name: form.name.value,
+                email: form.email.value,
+            },
+        });
+
+        if (error) {
+            // Display error to the user
+            alert(error.message);
+        } else {
+            // Send the payment method to the backend
+            fetch('/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: JSON.stringify({
+                    paymentMethod: paymentMethod.id,
+                    plan: form.plan.value,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.message) {
+                        alert(data.message); // Show success message
+                        subscriptionModal.classList.add('hidden'); // Close the modal
+                    } else {
+                        alert('Error: ' + data.error); // Show error message
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        }
+    });
+</script>
+
             
             
     </div>

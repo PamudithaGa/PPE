@@ -1,10 +1,11 @@
 @extends('layout')
-
+@section('title', 'Pearl Princess Events | Utility')
 @section('content')
 {{-- 151E3D --}}
 <body>
     <div class="relative h-[400px] bg-gradient-to-r from-indigo-800 to-[#0492C2]">
         <!-- Background Overlay -->
+        
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         
         <!-- Content Section -->
@@ -22,6 +23,7 @@
             </a>
         </div>
     </div>
+    
     
 
     <div class="container mx-auto p-[90px]">
