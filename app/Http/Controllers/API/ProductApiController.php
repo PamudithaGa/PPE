@@ -44,4 +44,15 @@ class ProductApiController extends Controller
             'data' => $formattedData,
         ]);
     }
+
+// ProductController.php
+public function show($id)
+{
+    $product = Product::find($id);
+    if (!$product) {
+        return response()->json(['error' => 'Product not found.'], 404);
+    }
+    return response()->json($product);
+}
+
 }

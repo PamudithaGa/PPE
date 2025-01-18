@@ -31,3 +31,5 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/offerings', [ProductApiController::class, 'apiOfferings'])->name('api.offerings');
+//Route::get('/product/details/{id}', [ProductApiController::class, 'show'])->name('api.product.details');
+Route::get('/product/details/{id}', [ProductApiController::class, 'show'])->name('product.details');

@@ -14,7 +14,7 @@
             <h2 class="mt-4 font-serif text-[48px] text-white md:text-[56px]" style="font-family: 'Playfair Display', serif;">
                 Utility
             </h2>
-            <a href="#services" 
+            <a href="{{ route('serivces') }}"
                 class="mt-6 rounded-lg bg-white px-6 py-3 text-sm font-bold text-indigo-800 shadow-md transition hover:bg-indigo-800 hover:text-white"
                 style="font-family: 'Poppins', sans-serif;">
                 Explore More
@@ -132,11 +132,6 @@
                                 </tr>
                             </tbody>
                         </table>
-
-
-
-
-
                         
                     ` : ''}
                 `;
