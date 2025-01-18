@@ -52,7 +52,16 @@ public function show($id)
     if (!$product) {
         return response()->json(['error' => 'Product not found.'], 404);
     }
-    return response()->json($product);
+    return [
+        'id' => $product->id,
+        'name' => $product->name,
+        'price' => $product->price,
+        'description' => $product->description,
+        'image' => asset('img/' . $product->image),
+        'material' => $product->material,
+        'weight' => $product->weight,
+        'kt' => $product->kt,
+    ];
 }
 
 }

@@ -19,74 +19,6 @@
               <th class="pb-4">Total</th>
             </tr>
           </thead>
-          {{-- <tbody>
-
-            <tr class="border-b">
-              <td class="py-4">
-                <div class="flex items-center gap-4">
-                  <img class="h-20 w-20 rounded object-cover" src="https://via.placeholder.com/80" alt="Product Image">
-                  <div>
-                    <h3 class="font-semibold">Fergus S Strap Automatic 42mm</h3>
-                    <p class="text-sm text-gray-600">Item No: 796483117334</p>
-                    <p class="text-sm text-gray-600">Size: OS</p>
-                    <p class="text-sm text-gray-600">Color: Silver/Black/Tan</p>
-                    <p class="text-sm text-gray-600">Qty: 1</p>
-                    <div class="mt-2 flex gap-4 text-sm">
-                      <a href="#" class="text-indigo-600 hover:underline">Remove</a>
-                      <a href="#" class="text-indigo-600 hover:underline">Edit</a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="py-4">
-                <span class="text-gray-400 line-through">$425.00</span><br>
-                <span>$297.50</span>
-              </td>
-              <td class="py-4">$297.50</td>
-            </tr>
-
-            <tr class="border-b">
-              <td class="py-4">
-                <div class="flex items-center gap-4">
-                  <img class="h-20 w-20 rounded object-cover" src="https://via.placeholder.com/80" alt="Product Image">
-                  <div>
-                    <h3 class="font-semibold">New Q Zippers Huge Hillier Hobo</h3>
-                    <p class="text-sm text-gray-600">Item No: 888877362172</p>
-                    <p class="text-sm text-gray-600">Size: 1SZ</p>
-                    <p class="text-sm text-gray-600">Color: Black Multi</p>
-                    <p class="text-sm text-gray-600">Qty: 1</p>
-                    <div class="mt-2 flex gap-4 text-sm">
-                      <a href="#" class="text-indigo-600 hover:underline">Remove</a>
-                      <a href="#" class="text-indigo-600 hover:underline">Edit</a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="py-4">$598.00</td>
-              <td class="py-4">$598.00</td>
-            </tr>
-
-            <tr>
-              <td class="py-4">
-                <div class="flex items-center gap-4">
-                  <img class="h-20 w-20 rounded object-cover" src="https://via.placeholder.com/80" alt="Product Image">
-                  <div>
-                    <h3 class="font-semibold">Baker 36mm</h3>
-                    <p class="text-sm text-gray-600">Item No: 796483029149</p>
-                    <p class="text-sm text-gray-600">Size: OS</p>
-                    <p class="text-sm text-gray-600">Color: Black</p>
-                    <p class="text-sm text-gray-600">Qty: 1</p>
-                    <div class="mt-2 flex gap-4 text-sm">
-                      <a href="#" class="text-indigo-600 hover:underline">Remove</a>
-                      <a href="#" class="text-indigo-600 hover:underline">Edit</a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="py-4">$195.00</td>
-              <td class="py-4">$195.00</td>
-            </tr>
-          </tbody> --}}
 
 
           <tbody>
@@ -101,11 +33,11 @@
                                 <h3 class="font-semibold">{{ $cartItem->product->name }}</h3>
                                 <p class="text-sm text-gray-600">Qty: {{ $cartItem->quantity }}</p>
                                 <div class="mt-2 flex gap-4 text-sm">
-                                    <form action="{{ route('cart.remove', $cartItem->_id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-indigo-600 hover:underline">Remove</button>
-                                    </form>
+                                  <form action="{{ route('cart.remove', $cartItem->_id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-indigo-600 hover:underline">Remove</button>
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -136,26 +68,68 @@
         <div class="border-t py-4">
           <div class="mb-2 flex justify-between text-sm">
             <span>Subtotal</span>
-            <span>$1,090.50</span>
+            <span>LKR {{ number_format($subtotal, 2) }}</span>
           </div>
           <div class="mb-2 flex justify-between text-sm">
             <span>Shipping</span>
-            <span>TBD</span>
-          </div>
-          <div class="mb-4 flex justify-between text-sm">
-            <span>Sales Tax</span>
-            <span>TBD</span>
+            <span>LKR {{ number_format($shipping, 2) }}</span>
           </div>
           <div class="flex justify-between text-lg font-semibold">
             <span>Estimated Total</span>
-            <span>$1,090.50</span>
+            <span>LKR {{ number_format($total, 2) }}</span>
           </div>
         </div>
-        <button class="mt-4 w-full rounded bg-black py-3 text-sm font-bold uppercase text-white">Checkout</button>
-        <p class="mt-4 text-sm text-gray-500">Need help? Call us at <a href="tel:1-877-707-6272" class="text-indigo-600 hover:underline">1-877-707-6272</a></p>
+        
+
+
+<!-- Alpine.js Modal -->
+<div x-data="{ showModal: false }">
+  <button @click="showModal = true" class="mt-4 w-full rounded bg-black py-3 text-sm font-bold uppercase text-white">
+      Checkout
+  </button>
+
+  <div x-show="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+          <h2 class="mb-4 text-lg font-semibold">Billing Details</h2>
+          <form action="{{ route('checkout.index') }}" method="GET">
+              @csrf
+              <label class="block text-sm font-medium text-gray-700">Full Name</label>
+              <input type="text" class="w-full rounded border px-4 py-2 text-sm" required>
+
+              <label class="mt-4 block text-sm font-medium text-gray-700">Address</label>
+              <input type="text" class="w-full rounded border px-4 py-2 text-sm" required>
+
+              <label class="mt-4 block text-sm font-medium text-gray-700">Phone Number</label>
+              <input type="text" class="w-full rounded border px-4 py-2 text-sm" required>
+
+              <div class="mt-4 flex justify-between">
+                  <button type="button" @click="showModal = false" class="px-4 py-2 text-sm text-gray-600">Cancel</button>
+                  <button type="submit" class="rounded bg-black px-4 py-2 text-sm font-bold uppercase text-white">
+                      Proceed to Payment
+                  </button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+
+        <p class="mt-4 text-sm text-gray-500">Need help? Contact us at <a href="tel:+94726442538" class="text-indigo-600 hover:underline">0784722795</a></p>
       </div>
     </div>
   </div>
+
+
+
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+
+  
 </body>
 
 @endsection 

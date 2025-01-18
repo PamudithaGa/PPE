@@ -1,14 +1,13 @@
 <?php
 
-
 namespace App\Models;
 
 use Mongodb\Laravel\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $connection = 'mongodb'; // Ensure it's using MongoDB
-    protected $collection = 'carts';   // Name of the collection
+    protected $connection = 'mongodb';
+    protected $collection = 'carts'; // Ensure correct collection name
 
     protected $fillable = [
         'user_id',
@@ -18,6 +17,7 @@ class Cart extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id', '_id');
     }
 }
+

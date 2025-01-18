@@ -12,6 +12,9 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 
 Route::view('/', 'Users.home');
@@ -77,7 +80,7 @@ Route::view('profile', 'profile')
 
 
 Route::get('/userdashboard', [UserController::class, 'index'])->name('userdashboard');
-Route::get('/cart', [UserController::class, 'cart'])->name('cart');
+
 
 
 Route::post('/purchase-ticket', [EventController::class, 'purchaseTicket']);
@@ -88,11 +91,11 @@ Route::post('/purchase-ticket', [EventController::class, 'purchaseTicket']);
 Route::get('/offerings', [ProductController::class, 'offerings'])->name('offerings');
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
-    Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+//     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+//     Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+// });
 
 
 
@@ -106,6 +109,34 @@ Route::get('/adlogin', [AdminController::class, 'login'])->name('adlogin');
 Route::post('/adlogin', [AdminController::class, 'authenticate'])->name('admin.authenticate');
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart'); // Show the cart page
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add'); // Add to cart
+    Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove'); // Remove from cart
+});
+
+
+
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.index');
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
+});
+
+
+
+
+
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+});
 
 
 require __DIR__.'/auth.php';

@@ -42,11 +42,17 @@
                             <div class="mt-2 flex items-center justify-between">
 
                                 <p class="text-lg font-bold text-green-600">Rs {{ $product->price }}.00</p>
-                                <a href="javascript:void(0)"
+                                {{-- <a href="javascript:void(0)"
                                     onclick="addToCart('{{ $product->_id }}')"
                                     class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-indigo-700 hover:shadow-lg">
                                     Add to Cart
-                                </a>
+                                </a> --}}
+                                <a href="javascript:void(0)" 
+                                    onclick="addToCart('{{ $product->_id }}')" 
+                                    class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-indigo-700 hover:shadow-lg {{ Auth::check() ? '' : 'pointer-events-none opacity-50' }}">
+                                    Add to Cart
+                             </a>
+                                                             
                             </div>
                         </div>
                     @endforeach
@@ -66,9 +72,15 @@
         </button>
             <div id="product-details-content" class="mb-6"></div>
             <div class="mt-4 flex justify-end">
-                <a href="javascript:void(0)"
+                {{-- <a href="javascript:void(0)"
                     onclick="addToCart('{{ $product->_id }}')"
                     class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-indigo-700 hover:shadow-lg">
+                    Add to Cart
+                </a> --}}
+
+                <a href="javascript:void(0)" 
+                    onclick="addToCart('{{ $product->_id }}')" 
+                    class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:bg-indigo-700 hover:shadow-lg {{ Auth::check() ? '' : 'pointer-events-none opacity-50' }}">
                     Add to Cart
                 </a>
             </div>
@@ -80,22 +92,34 @@
 @endsection
 
 <script>
-    function addToCart(productId) {
-        fetch("{{ route('cart.add') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-            },
-            body: JSON.stringify({
-                product_id: productId,
-                quantity: 1
-            })
+function addToCart(productId) {
+    fetch("{{ route('cart.add') }}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        },
+        body: JSON.stringify({
+            product_id: productId,
+            quantity: 1
         })
-        .then(response => response.json())
-        .then(data => alert(data.message))
-        .catch(error => console.error('Error:', error));
-    }
+    })
+    .then(response => {
+        if (response.status === 401) {
+            alert('You need to log in to add items to the cart.');
+            window.location.href = "{{ route('login') }}";
+            return;
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 
     function showProductDetails(productId) {
         fetch(`/product/details/${productId}`)
@@ -132,7 +156,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        
+
                     ` : ''}
                 `;
                 document.getElementById('product-details-modal').classList.remove('hidden');

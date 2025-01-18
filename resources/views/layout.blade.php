@@ -88,13 +88,11 @@
                 <button class="h-[45px] w-[125px] rounded-md border-none bg-white font-serif font-semibold text-slate-900 shadow-md hover:bg-gray-200">
                     <a href="{{ route('eventPage') }}">Upcomings</a>
                 </button>
-                {{-- <button class="h-[45px] w-[125px] rounded-md border-2 border-white bg-transparent font-semibold text-white shadow-md hover:bg-white hover:text-[#4c4f76]">
-                    <a href="{{ route('weddings') }}">Login</a>
-                </button> --}}
+
             </div>
 
             <div class="hidden space-x-4 md:flex">
-                <a href="{{ route('dashboard') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/cart-shopping-solid.svg') }}" alt="Cart"></a>
+                <a href=""><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/cart-shopping-solid.svg') }}" alt="Cart"></a>
                 <a href="{{ route('dashboard') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/user.png') }}" alt="Account"></a>
             </div>
         </nav>
