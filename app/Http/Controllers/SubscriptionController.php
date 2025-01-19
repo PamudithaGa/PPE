@@ -3,68 +3,59 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Subscription;
 use Stripe\Stripe;
-use Stripe\PaymentIntent;
+use Stripe\Customer;
+use Stripe\Subscription;
+use Stripe\Exception\ApiErrorException;
+use App\Models\Subscription as SubscriptionModel;
 use Illuminate\Support\Facades\Auth;
-use Stripe\StripeClient;
 
 class SubscriptionController extends Controller
 {
-    public function store(Request $request)
+    public function subscribe(Request $request)
     {
-        // Validate the request
-        $request->validate([
-            'paymentMethod' => 'required|string',
-            'plan' => 'required|string',
-        ]);
+        $existingSubscription = SubscriptionModel::where('user_id', Auth::id())
+        ->where('expires_at', '>', now())
+        ->first();
+
+    if ($existingSubscription) {
+        return response()->json([
+            'error' => 'You already have an active subscription.',
+        ], 400);
+    }
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
-            // Initialize Stripe
-            $stripe = new StripeClient(env('STRIPE_SECRET'));
-
-            // Attach payment method to the customer
-            $user = Auth::user();
-            $customer = $stripe->customers->create([
-                'email' => $user->email,
-                'name' => $user->name,
+            // Create a Customer in Stripe
+            $customer = Customer::create([
+                'email' => $request->email,
+                'name' => $request->name,
                 'payment_method' => $request->paymentMethod,
-                'invoice_settings' => [
-                    'default_payment_method' => $request->paymentMethod,
-                ],
+                'invoice_settings' => ['default_payment_method' => $request->paymentMethod],
             ]);
 
-            // Create a subscription
-            $stripe->subscriptions->create([
+            $stripeSubscription = Subscription::create([
                 'customer' => $customer->id,
-                'items' => [
-                    ['price' => $this->getStripePlanPriceId($request->plan)], // Replace with actual plan ID
-                ],
-                'expand' => ['latest_invoice.payment_intent'],
+                'items' => [['price' => 'price_1QinOnGPbAuZxiJfB4c6HEOl']], 
             ]);
 
-            // Save subscription in the database
-            Subscription::create([
-                'user_id' => $user->id,
-                'plan' => $request->plan,
-                'stripe_customer_id' => $customer->id,
+            $subscription = SubscriptionModel::create([
+                'user_id' => Auth::id(),
+                'plan' => $request->plan, 
+                'stripe_payment_id' => $stripeSubscription->id, 
+                'expires_at' => now()->addYear(),
             ]);
 
-            return response()->json(['message' => 'Subscription successful!'], 200);
-        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Subscription successful!',
+                'subscription' => $subscription,
+            ]);
+        } catch (ApiErrorException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
-    /**
-     * Map the plan name to a Stripe price ID.
-     */
-    private function getStripePlanPriceId($plan)
-    {
-        $plans = [
-            'basic' => 'evt_1QV3b2GPbAuZxiJfuqfwBgHt', // Replace with actual price IDs from Stripe
-        ];
-
-        return $plans[$plan] ?? null;
-    }
+    
 }
+

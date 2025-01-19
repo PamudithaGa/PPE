@@ -360,54 +360,75 @@
 <div class="bg-gray-200 pb-[50px] pt-[75px]">
     <h2 class="ml-[100px] font-mono text-[44px]">SUBSCRIPTION</h2>
     <p class="ml-[200px] mt-[30px] text-[21px] font-light">
-        Subscribing to our event planning service ensures exclusive access to premium features,<br> 
+        Subscribing to our event planning service ensures exclusive access to premium features,<br>
         personalized event consultations, priority booking, and special discounts on all our offerings.<br>
         Subscribers receive dedicated support and tailored recommendations, guaranteeing a seamless and<br>
-        unforgettable event experience. <br><br>
+        unforgettable event experience.<br><br>
         Enjoy unparalleled convenience and peace of mind with our comprehensive subscription plans.
     </p>
 
     @auth
-        <div class="flex justify-center">
-            <a href="javascript:void(0);" id="openModal">
-                <button class="mt-[95px] flex h-[50px] w-[250px] cursor-pointer items-center justify-center border-none bg-[#ffffff] font-serif text-[28px] text-slate-900 shadow-md">
+        @php
+            $subscription = \App\Models\Subscription::where('user_id', auth()->id())->latest('expires_at')->first();
+            $isSubscribed = $subscription && $subscription->expires_at->isFuture();
+        @endphp
+
+        @if($isSubscribed)
+            <div class="flex justify-center">
+                <button class="mt-[95px] flex h-[50px] w-[300px] cursor-not-allowed items-center justify-center bg-green-600 font-serif text-[20px] text-white" disabled>
+                    You Have Subscribed
+                </button>
+            </div>
+        @else
+            <div class="flex justify-center">
+                <button id="openModal" class="mt-[95px] flex h-[50px] w-[250px] items-center justify-center border-none bg-[#ffffff] font-serif text-[28px] text-slate-900 shadow-md">
                     SUBSCRIBE
                 </button>
-            </a>
-        </div>
-
-        <div id="subscriptionModal" class="fixed inset-0 flex hidden items-center justify-center bg-gray-800 bg-opacity-50">
-            <div class="relative w-full max-w-sm rounded-lg bg-white p-8 shadow-2xl">
-                <button id="closeModal" class="absolute right-2 top-2 text-2xl text-gray-600">
-                    &times;
-                </button>
-                <h2 class="mb-6 text-center text-2xl font-semibold text-gray-700">Subscribe Now</h2>
-                <form id="subscriptionForm">
-                    <label class="mb-2 block text-gray-600">Full Name</label>
-                    <input type="text" name="name" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"  value="{{ auth()->user()->name ?? '' }}"  required>
-                    <label class="mb-2 block text-gray-600">Email Address</label>
-                    <input type="email" name="email" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ auth()->user()->email ?? '' }}"  required>
-                    <label class="mb-2 block text-gray-600">Choose Plan</label>
-                    <select name="plan" class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        <option value="basic">Basic - LKR 10000</option>
-                    </select>
-                    <div id="card-element" class="mb-6 rounded-lg border border-gray-300 p-4"></div>
-                    <button type="submit" class="w-full rounded-lg bg-green-600 py-3 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        Subscribe
-                    </button>
-                </form>
             </div>
-        </div>
+        @endif
     @else
         <div class="flex justify-center">
-            <button class="mt-[95px] flex h-[50px] w-[300px] items-center justify-center bg-red-600 font-serif text-[20px] text-white">
-                <a href="{{ route('login') }}">Please log in to subscribe.</a>
-            </button>
+            <a href="{{ route('login') }}">
+                <button class="mt-[95px] flex h-[50px] w-[300px] items-center justify-center bg-red-600 font-serif text-[20px] text-white">
+                    Please log in to subscribe.
+                </button>
+            </a>
         </div>
     @endauth
 </div>
 
+<!-- Modal -->
+<div id="subscriptionModal" class="fixed inset-0 flex hidden items-center justify-center bg-black bg-opacity-50">
+    <div class="w-[400px] rounded bg-white p-6 shadow-lg">
+        <h3 class="mb-4 text-xl font-bold">Subscription Details</h3>
+        <form id="subscriptionForm">
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" class="w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required />
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" class="w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required />
+            </div>
+            <div class="mb-4">
+                <label for="plan" class="block text-sm font-medium text-gray-700">Plan</label>
+                <select id="plan" name="plan" class="w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                    <option value="yearly"> Rs10,000 (Yearly Plan)</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="card-element" class="block text-sm font-medium text-gray-700">Card Details</label>
+                <div id="card-element" class="rounded-md border border-gray-300 p-2"></div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="button" id="closeModal" class="rounded bg-red-500 px-4 py-2 text-white shadow hover:bg-red-700">Cancel</button>
+                <button type="submit" class="rounded bg-green-500 px-4 py-2 text-white shadow hover:bg-green-700">Subscribe</button>
+            </div>
+        </form>
+    </div>
+</div>
 
+<!-- Stripe Script -->
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     const stripe = Stripe('{{ env("STRIPE_KEY") }}');
@@ -431,24 +452,19 @@
     });
     card.mount('#card-element');
 
+    // Modal Management
     const openModal = document.getElementById('openModal');
     const subscriptionModal = document.getElementById('subscriptionModal');
     const closeModal = document.getElementById('closeModal');
 
-    openModal.addEventListener('click', () => {
-        subscriptionModal.classList.remove('hidden');
-    });
+    openModal.addEventListener('click', () => subscriptionModal.classList.remove('hidden'));
+    closeModal.addEventListener('click', () => subscriptionModal.classList.add('hidden'));
 
-    closeModal.addEventListener('click', () => {
-        subscriptionModal.classList.add('hidden');
-    });
-
-    // Handle form submission
+    // Handle Form Submission
     const form = document.getElementById('subscriptionForm');
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        // Create a Payment Method using the card
         const { paymentMethod, error } = await stripe.createPaymentMethod({
             type: 'card',
             card: card,
@@ -459,10 +475,8 @@
         });
 
         if (error) {
-            // Display error to the user
             alert(error.message);
         } else {
-            // Send the payment method to the backend
             fetch('/subscribe', {
                 method: 'POST',
                 headers: {
@@ -477,23 +491,17 @@
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.message) {
-                        alert(data.message); // Show success message
-                        subscriptionModal.classList.add('hidden'); // Close the modal
+                        alert(data.message);
+                        subscriptionModal.classList.add('hidden');
                     } else {
-                        alert('Error: ' + data.error); // Show error message
+                        alert('Error: ' + data.error);
                     }
                 })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    alert('An error occurred. Please try again.');
-                });
+                .catch((err) => alert('An error occurred. Please try again.'));
         }
     });
 </script>
 
-            
-            
-    </div>
 </body>
 
 @endsection 

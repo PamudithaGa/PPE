@@ -11,6 +11,7 @@ class Subscription extends Eloquent
     protected $fillable = [
         'user_id', 
         'plan', 
-        'stripe_payment_id'
+        'stripe_payment_id',
+        'expires_at',
     ];
 }

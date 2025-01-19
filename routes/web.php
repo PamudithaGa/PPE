@@ -138,6 +138,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 });
 
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->middleware('auth');
+
+
 
 require __DIR__.'/auth.php';
 

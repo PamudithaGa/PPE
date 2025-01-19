@@ -414,7 +414,7 @@ Only the initial email or SMS provided by Pearl Princess Events will be accepted
     </div>
 
     <!-- Ticket Booking Modal -->
-    <div id="bookingForm" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-slate-900 bg-opacity-50">
+    <div id="bookingForm" class="fixed inset-0 z-50 flex hidden items-center justify-center bg-slate-900 bg-opacity-70">
         <div class="flex w-full max-w-5xl overflow-hidden rounded-lg bg-white shadow-xl">
             <div class="w-1/2">
                 <img id="eventImage" src="" alt="Event Image" class="h-full w-full object-cover">
@@ -434,15 +434,11 @@ Only the initial email or SMS provided by Pearl Princess Events will be accepted
                 <button onclick="showPaymentGateway()" class="mt-4 w-full rounded bg-green-500 px-4 py-2 text-white transition hover:bg-green-600">Purchase</button>
             </div>
             <div class="relative w-1/3 bg-yellow-500 p-4">
-                <!-- Close button -->
-                <button class="absolute right-2 top-2 text-gray-400 hover:text-red-500" onclick="toggleBookingForm()">✖</button>
+                <button class="absolute right-2 top-2 text-red-400 hover:text-red-800" onclick="toggleBookingForm()">✖</button>
 
                 <h3 class="mt-6 text-lg font-semibold">Ticket Policy</h3>
-                
-                <!-- Instructional text -->
                 <p class="mb-4 mt-6 text-sm">Only the initial email or SMS from Pearl Princess Events will be accepted as proof of purchase. Tickets will not be redeemed for forwarded or screenshot versions.<br><br> A valid NIC or Passport may be required for redemption.</p>
                 
-                <!-- Barcode-like divs -->
                 <div class="absolute bottom-6 left-0 right-0 flex items-center justify-center space-x-1">
                     <div class="h-8 w-1 bg-black"></div>
                     <div class="h-8 w-2 bg-black"></div>
