@@ -1,33 +1,3 @@
-{{-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Order Confirmation</title>
-</head>
-<body>
-    <h1>Thank You for Your Order, {{ $order->full_name }}!</h1>
-    <p>Your order has been placed successfully.</p>
-    
-    <h3>Order Details</h3>
-    <ul>
-        @foreach($order->items as $item)
-            <li>{{ $item['name'] }} (x{{ $item['quantity'] }}) - LKR {{ number_format($item['price'], 2) }}</li>
-        @endforeach
-    </ul>
-
-    <p><strong>Total Paid:</strong> LKR {{ number_format($order->total_amount, 2) }}</p>
-
-    <p>Your order will be shipped to: <br>
-       {{ $order->address }} <br>
-       Contact: {{ $order->phone_number }}</p>
-
-    <p>Thank you for shopping with us!</p>
-</body>
-</html> --}}
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

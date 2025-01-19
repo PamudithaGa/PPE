@@ -15,18 +15,6 @@ class CartSeeder extends Seeder
     public function run(): void
     {
 
-            // Connect to MongoDB
-            // $mongoClient = new Client(env('MONGO_DB_CONNECTION_STRING'));
-            // $db = $mongoClient->selectDatabase('PPevent');
-            // $cartCollection = $db->carts;
-    
-            // // Seed data
-            // $cartCollection->insertOne([
-                
-            // ]);
-    
-            // $this->command->info('Cart item seeded successfully!');
-
             Cart::create([
                 'user_id' => '6784be13229c87a83d0fbc82', // Replace with an actual user ID
                 'product_id' => '67836f44c42f84dddf03c36e', // Replace with an actual product ID
@@ -35,7 +23,7 @@ class CartSeeder extends Seeder
             ]);
 
             Cart::create([
-                'user_id' => '6784be13229c87a83d0fbc82', // Replace with an actual user ID
+                'user_id' => '678ce217a929a6008c025522', // Replace with an actual user ID
                 'product_id' => '67836eddc42f84dddf03c36d', // Replace with an actual product ID
                 'quantity' => 4,
                 //'added_at' => now(),

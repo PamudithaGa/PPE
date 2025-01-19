@@ -3,7 +3,6 @@
 @section('content')
 
 <body class="m-0">
-    <!-- Hero Section -->
     <div class="pb-[200px]">
     <div class="relative">
         <img class="h-[820px] w-full" src="{{ asset('../img/heroa.jpg') }}" alt="Hero Image">
@@ -18,7 +17,6 @@
     </a>
     </div>
     
-    <!-- About Section -->
     <div class="w-full bg-gray-200 p-[70px]">
         <h2 class="mb-[30px] text-center font-mono text-[24px]">UNFORGETTABLE, PERSONALIZED, LUXURY</h2>
         <h2 class="pb-[30px] text-center text-[34px] font-bold">Pearl Princess Events</h2>
@@ -27,7 +25,6 @@
             Our dedicated team goes above and beyond to provide exceptional service and innovative solutions, ensuring every detail is perfect and every moment is cherished.
         </p>
 
-        <!-- Call Us Button -->
         <div class="mt-10 flex justify-center">
             <a href="tel:+94726442538">
                 <button class="flex h-[50px] w-[250px] cursor-pointer items-center justify-center border-none bg-[#ffffff] font-serif text-[28px] text-slate-900 shadow-md">
@@ -37,7 +34,6 @@
         </div>
     </div>
 
-    <!--Events-->
     <div class="pb-[125px] pt-[155px]">
         <div class="grid grid-cols-3 place-items-center pb-[40px]">
             <div class="">
@@ -77,7 +73,7 @@
             </div>
     
             <div class="group relative h-[270px] w-[270px]">
-                <img class="h-full w-full object-cover" src="..\img\copoeve.jpg" alt="">
+                <img class="h-full w-full object-cover" src="{{ asset('..\img\copoeve.jpg')}}" alt="">
                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition duration-300 group-hover:bg-opacity-80">
                     <div class="flex h-[70px] w-[70px] items-center justify-center rounded-full bg-slate-900 bg-opacity-0 transition duration-300 group-hover:bg-opacity-30">
                         <span class="font-mono text-[50px] text-white opacity-0 group-hover:opacity-100">
@@ -99,7 +95,7 @@
             <div class="scroll-snap-x flex snap-mandatory justify-start space-x-6">
                 <!-- Venue Card -->
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/vanue.jpg" alt="Venue">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('..\img\vanue.jpg')}}" alt="Venue">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
                         <h3 class="text-lg font-bold text-white">Venues</h3>
                     </div>
@@ -107,28 +103,28 @@
         
                 <!-- Photography Card -->
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/photography.jpg" alt="Photography">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('../img/photography.jpg')}}" alt="Photography">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
                         <h3 class="text-lg font-bold text-white">Imaging</h3>
                     </div>
                 </div>
 
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/shanAudi.jpg" alt="Flowers">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('../img/shanAudi.jpg')}}" alt="Flowers">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
                         <h3 class="text-lg font-bold text-white">Vehicles</h3>
                     </div>
                 </div>
         
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/dinesh.jpg" alt="Recreation">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('../img/dinesh.jpg')}}" alt="Recreation">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
                         <h3 class="text-lg font-bold text-white">Recreation</h3>
                     </div>
                 </div>
                 
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/flowers.jpg" alt="Flowers">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('../img/flowers.jpg')}}" alt="Flowers">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
                         <h3 class="text-lg font-bold text-white">Decorations</h3>
                     </div>
@@ -136,7 +132,7 @@
 
                 <!-- Catering Card -->
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="../img/catering.jpg" alt="Catering">
+                    <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('../img/catering.jpg')}}" alt="Catering">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
                         <h3 class="text-lg font-bold text-white">Catering</h3>
                     </div>
@@ -154,7 +150,7 @@
         <div class="mt-[30px] grid grid-cols-5 place-items-center">
             <div class="group relative flex h-[180px] w-[180px] items-center justify-center rounded-full bg-[#717999]">
                 <div class="h-[170px] w-[170px] overflow-hidden rounded-full">
-                    <img class="h-[170px] w-[170px] rounded-full" src="..\img\dineshAravinda.jpg" alt="">
+                    <img class="h-[170px] w-[170px] rounded-full" src="{{ asset('..\img\dineshAravinda.jpg')}}" alt="">
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-lg font-semibold text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     Dinesh Aravinda
@@ -162,7 +158,7 @@
             </div>
             <div class="group relative flex h-[200px] w-[200px] items-center justify-center rounded-full bg-[#717999]">
                 <div class="h-[190px] w-[190px] overflow-hidden rounded-full">
-                    <img class="h-[190px] w-[190px] rounded-full" src="..\img\ashanDeSilva.jpg" alt="">
+                    <img class="h-[190px] w-[190px] rounded-full" src="{{ asset('..\img\ashanDeSilva.jpg')}}" alt="">
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-lg font-semibold text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     Ashan De Silva
@@ -170,7 +166,7 @@
             </div>
             <div class="group relative flex h-[220px] w-[220px] items-center justify-center rounded-full bg-[#E7892C]">
                 <div class="h-[210px] w-[210px] overflow-hidden rounded-full">
-                    <img class="h-[210px] w-[210px] rounded-full" src="..\img\buddikaIdamgedara.jpg" alt="">
+                    <img class="h-[210px] w-[210px] rounded-full" src="{{ asset('..\img\buddikaIdamgedara.jpg')}}" alt="">
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-lg font-semibold text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     Buddika Idamgedara
@@ -180,7 +176,7 @@
 
             <div class="group relative flex h-[200px] w-[200px] items-center justify-center rounded-full bg-[#717999]">
                 <div class="h-[190px] w-[190px] overflow-hidden rounded-full">
-                    <img class="h-[190px] w-[190px] rounded-full" src="..\img\thamaraSamaravikrama.jpg" alt="">
+                    <img class="h-[190px] w-[190px] rounded-full" src="{{ asset('..\img\thamaraSamaravikrama.jpg')}}" alt="">
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-lg font-semibold text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     T Samaravikrama
@@ -189,7 +185,7 @@
 
             <div class="group relative flex h-[180px] w-[180px] items-center justify-center rounded-full bg-[#717999]">
                 <div class="h-[170px] w-[170px] overflow-hidden rounded-full">
-                    <img class="h-[170px] w-[170px] rounded-full"src="..\img\eshan.jpg" alt="">
+                    <img class="h-[170px] w-[170px] rounded-full"src="{{ asset('..\img\eshan.jpg')}}" alt="">
                 </div>
                 <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 text-center text-lg font-semibold text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     Eshan Dineth
@@ -209,10 +205,14 @@
         <h2 class="font-julius-sans-one pl-[210px] pt-[20px] text-[55px] text-white">WE ARE HERE TO HELP YOU.</h2>
         <h2 class="pl-[70px] font-serif text-[20px] text-white">Discuss with experts with years of experience in the field and get your <br> wishes fulfilled.</h2>
         <div class="flex items-center justify-center">
-            <a href="tel:+94726442538"><button class="ml-64px mt-12 h-16 w-64 transform bg-[#E7892C] font-serif text-2xl font-light text-white transition duration-500 ease-in-out hover:scale-105">CONTACT US</button></a>
+            <a href="tel:+94726442538">
+                <button class="ml-64px mt-12 h-16 w-64 transform bg-[#E7892C] font-serif text-2xl font-light text-white transition duration-500 ease-in-out hover:scale-105">
+                    CONTACT US
+                </button>
+            </a>
         </div>
         <div class="absolute inset-0 flex items-end justify-end">
-            <img class="h-[450px]" src="..\img\flower.png" alt="Flower">
+            <img class="h-[450px]" src="{{ asset('..\img\flower.png')}}" alt="Flower">
         </div>
     </div>
     
@@ -248,44 +248,38 @@
     
 
     <div class="flex flex-wrap items-center justify-center gap-6 p-6 pb-[170px] pt-[170px]">
-        <!-- Card 1 -->
         <div class="group relative h-96 w-72 overflow-hidden rounded-lg shadow-lg">
-          <img src="..\img\cus.jpg" alt="Wedding Dress" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110">
-          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-center text-white">
-            <p class="text-sm font-semibold uppercase">Cloth</p>
-            <h3 class="mt-2 text-xl font-bold">Wedding Dress Collection</h3>
-            <a href="{{ route('offerings') }}" class="mt-4 rounded bg-yellow-400 px-4 py-2 font-semibold text-black transition hover:bg-yellow-500">SHOP NOW</a>
-          </div>
+            <img src="{{ asset('..\img\cus.jpg')}}" alt="Wedding Dress" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110">
+            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-center text-white">
+                <p class="text-sm font-semibold uppercase">Cloth</p>
+                <h3 class="mt-2 text-xl font-bold">Wedding Dress Collection</h3>
+                <a href="{{ route('offerings') }}" class="mt-4 rounded bg-yellow-400 px-4 py-2 font-semibold text-black transition hover:bg-yellow-500">SHOP NOW</a>
+            </div>
         </div>
-        <!-- Card 2 -->
+        
         <div class="group relative h-96 w-72 overflow-hidden rounded-lg shadow-lg">
-          <img src="..\img\jwel.jpg" alt="Wedding Jewellery" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110">
-          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-center text-white">
-            <p class="text-sm font-semibold uppercase">Jewellery</p>
-            <h3 class="mt-2 text-xl font-bold">Wedding Jewellery Collection</h3>
-            <a href="{{ route('offerings') }}" class="mt-4 rounded bg-yellow-400 px-4 py-2 font-semibold text-black transition hover:bg-yellow-500">SHOP NOW</a>
-          </div>
+            <img src="{{ asset('..\img\jwel.jpg')}}" alt="Wedding Jewellery" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110">
+            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-center text-white">
+                <p class="text-sm font-semibold uppercase">Jewellery</p>
+                <h3 class="mt-2 text-xl font-bold">Wedding Jewellery Collection</h3>
+                <a href="{{ route('offerings') }}" class="mt-4 rounded bg-yellow-400 px-4 py-2 font-semibold text-black transition hover:bg-yellow-500">SHOP NOW</a>
+            </div>
         </div>
-        <!-- Card 3 -->
+        
         <div class="relative flex h-96 w-72 flex-col items-center justify-center rounded-lg bg-yellow-400 text-center text-black shadow-lg">
-          <p class="text-sm font-semibold uppercase">Up to 70% off in Jewellery</p>
-          <h3 class="mt-2 text-xl font-bold">Wedding Jewellery Collection</h3>
-          <a href="{{ route('offerings') }}" class="mt-4 rounded bg-black px-4 py-2 font-semibold text-white transition hover:bg-gray-800">BROWSE SALES</a>
+            <p class="text-sm font-semibold uppercase">Up to 70% off in Jewellery</p>
+            <h3 class="mt-2 text-xl font-bold">Wedding Jewellery Collection</h3>
+            <a href="{{ route('offerings') }}" class="mt-4 rounded bg-black px-4 py-2 font-semibold text-white transition hover:bg-gray-800">BROWSE SALES</a>
         </div>
-      </div>
+    </div>
 
-
-    
-    
-    <!--trips-->
-    
     <div class="bg-gradient-to-r from-white to-slate-900 py-12">
         <div class="pb-[80px] pt-[35px]">
         <h2 class="text-center font-serif text-[48px]">5% OFF For Subscribers</h2>
     </div>
     
-        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="relative rounded-lg bg-white p-6 text-center shadow-lg">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="relative rounded-lg bg-white p-6 text-center shadow-lg">
                 <div class="absolute inset-x-0 -top-4 flex justify-center">
                     <div class="h-4 w-full rounded-full bg-gradient-to-b from-white via-gray-200 to-white"></div>
                 </div>
@@ -428,13 +422,11 @@
     </div>
 </div>
 
-<!-- Stripe Script -->
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     const stripe = Stripe('{{ env("STRIPE_KEY") }}');
     const elements = stripe.elements();
 
-    // Create a card element
     const card = elements.create('card', {
         style: {
             base: {
@@ -452,7 +444,6 @@
     });
     card.mount('#card-element');
 
-    // Modal Management
     const openModal = document.getElementById('openModal');
     const subscriptionModal = document.getElementById('subscriptionModal');
     const closeModal = document.getElementById('closeModal');
@@ -460,7 +451,6 @@
     openModal.addEventListener('click', () => subscriptionModal.classList.remove('hidden'));
     closeModal.addEventListener('click', () => subscriptionModal.classList.add('hidden'));
 
-    // Handle Form Submission
     const form = document.getElementById('subscriptionForm');
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
