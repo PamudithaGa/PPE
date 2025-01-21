@@ -8,21 +8,24 @@ use Stripe\Customer;
 use Stripe\Subscription;
 use Stripe\Exception\ApiErrorException;
 use App\Models\Subscription as SubscriptionModel;
+use App\Mail\SubscriptionMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class SubscriptionController extends Controller
 {
     public function subscribe(Request $request)
     {
+        // Check for existing active subscriptions
         $existingSubscription = SubscriptionModel::where('user_id', Auth::id())
-        ->where('expires_at', '>', now())
-        ->first();
+            ->where('expires_at', '>', now())
+            ->first();
 
-    if ($existingSubscription) {
-        return response()->json([
-            'error' => 'You already have an active subscription.',
-        ], 400);
-    }
+        if ($existingSubscription) {
+            return response()->json([
+                'error' => 'You already have an active subscription.',
+            ], 400);
+        }
 
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -35,27 +38,29 @@ class SubscriptionController extends Controller
                 'invoice_settings' => ['default_payment_method' => $request->paymentMethod],
             ]);
 
+            // Create a Subscription in Stripe
             $stripeSubscription = Subscription::create([
                 'customer' => $customer->id,
-                'items' => [['price' => 'price_1QinOnGPbAuZxiJfB4c6HEOl']], 
+                'items' => [['price' => 'price_1QinOnGPbAuZxiJfB4c6HEOl']],
             ]);
 
+            // Save the subscription details in your database
             $subscription = SubscriptionModel::create([
                 'user_id' => Auth::id(),
-                'plan' => $request->plan, 
-                'stripe_payment_id' => $stripeSubscription->id, 
+                'plan' => $request->plan,
+                'stripe_payment_id' => $stripeSubscription->id,
                 'expires_at' => now()->addYear(),
             ]);
 
+            // Send confirmation email to the user
+            Mail::to($request->email)->send(new SubscriptionMail($subscription));
+
             return response()->json([
-                'message' => 'Subscription successful!',
+                'message' => 'Subscription successful! A confirmation email has been sent.',
                 'subscription' => $subscription,
             ]);
         } catch (ApiErrorException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
-    
 }
-

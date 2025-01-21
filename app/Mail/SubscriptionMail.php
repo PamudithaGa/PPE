@@ -5,8 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class SubscriptionMail extends Mailable
@@ -18,7 +16,7 @@ class SubscriptionMail extends Mailable
      *
      * @var mixed
      */
-    protected $subscription;
+    public $subscription;
 
     /**
      * Create a new message instance.
@@ -33,7 +31,9 @@ class SubscriptionMail extends Mailable
     public function build()
     {
         return $this->subject('Subscription Confirmation')
-                    ->view('emails.subscription_confirm');
+                    ->view('emails.subscription_confirm')
+                    ->with([
+                        'subscription' => $this->subscription,
+                    ]);
     }
-
 }

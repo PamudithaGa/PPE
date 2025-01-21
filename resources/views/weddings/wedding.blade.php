@@ -22,7 +22,7 @@
                     ensuring that your special day is seamless and memorable.</p>
             </div>            
             <div>
-                <img class="ml-[150px] mt-[60px] w-[300px]" src="..\img\couple.jpg">
+                <img class="ml-[150px] mt-[60px] w-[300px]" src="{{ asset('..\img\couple.jpg')}}">
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             <div class="bg-gray-200">
                 <div class="ml-[100px] grid grid-cols-2 place-items-start">
                     <div>
-                        <img class="ml-[150px] mt-[130px] w-[300px]" src="..\img\wed.jpg">
+                        <img class="ml-[150px] mt-[130px] w-[300px]" src="{{ asset('..\img\wed.jpg')}}">
                     </div>
                     <div>
                         <h2 class="font-k2d mt-[50px] text-[32px]">WEDDING SERVICES</h2>
@@ -58,7 +58,7 @@
         </div>
 
 
-        <div class="mt-[60px] grid grid-cols-3 place-items-center text-[#761313]">
+        {{-- <div class="mt-[60px] grid grid-cols-3 place-items-center text-[#761313]">
             <div class="flex w-[300px] justify-center">
                 <p>Dulaj + Rasika | Asian Wedding</p>
             </div>
@@ -73,24 +73,52 @@
         
         <div class="mt-[20px] grid grid-cols-3 place-items-center">
             <div><a href="{{ route('dulaj') }}">
-                <img class="w-[300px]" src="..\img\IMG-0543.jpg" alt=""></a>
+                <img class="w-[300px]" src="{{ asset('..\img\IMG-0543.jpg')}}" alt="Dulaj's Couple Photo"></a>
             </div>
             <div class=""><a href="{{ route('loshitha') }}">
-                <img class="w-[300px]" src="..\img\Loshitha_Budhdhi.jpg" alt=""></a>
+                <img class="w-[300px]" src="{{ asset('..\img\Loshitha_Budhdhi.jpg')}}" alt="Lositha's Couple Photo"></a>
             </div>
-            <div class=""><a href="{{ url('sasiruwan') }}">
-                <img class="w-[300px]" src="..\img\Sasiruwan_Nethmi.jpg" alt=""></a>
+            <div class=""><a href="{{ route('sasiruwan') }}">
+                <img class="w-[300px]" src="{{ asset('..\img\Sasiruwan_Nethmi.jpg')}}" alt="Sasiruwan's Couple Photo"></a>
+            </div>
+        </div> --}}
+
+
+        <div class="mt-[60px] grid grid-cols-3 place-items-center gap-6 text-[#761313]">
+            <div class="flex flex-col items-center">
+                <p class="mb-2">Dulaj + Rasika | Asian Wedding</p>
+                <a href="{{ route('dulaj') }}">
+                    <img class="w-[300px]" src="{{ asset('..\img\IMG-0543.jpg') }}" alt="Dulaj's Couple Photo">
+                </a>
+            </div>
+        
+            <div class="flex flex-col items-center">
+                <p class="mb-2">Loshitha + Buddhi | Indian Wedding</p>
+                <a href="{{ route('loshitha') }}">
+                    <img class="w-[300px]" src="{{ asset('..\img\Loshitha_Budhdhi.jpg') }}" alt="Loshitha's Couple Photo">
+                </a>
+            </div>
+        
+            <div class="flex flex-col items-center">
+                <p class="mb-2">Sasiruwan + Nethmi | Western Wedding</p>
+                <a href="{{ route('sasiruwan') }}">
+                    <img class="w-[300px]" src="{{ asset('..\img\Sasiruwan_Nethmi.jpg') }}" alt="Sasiruwan's Couple Photo">
+                </a>
             </div>
         </div>
+        
 
 
         <div class="mb-[70px]">
             <h2 class="font-josefin-slab mt-[80px] text-center text-[38px]">Planning an event? We are here...</h2>
-            <div class="flex items-center justify-center"><a href="{{ url('/about') }}">
-                <button class="mt-[50px] h-[60px] w-[200px] transform bg-[#E7892C] font-serif text-[24px] text-white transition duration-500 ease-in-out hover:scale-105">Contact Us</button>
-        </a></div>
+            <div class="flex items-center justify-center">
+                <a href="{{ route('bookings.store') }}">
+                    <button class="mt-[50px] h-[60px] w-[200px] transform bg-[#E7892C] font-serif text-[24px] text-white transition duration-500 ease-in-out hover:scale-105"> 
+                        Contact Us
+                    </button>
+                 </a>
+            </div>
         </div>
     </section>
-
 </body>
 @endsection

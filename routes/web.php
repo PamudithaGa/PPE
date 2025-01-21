@@ -113,9 +113,9 @@ Route::post('/adlogin', [AdminController::class, 'authenticate'])->name('admin.a
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/cart', [CartController::class, 'cart'])->name('cart'); // Show the cart page
-    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add'); // Add to cart
-    Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove'); // Remove from cart
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add'); 
+    Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove'); 
 });
 
 

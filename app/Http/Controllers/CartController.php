@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -23,21 +24,21 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         Log::info('Add to Cart request received', $request->all());
-
+    
         $validated = $request->validate([
             'product_id' => 'required|string',
             'quantity' => 'required|integer|min:1',
         ]);
-
+    
         Cart::create([
             'user_id' => Auth::id(),
             'product_id' => $validated['product_id'],
             'quantity' => $validated['quantity'],
         ]);
-
-        return response()->json(['message' => 'Product added to cart successfully!']);
+    
+        return redirect()->route('cart.index')->with('success', 'Product added to cart successfully!');
     }
-
+    
     public function remove($id)
     {
         Cart::where('_id', $id)->delete();

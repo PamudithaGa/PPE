@@ -90,9 +90,9 @@
                 </button>
 
             </div>
-
+            
             <div class="hidden space-x-4 md:flex">
-                <a href=""><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/cart-shopping-solid.svg') }}" alt="Cart"></a>
+                <a href="{{ route('cart.index') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/cart-shopping-solid.svg') }}" alt="Cart"></a>
                 <a href="{{ route('dashboard') }}"><img class="h-[40px] w-[40px] hover:opacity-80" src="{{ asset('img/user.png') }}" alt="Account"></a>
             </div>
         </nav>
