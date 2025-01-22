@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ProductApiController;
 use App\Http\Controllers\API\CartApiController;
-
-
-
+use App\Http\Controllers\API\CheckoutApiController;
 
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
@@ -31,16 +29,18 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-
 Route::get('/offerings', [ProductApiController::class, 'apiOfferings'])->name('api.offerings');
-//Route::get('/product/details/{id}', [ProductApiController::class, 'show'])->name('api.product.details');
 Route::get('/product/details/{id}', [ProductApiController::class, 'show'])->name('product.details');
-
-
-
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/cart', [CartApiController::class, 'index']); // Get cart items
     Route::post('/cart/add', [CartApiController::class, 'addToCart']); // Add item to cart
     Route::delete('/cart/{id}', [CartApiController::class, 'remove']); // Remove item
+});
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/checkout', [CheckoutApiController::class, 'checkout']); // Start checkout
+    Route::get('/checkout/success', [CheckoutApiController::class, 'success'])->name('api.checkout.success'); // Handle success
+    Route::get('/checkout/cancel', [CheckoutApiController::class, 'cancel'])->name('api.checkout.cancel'); // Handle cancel
 });

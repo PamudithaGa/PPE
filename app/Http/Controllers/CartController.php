@@ -1,4 +1,3 @@
-<!-- app\Http\Controllers\CartController.php -->
 <?php
 
 namespace App\Http\Controllers;
