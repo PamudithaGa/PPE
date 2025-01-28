@@ -5,18 +5,18 @@
 <body class="m-0">
     <div class="pb-[200px]">
     <div class="relative">
-        <img class="h-[820px] w-full" src="{{ asset('../img/heroa.jpg') }}" alt="Hero Image">
+        <img class="h-[820px] w-full object-cover" src="{{ asset('../img/heroa.jpg') }}" alt="Hero Image">
         <img class="justify-centerh-[350px] absolute left-[50%] top-[75%] flex h-[350px] w-[650px] -translate-x-[50%] -translate-y-[50%] transform items-center" src="{{ asset('../img/pp-01-removebg.png') }}" alt="Logo">
         <h2 class="mt-[-350px] text-center font-mono text-[26px] text-white">An Identity Of Infinite Memories</h2>
     </div>
 
     <a href="{{ route('bookings.store') }}">
-        <button class="relative left-[43%] mt-20 flex h-[50px] w-[270px] cursor-pointer items-center justify-center border-none bg-[#ffffff] font-serif text-[30px] text-slate-900 shadow-md transition duration-500 ease-in-out hover:scale-105">
+        <button class="relative left-12 mt-20 flex h-12 w-72 cursor-pointer items-center justify-center border-none bg-[#ffffff] font-serif text-[30px] text-slate-900 shadow-md transition duration-500 ease-in-out hover:scale-105 lg:left-[43%]">
             Plan Your Day
         </button>
     </a>
     </div>
-    
+
     <div class="w-full bg-gray-200 p-[70px]">
         <h2 class="mb-[30px] text-center font-mono text-[24px]">UNFORGETTABLE, PERSONALIZED, LUXURY</h2>
         <h2 class="pb-[30px] text-center text-[34px] font-bold">Pearl Princess Events</h2>
@@ -34,22 +34,9 @@
         </div>
     </div>
 
-    <div class="pb-[125px] pt-[155px]">
-        <div class="grid grid-cols-3 place-items-center pb-[40px]">
-            <div class="">
-                <h2 class="font-mono text-[32px] text-slate-900">WEDDINGS</h2>
-            </div>
-        
-            <div class="">
-                <h2 class="font-mono text-[32px] text-slate-900">SOCIAL GATHERINGS</h2>
-            </div>
-    
-            <div class="">
-               <h2 class="font-mono text-[32px] text-slate-900">CORPORATE EVENTS</h2>
-            </div>
-        </div>
-    
-        <div class="grid grid-cols-3 place-items-center gap-[20px]">
+    <div class="grid place-items-center gap-6 pb-[175px] pt-[175px] lg:grid-cols-3">
+        <div class="flex flex-col items-center">
+            <h2 class="font-mono text-[32px] text-slate-900">WEDDINGS</h2>
             <div class="group relative h-[270px] w-[270px]">
                 <img class="h-full w-full object-cover" src="{{ asset('..\img\wedding.jpg')}}" alt="weddings">
                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition duration-300 group-hover:bg-opacity-80">
@@ -60,7 +47,10 @@
                     </div>
                 </div>
             </div>
+        </div>
     
+        <div class="flex flex-col items-center">
+            <h2 class="font-mono text-[32px] text-slate-900">SOCIAL GATHERINGS</h2>
             <div class="group relative h-[270px] w-[270px]">
                 <img class="h-full w-full object-cover" src="{{ asset('..\img\socialG.jpg')}}" alt="">
                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition duration-300 group-hover:bg-opacity-80">
@@ -71,7 +61,10 @@
                     </div>
                 </div>
             </div>
+        </div>
     
+        <div class="flex flex-col items-center">
+            <h2 class="font-mono text-[32px] text-slate-900">CORPORATE EVENTS</h2>
             <div class="group relative h-[270px] w-[270px]">
                 <img class="h-full w-full object-cover" src="{{ asset('..\img\copoeve.jpg')}}" alt="">
                 <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition duration-300 group-hover:bg-opacity-80">
@@ -84,6 +77,7 @@
             </div>
         </div>
     </div>
+    
 
     <div class="mt-[30px] bg-black p-[70px] pt-[40px]">
         <div class="flex items-center justify-between pb-[30px] pr-[40px] pt-[40px]">
@@ -93,7 +87,7 @@
         
         <div class="overflow-x-auto py-8">
             <div class="scroll-snap-x flex snap-mandatory justify-start space-x-6">
-                <!-- Venue Card -->
+                
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
                     <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('..\img\vanue.jpg')}}" alt="Venue">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
@@ -101,7 +95,6 @@
                     </div>
                 </div>
         
-                <!-- Photography Card -->
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
                     <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('../img/photography.jpg')}}" alt="Photography">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
@@ -130,7 +123,6 @@
                     </div>
                 </div>
 
-                <!-- Catering Card -->
                 <div class="scroll-snap-align-start group relative h-[420px] w-[260px] flex-shrink-0 overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl">
                     <img class="h-full w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" src="{{ asset('../img/catering.jpg')}}" alt="Catering">
                     <div class="absolute inset-0 flex items-end bg-black bg-opacity-40 p-4 transition duration-300">
@@ -142,12 +134,10 @@
         </div>
     </div>
     
-    
-    
     <!--crew-->
-    <div class="items-center pb-[60px] pt-[135px]">
-        <h2 class="ml-[80px] text-center font-serif text-[36px]">Our Professioners</h2>
-        <div class="mt-[30px] grid grid-cols-5 place-items-center">
+    <div class="items-center pb-16 pt-36">
+        <h2 class="text-center font-serif text-4xl font-semibold">Our Professionals</h2>
+        <div class="mt-8 grid grid-cols-1 place-items-center gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             <div class="group relative flex h-[180px] w-[180px] items-center justify-center rounded-full bg-[#717999]">
                 <div class="h-[170px] w-[170px] overflow-hidden rounded-full">
                     <img class="h-[170px] w-[170px] rounded-full" src="{{ asset('..\img\dineshAravinda.jpg')}}" alt="">
@@ -172,8 +162,6 @@
                     Buddika Idamgedara
                 </div>
             </div>
-            
-
             <div class="group relative flex h-[200px] w-[200px] items-center justify-center rounded-full bg-[#717999]">
                 <div class="h-[190px] w-[190px] overflow-hidden rounded-full">
                     <img class="h-[190px] w-[190px] rounded-full" src="{{ asset('..\img\thamaraSamaravikrama.jpg')}}" alt="">
@@ -192,27 +180,33 @@
                 </div>
             </div>
         </div>
-        
-        <p class="ml-[100px] mr-[90px] mt-[50px] text-center text-[24px] font-thin">Experience the perfect blend of 
-            user-friendly service and professional expertise, where every detail is handled with care, and every 
-            interaction leaves you feeling valued and confident.
+    
+        <p class="mx-auto mt-12 max-w-4xl text-center text-xl font-light">
+            Experience the perfect blend of user-friendly service and professional expertise, where every detail is handled with care, and every interaction leaves you feeling valued and confident.
         </p>
     </div>
 
     <!--image-->
-    <div class="relative mt-[100px] bg-[#717999] pb-[100px] pt-[50px]">
-        <h2 class="font-just-another-hand pl-[100px] pt-[30px] text-[60px] text-white">Need help planning your event?</h2>
-        <h2 class="font-julius-sans-one pl-[210px] pt-[20px] text-[55px] text-white">WE ARE HERE TO HELP YOU.</h2>
-        <h2 class="pl-[70px] font-serif text-[20px] text-white">Discuss with experts with years of experience in the field and get your <br> wishes fulfilled.</h2>
-        <div class="flex items-center justify-center">
+    <div class="relative mt-24 bg-[#717999] py-16">
+        <h2 class="font-just-another-hand text-center text-4xl text-white sm:text-5xl lg:text-6xl">
+            Need help planning your event?
+        </h2>
+        <h2 class="font-julius-sans-one mt-4 text-center text-3xl text-white sm:text-4xl lg:text-5xl">
+            WE ARE HERE TO HELP YOU.
+        </h2>
+        <p class="mt-6 text-center font-serif text-base text-white sm:text-lg lg:text-xl">
+            Discuss with experts with years of experience in the field and get your<br> wishes fulfilled.
+        </p>
+        <div class="mt-10 flex justify-center">
             <a href="tel:+94726442538">
-                <button class="ml-64px mt-12 h-16 w-64 transform bg-[#E7892C] font-serif text-2xl font-light text-white transition duration-500 ease-in-out hover:scale-105">
+                <button
+                    class="h-16 w-64 transform bg-[#E7892C] font-serif text-xl font-light text-white transition duration-500 ease-in-out hover:scale-105">
                     CONTACT US
                 </button>
             </a>
         </div>
-        <div class="absolute inset-0 flex items-end justify-end">
-            <img class="h-[450px]" src="{{ asset('..\img\flower.png')}}" alt="Flower">
+        <div class="absolute bottom-0 right-0">
+            <img class="h-[300px] md:h-[400px] lg:h-[450px]" src="{{ asset('img/flower.png') }}" alt="Flower">
         </div>
     </div>
     
@@ -351,14 +345,14 @@
     </div>
       
 <!--Subscription-->
-<div class="bg-gray-200 pb-[50px] pt-[75px]">
-    <h2 class="ml-[100px] font-mono text-[44px]">SUBSCRIPTION</h2>
-    <p class="ml-[200px] mt-[30px] text-[21px] font-light">
-        Subscribing to our event planning service ensures exclusive access to premium features,<br>
-        personalized event consultations, priority booking, and special discounts on all our offerings.<br>
-        Subscribers receive dedicated support and tailored recommendations, guaranteeing a seamless and<br>
-        unforgettable event experience.<br><br>
-        Enjoy unparalleled convenience and peace of mind with our comprehensive subscription plans.
+<div class="bg-gray-200 py-20">
+    <h2 class="text-center font-mono text-3xl sm:text-4xl lg:text-5xl">SUBSCRIPTION</h2>
+    <p class="mt-6 px-4 text-center text-sm font-light sm:text-base lg:px-32 lg:text-lg">
+        Subscribing to our event planning service ensures exclusive access to premium features, 
+        personalized event consultations, priority booking, and special discounts on all our offerings. 
+        Subscribers receive dedicated support and tailored recommendations, guaranteeing a seamless and 
+        unforgettable event experience. <br><br> Enjoy unparalleled convenience and peace of mind with 
+        our comprehensive subscription plans.
     </p>
 
     @auth
@@ -367,23 +361,26 @@
             $isSubscribed = $subscription && $subscription->expires_at->isFuture();
         @endphp
 
-        @if($isSubscribed)
-            <div class="flex justify-center">
-                <button class="mt-[95px] flex h-[50px] w-[300px] cursor-not-allowed items-center justify-center bg-green-600 font-serif text-[20px] text-white" disabled>
+        <div class="mt-10 flex justify-center">
+            @if($isSubscribed)
+                <button 
+                    class="h-12 w-72 cursor-not-allowed items-center justify-center bg-green-600 font-serif text-lg text-white shadow-md" 
+                    disabled>
                     You Have Subscribed
                 </button>
-            </div>
-        @else
-            <div class="flex justify-center">
-                <button id="openModal" class="mt-[95px] flex h-[50px] w-[250px] items-center justify-center border-none bg-[#ffffff] font-serif text-[28px] text-slate-900 shadow-md">
+            @else
+                <button 
+                    id="openModal" 
+                    class="h-12 w-64 items-center justify-center border border-gray-400 bg-white font-serif text-xl text-gray-800 shadow-md transition hover:bg-gray-100">
                     SUBSCRIBE
                 </button>
-            </div>
-        @endif
+            @endif
+        </div>
     @else
-        <div class="flex justify-center">
+        <div class="mt-10 flex justify-center">
             <a href="{{ route('login') }}">
-                <button class="mt-[95px] flex h-[50px] w-[300px] items-center justify-center bg-red-600 font-serif text-[20px] text-white">
+                <button 
+                    class="h-12 w-72 items-center justify-center bg-red-600 font-serif text-lg text-white shadow-md transition hover:bg-red-700">
                     Please log in to subscribe.
                 </button>
             </a>
