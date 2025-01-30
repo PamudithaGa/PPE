@@ -1,4 +1,87 @@
-@tailwind base;
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+ */
+
+
+ @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styles for login page */
+.auth-gradient {
+    background-image: linear-gradient(to bottom right, #8B5E3C, #6B4423);
+}
+
+.auth-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #D1D5DB;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-input:focus {
+    border-color: #8B5E3C;
+    box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.5);
+}
+
+.auth-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(to right, #8B5E3C, #6B4423);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.auth-button:hover {
+    background: linear-gradient(to right, #7A4C33, #5A3718);
+    transform: scale(1.02);
+}
+
+.auth-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.5);
+}
+
+/* Custom styles for login page */
+.auth-gradient {
+    background-image: linear-gradient(to bottom right, #8B5E3C, #6B4423);
+}
+
+.auth-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #D1D5DB;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-input:focus {
+    border-color: #8B5E3C;
+    box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.5);
+}
+
+.auth-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(to right, #8B5E3C, #6B4423);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.auth-button:hover {
+    background: linear-gradient(to right, #7A4C33, #5A3718);
+    transform: scale(1.02);
+}
+
+.auth-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.5);
+}
