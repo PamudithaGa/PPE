@@ -11,7 +11,7 @@
             <option value="workshop">Workshop</option>
         </select>
     </div>
-
+    
     <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-2 lg:grid-cols-5">
         @forelse($events as $event)
             <div class="group relative mt-[70px] flex flex-col overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:shadow-2xl">

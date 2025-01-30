@@ -24,5 +24,6 @@ class bookings extends Eloquent
         'budget',
         'services',
         'notes',
+        'image'
     ];
 }

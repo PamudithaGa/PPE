@@ -24,6 +24,9 @@ class CheckoutController extends Controller
         }
 
         $lineItems = [];
+        $fullName = $request->input('full_name');
+        $address = $request->input('address');
+        $phoneNumber = $request->input('phone_number');
         $subtotal = 0;
 
         foreach ($cartItems as $item) {
@@ -43,6 +46,18 @@ class CheckoutController extends Controller
         $shipping = 2500;
         $total = $subtotal + $shipping;
 
+        $lineItems[] = [
+            'price_data' => [
+                'currency' => 'lkr',
+                'product_data' => [
+                    'name' => 'Shipping',
+                    'description' => 'Shipping Cost',
+                ],
+                'unit_amount' => $shipping * 100,
+            ],
+            'quantity' => 1,
+        ];
+
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = Session::create([
@@ -51,6 +66,11 @@ class CheckoutController extends Controller
             'mode' => 'payment',
             'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout.cancel'),
+            'metadata' => [
+                'full_name'   => $fullName,
+                'address'     => $address,
+                'phone_number'=> $phoneNumber,
+            ],
         ]);
 
         return redirect($session->url);
@@ -74,9 +94,9 @@ class CheckoutController extends Controller
         $userId = Auth::id();
     
         // Retrieve metadata
-        $fullName = $session->metadata->full_name;
-        $address = $session->metadata->address;
-        $phoneNumber = $session->metadata->phone_number;
+        $fullName = $session->metadata['full_name'];
+        $address = $session->metadata['address'];
+        $phoneNumber = $session->metadata['phone_number'];
     
         // Calculate total amount
         $totalAmount = $session->amount_total / 100; 

@@ -97,7 +97,7 @@
     </div>
     
     <!-- Jewelry-Specific Table -->
-    <div id="jewelry-table" class="mt-4 hidden">
+    <div id="update-jewelry-table" class="mt-4 hidden">
         <h4 class="text-md font-semibold text-gray-700">Jewelry Details</h4>
         <table class="w-full table-auto border-collapse border border-gray-300">
             <thead>
@@ -110,18 +110,19 @@
             <tbody>
                 <tr>
                     <td class="border border-gray-300 px-4 py-2">
-                        <input type="text" name="material" class="w-full rounded border px-2 py-1" placeholder="e.g., Gold, Silver">
+                        <input type="text" id="updateMaterial" name="material" class="w-full rounded border px-2 py-1">
                     </td>
                     <td class="border border-gray-300 px-4 py-2">
-                        <input type="number" name="weight" class="w-full rounded border px-2 py-1" placeholder="e.g., 10">
+                        <input type="number" id="updateWeight" name="weight" class="w-full rounded border px-2 py-1">
                     </td>
                     <td class="border border-gray-300 px-4 py-2">
-                        <input type="text" name="kt" class="w-full rounded border px-2 py-1" placeholder="e.g., 18, 22">
+                        <input type="text" id="updateKt" name="kt" class="w-full rounded border px-2 py-1">
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    
 
     <div class="flex justify-end space-x-4">
         <button class="rounded bg-red-500 px-4 py-2 text-white" type="reset">Cancel</button>
@@ -218,7 +219,7 @@
     </div>
 
     <script>
-        function showUpdateForm(productId) {
+function showUpdateForm(productId) {
     const updateCard = document.getElementById('updateProductCard');
     const updateForm = document.getElementById('updateForm');
 
@@ -226,21 +227,34 @@
     fetch(`/products/${productId}/edit`)
         .then(response => response.json())
         .then(product => {
-            // Populate the form with product data
             document.getElementById('updateProductId').value = product._id;
             document.getElementById('updateName').value = product.name;
             document.getElementById('updatePrice').value = product.price;
             document.getElementById('updateCategory').value = product.category;
             document.getElementById('updateDescription').value = product.description;
 
-            // Update the form action
-            updateForm.action = `/products/${product._id}`;
+            // Show or hide Jewelry fields based on category
+            toggleJewelryTable(product.category, true);
 
-            // Show the update card with animation
+            // Update form action
+            //updateForm.action = `/products/${product._id}`;
+            updateForm.setAttribute("action", `/products/${product._id}`);
+
+
+            // Show the update card
             updateCard.classList.remove('hidden');
             updateCard.classList.add('active');
         })
         .catch(error => console.error('Error fetching product details:', error));
+}
+
+function toggleJewelryTable(category, isUpdate = false) {
+    const table = isUpdate ? document.getElementById("update-jewelry-table") : document.getElementById("jewelry-table");
+    if (category === "Jewelry") {
+        table.classList.remove("hidden");
+    } else {
+        table.classList.add("hidden");
+    }
 }
 
 function hideUpdateForm() {

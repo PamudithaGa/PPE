@@ -17,6 +17,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TicketsBookingController;
 use App\Http\Middleware\VerifyCsrfToken;
+use App\Http\Controllers\AdminDashboardController;
 
 Route::view('/', 'Users.home');
 
@@ -49,11 +50,18 @@ Route::put('/products/{id}', [ProductController::class, 'update'])->name('produc
 Route::get('/product/details/{id}', [ProductController::class, 'show'])->name('product.details');
 
     //Events
+// Route::post('/eventsAdd', [EventController::class, 'store'])->name('events.store'); 
+// Route::get('/events', [EventController::class, 'index'])->name('events.index');
+// Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
+// Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+
+
+Route::get('/event-dashboard', [EventController::class, 'index'])->name('EventDashboard');
 Route::post('/eventsAdd', [EventController::class, 'store'])->name('events.store'); 
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
-    
+
     //Book routes
 Route::get('/Bookings', [BookingController::class, 'index'])->name('event');
 Route::post('/Bookings', [BookingController::class, 'store'])->name('bookings.store');
@@ -90,5 +98,10 @@ Route::middleware('auth')->group(function () {
     Route::get('success', [TicketsBookingController::class, 'success'])->name('booking.success');
     Route::get('cancel', [TicketsBookingController::class, 'cancel'])->name('booking.cancel');
 });
+
+
+
+
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 require __DIR__.'/auth.php';

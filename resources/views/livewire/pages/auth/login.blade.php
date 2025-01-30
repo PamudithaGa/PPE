@@ -24,67 +24,64 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<div class="flex items-center justify-center border-4 bg-gray-100 dark:bg-gray-900">
+    <div class="w-full max-w-md space-y-6 rounded-lg bg-white p-8 shadow-lg dark:bg-gray-800">
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="login">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="mt-1 block w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
-        </div>
+        <h2 class="text-center text-2xl font-bold text-gray-900 dark:text-white">
+            {{ __('Sign in to your account') }}
+        </h2>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <form wire:submit="login" class="space-y-4">
+            <!-- Email Address -->
+            <div>
+                <x-input-label for="email" :value="__('Email')" />
+                <x-text-input wire:model="form.email" id="email" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-700 dark:text-white" type="email" name="email" required autofocus autocomplete="username" />
+                <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            </div>
 
-            <x-text-input wire:model="form.password" id="password" class="mt-1 block w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <!-- Password -->
+            <div>
+                <x-input-label for="password" :value="__('Password')" />
+                <x-text-input wire:model="form.password" id="password" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-700 dark:text-white" type="password" name="password" required autocomplete="current-password" />
+                <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
+            </div>
 
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
-        </div>
+            <!-- Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between">
+                <label for="remember" class="inline-flex items-center">
+                    <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 dark:border-gray-700 dark:bg-gray-800 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
+                    <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                </label>
 
-        <!-- Remember Me -->
-        <div class="mt-4 block">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" class="text-sm text-indigo-600 hover:underline dark:text-indigo-400">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
+            </div>
 
-        <div class="mt-4 flex items-center justify-end">
-            @if (Route::has('password.request'))
-                <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+            <!-- Login Button -->
+            <div>
+                <x-primary-button class="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 font-bold text-white transition duration-300 hover:bg-indigo-700">
+                    {{ __('Log in') }}
+                </x-primary-button>
+            </div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-
-        <div class="flex items-center justify-end">
-            <a
-                href="{{ route('register') }}"
-                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-            >
-                {{ __('Create a new account') }}
-            </a>
-        </div>
-    </form>
+            <!-- Register -->
+            <div class="text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {{ __("Don't have an account?") }}
+                    <a href="{{ route('register') }}" class="text-indigo-600 hover:underline dark:text-indigo-400">
+                        {{ __('Create a new account') }}
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
 </div>
 
 
 
 
-{{-- <a
-href="{{ route('register') }}"
-class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
->
-Register
-</a> --}}

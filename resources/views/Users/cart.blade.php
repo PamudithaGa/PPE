@@ -94,14 +94,14 @@
           <form action="{{ route('checkout.index') }}" method="GET">
               @csrf
               <label class="block text-sm font-medium text-gray-700">Full Name</label>
-              <input type="text" class="w-full rounded border px-4 py-2 text-sm" required>
+              <input type="text" name="full_name" class="w-full rounded border px-4 py-2 text-sm text-black" required>
 
               <label class="mt-4 block text-sm font-medium text-gray-700">Address</label>
-              <input type="text" class="w-full rounded border px-4 py-2 text-sm" required>
+              <input type="text" name="address" class="w-full rounded border px-4 py-2 text-sm text-black" required>
 
               <label class="mt-4 block text-sm font-medium text-gray-700">Phone Number</label>
-              <input type="text" class="w-full rounded border px-4 py-2 text-sm" required>
-
+              <input type="text" name="phone_number" class="w-full rounded border px-4 py-2 text-sm text-black" required>
+              
               <div class="mt-4 flex justify-between">
                   <button type="button" @click="showModal = false" class="px-4 py-2 text-sm text-gray-600">Cancel</button>
                   <button type="submit" class="rounded bg-black px-4 py-2 text-sm font-bold uppercase text-white">

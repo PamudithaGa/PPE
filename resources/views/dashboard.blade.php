@@ -137,11 +137,13 @@
                         <p class="mt-2 text-gray-600"><strong>Name:</strong> {{ auth()->user()->name }}</p>
                         <p class="mt-1 text-gray-600"><strong>Email:</strong> {{ auth()->user()->email }}</p>
                         <p class="mt-1 text-gray-600"><strong>Phone:</strong> {{ auth()->user()->phone }}</p>
-                        <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
-                            Update Profile
-                        </button>
+                        <a href="{{ route('profile') }}">
+                            <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
+                                Update Profile
+                            </button>
+                        </a>                  
                     </div>
-
+                    
                     <div class="rounded-lg bg-white p-6 shadow">
                         <h3 class="text-xl font-semibold">Address Book</h3>
                         <p class="mt-2 text-gray-600">Manage your saved addresses here.</p>
