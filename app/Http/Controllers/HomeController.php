@@ -22,8 +22,8 @@ class HomeController extends Controller
 
     public function eventPage()
     {
-        $events = Event::all(); // Fetch all events from the database
-        return view('Users.events', compact('events')); // Pass the events to the view
+        $events = Event::all(); 
+        return view('Users.events', compact('events')); 
     }
     
 }

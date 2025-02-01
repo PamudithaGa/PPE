@@ -12,21 +12,58 @@
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <div class="flex">
-        <div class="fixed h-screen w-1/5 bg-gray-900 shadow-lg">
-            <div class="mt-[140px] flex items-center justify-center">
-                <img class="h-16 w-16 rounded-full" src="https://via.placeholder.com/150" alt="Admin Profile Picture">
-            </div>
-            <nav class="mt-[40px]">
-                <ul>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Dashboard</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Users</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('products.index') }}">Product Management</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ route('events.index') }}">Event Management</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Orders</a></li>
-                    <li class="px-6 py-2 text-gray-200 hover:bg-gray-700"><a href="{{ url('/about') }}">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
+            <!-- Sidebar -->
+            <!-- Sidebar -->
+<div class="fixed hidden h-screen w-64 bg-gray-900 shadow-lg transition-all duration-300 ease-in-out md:block" id="sidebar">
+    <!-- Profile Section -->
+    <div class="mt-10 flex flex-col items-center">
+        <img class="h-16 w-16 rounded-full border-2 border-gray-500" src="{{ asset('..\img\admin.png')}}" alt="Admin Profile Picture">
+        <h2 class="mt-2 text-lg font-semibold text-white">Admin Panel</h2>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="mt-6">
+        <ul class="space-y-2">
+            <li>
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center rounded-md px-6 py-3 text-gray-300 transition hover:bg-gray-700 hover:text-white">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('products.index') }}" class="flex items-center rounded-md px-6 py-3 text-gray-300 transition hover:bg-gray-700 hover:text-white">
+                    <i class="fas fa-box mr-3"></i> Product Management
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('events.index') }}" class="flex items-center rounded-md px-6 py-3 text-gray-300 transition hover:bg-gray-700 hover:text-white">
+                    <i class="fas fa-calendar-alt mr-3"></i> Event Management
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/logout') }}" class="flex items-center rounded-md px-6 py-3 text-red-400 transition hover:bg-red-600 hover:text-white">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Mobile Toggle Button -->
+<button class="fixed left-4 top-4 rounded-md bg-gray-800 p-2 text-white focus:outline-none md:hidden" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- JavaScript for Sidebar Toggle -->
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+        let sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('hidden');
+    });
+</script>
+
+<!-- FontAwesome Icons (Optional) -->
+<script src="https://kit.fontawesome.com/ee10af8ca1.js" crossorigin="anonymous"></script>
+
 
         <div class="ml-[330px] w-4/5 bg-gray-100 p-8">
             <header class="mb-1 mt-[20px] flex items-center justify-between rounded-lg bg-white p-4 shadow-md">
@@ -248,7 +285,18 @@
                                     class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600" onclick="closeUpdateForm()" title="Close">×
                                 </button>
                             
-                                <form action="{{ route('events.update', $event->_id) }}" method="POST" enctype="multipart/form-data">
+                                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
+                                <form action="{{ route('events.update', $event->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <h3 class="mb-4 text-lg font-semibold text-gray-700">Update Event</h3>
@@ -274,7 +322,7 @@
                                             class="w-full rounded border px-3 py-2" placeholder="Venue" required>
                                         <textarea name="eventDescription" class="w-full rounded border px-3 py-2" placeholder="Event Description" required>{{ $event->eventDescription }}</textarea>
                                         <input type="file" name="eventImage" class="w-full rounded border px-3 py-2">
-                                        <input type="number" id="ticketQunatity" name="ticketQunatity" class="w-full rounded border px-3 py-2" placeholder="Ticket Qunatity" required>
+                                        <input type="number" name="ticketQuantity" class="w-full rounded border px-3 py-2" placeholder="Ticket Quantity" required>
                                     </div>
                                     <button type="submit" class="mt-4 rounded bg-green-500 px-4 py-2 text-white">Update Event</button>
                                 </form>

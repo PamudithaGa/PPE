@@ -11,33 +11,8 @@ class BookingController extends Controller
 {
     public function index()
     {
-        return view('Users.bookings'); // Make sure this corresponds to the view you want to display.
+        return view('Users.bookings'); 
     }
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|email|max:255',
-    //         'phone' => 'required|string|max:15',
-    //         'eventType' => 'required|string',
-    //         'eventDate' => 'required|date',
-    //         'eventTime' => 'required',
-    //         'location' => 'required|string|max:255',
-    //         'guestCount' => 'required|integer|min:1',
-    //         'theme' => 'nullable|string|max:255',
-    //         'budget' => 'nullable|numeric',
-    //         'services' => 'nullable|array',
-    //         'services.*' => 'string',
-    //         'notes' => 'nullable|string|max:1000',
-    //     ]);
-    
-    //     $booking = bookings::create($request->all());
-    
-    //     Mail::to($request->email)->send(new BookingConfirmation($booking));
-    
-    //     return redirect()->route('home')->with('success', 'Your booking has been submitted successfully, and a confirmation email has been sent!');
-    // }
 
     public function store(Request $request)
 {

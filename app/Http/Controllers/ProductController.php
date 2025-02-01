@@ -73,64 +73,45 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        if (!$product) 
-        {
-            return redirect()->route('products.index')->with('error', 'Product not found.');
+        
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
         }
-
+    
         return response()->json($product);
     }
-
+    
 
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::find($id);
     
-        // Validate input
-        $validatedData = $request->validate([
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+    
+        // Validate the request
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'category' => 'required|in:electronics,clothing,jewelry',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required|numeric',
+            'category' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
     
-        // Update product details
-        $product->name = $validatedData['name'];
-        $product->price = $validatedData['price'];
-        $product->description = $validatedData['description'] ?? $product->description;
-        $product->category = $validatedData['category'];
+        // Update product fields
+        $product->update($validated);
     
-        // Handle jewelry-specific attributes
-        if ($request->category === 'jewelry') {
-            $validatedJewelryData = $request->validate([
-                'material' => 'required|string|max:255',
-                'weight' => 'required|numeric|min:0',
-                'kt' => 'nullable|string|max:10',
-            ]);
-    
-            $product->material = $validatedJewelryData['material'];
-            $product->weight = $validatedJewelryData['weight'];
-            $product->kt = $validatedJewelryData['kt'] ?? null;
-        }
-    
-        // Handle image update (if a new image is uploaded)
+        // Handle image upload if provided
         if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($product->image) {
-                Storage::delete($product->image);
-            }
-    
-            // Store new image and update path
             $imagePath = $request->file('image')->store('products', 'public');
             $product->image = $imagePath;
+            $product->save();
         }
     
-        // Save updates
-        $product->save();
-    
-        return redirect()->back()->with('success', 'Product updated successfully!');
+        return redirect()->back()->with('success', 'Product updated successfully');
     }
+    
     
 
     public function offerings()

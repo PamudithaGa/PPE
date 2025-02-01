@@ -120,7 +120,6 @@
                         </li>
                         <li class="group px-6 py-3 hover:bg-green-700">
                             <a href="{{ route('home') }}" class="flex items-center">
-                                {{-- <span class="material-icons text-gray-400 group-hover:text-white">home</span> --}}
                                 <span class="ml-4">Back to Home</span>
                             </a>
                         </li>
@@ -128,7 +127,6 @@
                 </nav>
             </div>
 
-            <!-- Content Section -->
             <div class="flex-1 p-6">
                 <!-- Profile Section -->
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -136,7 +134,6 @@
                         <h3 class="text-xl font-semibold">Profile</h3>
                         <p class="mt-2 text-gray-600"><strong>Name:</strong> {{ auth()->user()->name }}</p>
                         <p class="mt-1 text-gray-600"><strong>Email:</strong> {{ auth()->user()->email }}</p>
-                        <p class="mt-1 text-gray-600"><strong>Phone:</strong> {{ auth()->user()->phone }}</p>
                         <a href="{{ route('profile') }}">
                             <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
                                 Update Profile
@@ -144,20 +141,20 @@
                         </a>                  
                     </div>
                     
-                    <div class="rounded-lg bg-white p-6 shadow">
+                    {{-- <div class="rounded-lg bg-white p-6 shadow">
                         <h3 class="text-xl font-semibold">Address Book</h3>
                         <p class="mt-2 text-gray-600">Manage your saved addresses here.</p>
                         <button class="mt-4 w-full rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
                             Manage Addresses
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Bookings Section -->
-                <div class="mt-6">
+                {{-- <div class="mt-6">
                     <h3 class="text-xl font-semibold">Bookings</h3>
                     <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        <!-- Booking Card -->
+                        
                         <div class="rounded-lg bg-white p-6 shadow">
                             <h3 class="text-lg font-bold">Upcoming Event 1</h3>
                             <p class="mt-2 text-gray-600">Date: 2024-12-25</p>
@@ -166,7 +163,7 @@
                                 View Details
                             </button>
                         </div>
-                        <!-- Booking Card -->
+                        
                         <div class="rounded-lg bg-white p-6 shadow">
                             <h3 class="text-lg font-bold">Upcoming Event 2</h3>
                             <p class="mt-2 text-gray-600">Date: 2025-01-15</p>
@@ -176,7 +173,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Tickets Section -->
                 <div class="mt-6 rounded-lg bg-white p-6 shadow">

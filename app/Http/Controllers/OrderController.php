@@ -18,7 +18,6 @@ class OrderController extends Controller
     
         public function store(Request $request)
     {
-        // Validate input
         $request->validate([
             'full_name' => 'required|string|max:255',
             'address' => 'required|string|max:500',
@@ -26,14 +25,12 @@ class OrderController extends Controller
             'total_amount' => 'required|numeric|min:0',
         ]);
 
-        // Get cart items
         $cartItems = Cart::where('user_id', Auth::id())->get();
 
         if ($cartItems->isEmpty()) {
             return back()->with('error', 'Your cart is empty.');
         }
 
-        // Create order
         $order = Order::create([
             'user_id' => Auth::id(),
             'full_name' => $request->full_name,
@@ -41,7 +38,7 @@ class OrderController extends Controller
             'phone_number' => $request->phone_number,
             'total_amount' => $request->total_amount,
             'payment_status' => 'pending',
-            'stripe_session_id' => null, // Will update after Stripe payment
+            'stripe_session_id' => null, 
             'items' => $cartItems->map(function ($cartItem) {
                 return [
                     'product_id' => $cartItem->product_id,
@@ -52,7 +49,6 @@ class OrderController extends Controller
             })->toArray(),
         ]);
 
-        // Clear the user's cart after order placement
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('orders.index')->with('success', 'Order placed successfully!');

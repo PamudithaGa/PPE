@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Pearl Princess Events' }}</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> <!-- Assuming Tailwind CSS is installed -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/myscripts.js') }}" defer></script>
     <Script src="https://cdn.tailwindcss.com"></Script>
@@ -163,10 +163,6 @@
             <h2 class="text-sm text-white">&copy; 2024 Pearl Princess Events. All rights reserved.</h2>
         </div>
     </footer>
-    
-
-
-    
     <script>
     function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');

@@ -93,15 +93,12 @@ class CheckoutController extends Controller
     
         $userId = Auth::id();
     
-        // Retrieve metadata
         $fullName = $session->metadata['full_name'];
         $address = $session->metadata['address'];
         $phoneNumber = $session->metadata['phone_number'];
     
-        // Calculate total amount
         $totalAmount = $session->amount_total / 100; 
     
-        // Retrieve cart items
         $cartItems = Cart::where('user_id', $userId)->get();
         $items = $cartItems->map(function ($item) {
             return [
@@ -112,7 +109,6 @@ class CheckoutController extends Controller
             ];
         });
     
-        // Store order in MongoDB
         $order = Order::create([
             'user_id' => $userId,
             'full_name' => $fullName,
@@ -124,10 +120,8 @@ class CheckoutController extends Controller
             'items' => $items->toArray(),
         ]);
     
-        // Send confirmation email
         Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($order));
     
-        // Clear the cart
         Cart::where('user_id', $userId)->delete();
     
         return view('Users.success', ['order' => $order]);

@@ -33,12 +33,11 @@ class AdminController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            // Authentication passed
+            
             $request->session()->regenerate();
-            return redirect()->route('products.index'); // Redirect to products dashboard
+            return redirect()->route('products.index');
         }
 
-        // Authentication failed
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
@@ -47,7 +46,3 @@ class AdminController extends Controller
 
     
     }
-
-    
-
-// db.sessions.deleteMany({});

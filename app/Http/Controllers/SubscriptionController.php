@@ -16,7 +16,6 @@ class SubscriptionController extends Controller
 {
     public function subscribe(Request $request)
     {
-        // Check for existing active subscriptions
         $existingSubscription = SubscriptionModel::where('user_id', Auth::id())
             ->where('expires_at', '>', now())
             ->first();
@@ -30,7 +29,6 @@ class SubscriptionController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
-            // Create a Customer in Stripe
             $customer = Customer::create([
                 'email' => $request->email,
                 'name' => $request->name,
@@ -38,13 +36,11 @@ class SubscriptionController extends Controller
                 'invoice_settings' => ['default_payment_method' => $request->paymentMethod],
             ]);
 
-            // Create a Subscription in Stripe
             $stripeSubscription = Subscription::create([
                 'customer' => $customer->id,
                 'items' => [['price' => 'price_1QinOnGPbAuZxiJfB4c6HEOl']],
             ]);
 
-            // Save the subscription details in your database
             $subscription = SubscriptionModel::create([
                 'user_id' => Auth::id(),
                 'plan' => $request->plan,
@@ -52,7 +48,6 @@ class SubscriptionController extends Controller
                 'expires_at' => now()->addYear(),
             ]);
 
-            // Send confirmation email to the user
             Mail::to($request->email)->send(new SubscriptionMail($subscription));
 
             return response()->json([

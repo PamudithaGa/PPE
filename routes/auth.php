@@ -30,6 +30,5 @@ Route::middleware('auth')->group(function () {
     Volt::route('confirm-password', 'pages.auth.confirm-password')
         ->name('password.confirm');
         Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-        //Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     
 });

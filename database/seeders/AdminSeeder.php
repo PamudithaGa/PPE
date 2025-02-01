@@ -14,20 +14,20 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        // Admin::create([
-        //     'name' => 'Pamu',
-        //     'email' => 'Pamu@gmail.com',
-        //     'password' => bcrypt('password'),
-        //     'phone' => '1234567890',
-        // ]);
+        Admin::create([
+            'name' => 'Pamu',
+            'email' => 'pamu@gmail.com',
+            'password' => bcrypt('password'),
+            'phone' => '0726442538',
+        ]);
 
         
-            Admin::create([
-                'name' => 'Super Admin',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('password'), // Change this to a secure password
-                'phone' => '1234567890',
-            ]);
+            // Admin::create([
+            //     'name' => 'Super Admin',
+            //     'email' => 'admin@example.com',
+            //     'password' => Hash::make('password'), // Change this to a secure password
+            //     'phone' => '1234567890',
+            // ]);
         
     }
 }

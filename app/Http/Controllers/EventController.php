@@ -66,37 +66,8 @@ class EventController extends Controller
             return redirect()->route('EventDashboard')->with('success', 'Event deleted successfully!');
             
         }
-        //return redirect()->route('EventDashboard')->with('error', 'Event not found!');
         return redirect()->route('EventDashboard')->with('success', 'Event not found!');
     }
-
-
-
-//     public function update(Request $request, $id)
-// {
-//     $event = Event::find($id);
-//     $request->validate([
-//         'eventName' => 'required',
-//         'eventType' => 'required',
-//         'ticketPrice' => 'required|numeric',
-//         'eventDate' => 'required|date',
-//         'eventTime' => 'required',
-//         'endTime' => 'required',
-//         'eventVenue' => 'required',
-//         'eventDescription' => 'required',
-//         'eventImage' => 'nullable|image',
-//         'ticketQunatity' => 'required|numeric',
-//     ]);
-//     $event->update($request->all());
-//     if ($request->hasFile('eventImage')) {
-//         $file = $request->file('eventImage');
-//         $filename = time() . '.' . $file->getClientOriginalExtension();
-//         $file->move(public_path('img'), $filename);
-//         $event->eventImage = $filename;
-//         $event->save();
-//     }
-//     return redirect()->back()->with('success', 'Event updated successfully!');
-// }
 
 
 public function update(Request $request, $id)
@@ -139,7 +110,6 @@ public function update(Request $request, $id)
             unlink($imagePath);
         }
 
-        // Upload the new image
         $imageName = time() . '_' . $request->file('eventImage')->getClientOriginalName();
         $request->file('eventImage')->move(public_path('img'), $imageName);
         $event->eventImage = $imageName;
@@ -152,10 +122,3 @@ public function update(Request $request, $id)
 
 
 }
-
-
-
-
-
-// if0_37968138
-// Website for pearlprincessevents.kesug.com

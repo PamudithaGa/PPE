@@ -34,13 +34,11 @@ Route::get('/eventPage', [HomeController::class, 'eventPage'])->name('eventPage'
 Route::get('/serivces', [HomeController::class, 'serivces'])->name('serivces');
 Route::get('/offerings', [OfferController::class, 'index'])->name('offerings');
     
-    //Wedding routes
 Route::get('/wedding', [WeddingController::class, 'index'])->name('weddings');
 Route::get('/sasiruwan', [WeddingController::class, 'sasiruwan'])->name('sasiruwan');
 Route::get('/loshitha', [WeddingController::class, 'loshitha'])->name('loshitha');
 Route::get('/dulaj', [WeddingController::class, 'dulaj'])->name('dulaj');
     
-    //products routes
 Route::get('/offerings', [ProductController::class, 'offerings'])->name('offerings');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
@@ -49,23 +47,14 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::get('/product/details/{id}', [ProductController::class, 'show'])->name('product.details');
 
-    //Events
-// Route::post('/eventsAdd', [EventController::class, 'store'])->name('events.store'); 
-// Route::get('/events', [EventController::class, 'index'])->name('events.index');
-// Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
-// Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
-
-
 Route::get('/event-dashboard', [EventController::class, 'index'])->name('EventDashboard');
 Route::post('/eventsAdd', [EventController::class, 'store'])->name('events.store'); 
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
-    //Book routes
 Route::get('/Bookings', [BookingController::class, 'index'])->name('event');
 Route::post('/Bookings', [BookingController::class, 'store'])->name('bookings.store');
-
 
 Route::get('/userdashboard', [UserController::class, 'index'])->name('userdashboard');
 Route::post('/purchase-ticket', [EventController::class, 'purchaseTicket']);
@@ -98,9 +87,6 @@ Route::middleware('auth')->group(function () {
     Route::get('success', [TicketsBookingController::class, 'success'])->name('booking.success');
     Route::get('cancel', [TicketsBookingController::class, 'cancel'])->name('booking.cancel');
 });
-
-
-
 
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 

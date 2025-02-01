@@ -26,24 +26,44 @@
       
 
     <div class="flex h-screen">
-        <!-- Sidebar -->
-        <aside class="fixed h-full w-1/5 bg-gray-900 text-gray-200 shadow-lg">
-            <div class="flex flex-col items-center py-10">
-                <img class="h-16 w-16 rounded-full" src="https://via.placeholder.com/150" alt="Admin Profile Picture">
-                <h2 class="mt-4 text-lg font-semibold">Admin Panel</h2>
-            </div>
-            <nav class="mt-6">
-                <ul class="space-y-2">
-                    <li class="px-6 py-3 hover:bg-gray-700"><a href="#">Admins</a></li>
-                    <li class="px-6 py-3 hover:bg-gray-700"><a href="#">Users</a></li>
-                    <li class="px-6 py-3 hover:bg-gray-700"><a href="{{ route('products.index') }}">Products Management</a></li>
-                    <li class="px-6 py-3 hover:bg-gray-700"><a href="{{ route('events.index') }}">Event Management</a></li>
-                    <li class="px-6 py-3 hover:bg-gray-700"><a href="#">Logout</a></li>
-                </ul>
-            </nav>
-        </aside>
+        
+<div class="fixed hidden h-screen w-64 bg-gray-900 shadow-lg transition-all duration-300 ease-in-out md:block" id="sidebar">
+   
+    <div class="mt-10 flex flex-col items-center">
+        <img class="h-16 w-16 rounded-full border-2 border-gray-500" src="{{ asset('..\img\admin.png')}}" alt="Admin Profile Picture">
+        <h2 class="mt-2 text-lg font-semibold text-white">Admin Panel</h2>
+    </div>
 
-        <!-- Main Content -->
+    <nav class="mt-6">
+        <ul class="space-y-2">
+            <li>
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center rounded-md px-6 py-3 text-gray-300 transition hover:bg-gray-700 hover:text-white">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('products.index') }}" class="flex items-center rounded-md px-6 py-3 text-gray-300 transition hover:bg-gray-700 hover:text-white">
+                    <i class="fas fa-box mr-3"></i> Product Management
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('events.index') }}" class="flex items-center rounded-md px-6 py-3 text-gray-300 transition hover:bg-gray-700 hover:text-white">
+                    <i class="fas fa-calendar-alt mr-3"></i> Event Management
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/logout') }}" class="flex items-center rounded-md px-6 py-3 text-red-400 transition hover:bg-red-600 hover:text-white">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<button class="fixed left-4 top-4 rounded-md bg-gray-800 p-2 text-white focus:outline-none md:hidden" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+</button>
+
         <div class="ml-[330px] w-4/5 bg-gray-100 p-8">
             <header class="mb-8 flex items-center justify-between bg-white p-4 shadow-md">
                 <h1 class="text-2xl font-bold text-gray-700">Products Management Dashboard</h1>
@@ -59,28 +79,6 @@
                 <h2 class="mb-4 text-xl font-semibold text-gray-800">Manage Products</h2>
 
 
-                <!-- Add Product Form -->
-                {{-- <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
-                    @csrf
-                    <h3 class="text-lg font-semibold text-gray-700">Add Product</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" name="name" class="w-full rounded border px-3 py-2" placeholder="Product Name" required>
-                        <input type="number" name="price" class="w-full rounded border px-3 py-2" placeholder="Product Price" required>
-                        <select name="category" class="w-full rounded border px-3 py-2" required>
-                            <option value="" disabled selected>Select Category</option>
-                            <option value="Costumes">Costumes</option>
-                            <option value="Jewelry">Jewelry</option>
-                        </select>
-                        <input type="text" name="description" class="w-full rounded border px-3 py-2" placeholder="Product Description" required>
-                        <input type="file" name="image" class="w-full rounded border px-3 py-2" required>
-                    </div>
-                    <div class="flex justify-end space-x-4">
-                        <button class="rounded bg-red-500 px-4 py-2 text-white" type="reset">Cancel</button>
-                        <button class="rounded bg-green-500 px-4 py-2 text-white" type="submit">Add Product</button>
-                    </div>
-                </form> --}}
-
-                <!-- Add Product Form -->
 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
     @csrf
     <h3 class="text-lg font-semibold text-gray-700">Add Product</h3>
@@ -96,7 +94,6 @@
         <input type="file" name="image" class="w-full rounded border px-3 py-2" required>
     </div>
     
-    <!-- Jewelry-Specific Table -->
     <div id="update-jewelry-table" class="mt-4 hidden">
         <h4 class="text-md font-semibold text-gray-700">Jewelry Details</h4>
         <table class="w-full table-auto border-collapse border border-gray-300">
@@ -130,29 +127,13 @@
     </div>
 </form>
 
-<script>
-    // JavaScript to toggle the Jewelry table
-    function toggleJewelryTable() {
-        const category = document.getElementById("category").value;
-        const jewelryTable = document.getElementById("jewelry-table");
 
-        if (category === "Jewelry") {
-            jewelryTable.classList.remove("hidden");
-        } else {
-            jewelryTable.classList.add("hidden");
-        }
-    }
-</script>
-
-
-                <!-- Success Message -->
                 @if(session('success'))
                     <div class="mb-4 rounded bg-green-500 p-4 text-white">
                         {{ session('success') }}
                     </div>
                 @endif                
 
-                <!-- Products Table -->
                 <h3 class="my-6 text-xl font-semibold text-gray-800">Products List</h3>
                 <table class="min-w-full divide-y divide-gray-200 bg-white shadow-md">
                     <thead class="bg-gray-100">
@@ -190,13 +171,12 @@
                     </tbody>
                 </table>
 
-                <!-- Update Product Form -->
                 <div id="updateProductCard" class="fixed bottom-0 left-0 hidden w-3/4 rounded-t-lg bg-white p-6 shadow-md">
                     <h3 class="mb-4 text-lg font-semibold text-gray-700">Update Product</h3>
-                    <form id="updateForm" method="POST" enctype="multipart/form-data" action="#">
+                    <form id="updateForm" method="POST" enctype="multipart/form-data" action="{{ route('products.update', $product->_id ?? '') }}">
                         @csrf
-                        @method('PUT')
-                        <input type="hidden" id="updateProductId" name="product_id">
+                        @method('PUT')  
+                        <input type="hidden" id="updateProductId" name="product_id">                 
                         <div class="mb-4 grid grid-cols-2 gap-4">
                             <input type="text" id="updateName" name="name" class="w-full rounded border px-3 py-2" placeholder="Product Name" required>
                             <input type="number" id="updatePrice" name="price" class="w-full rounded border px-3 py-2" placeholder="Product Price" required>
@@ -218,53 +198,94 @@
         </div>
     </div>
 
+
     <script>
-function showUpdateForm(productId) {
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            let sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+    
+    <script>
+        function toggleJewelryTable() {
+            const category = document.getElementById("category").value;
+            const jewelryTable = document.getElementById("jewelry-table");
+    
+            if (category === "Jewelry") {
+                jewelryTable.classList.remove("hidden");
+            } else {
+                jewelryTable.classList.add("hidden");
+            }
+        }
+    </script>
+    
+
+    
+    <script>
+        
+        function showUpdateForm(productId) {
     const updateCard = document.getElementById('updateProductCard');
     const updateForm = document.getElementById('updateForm');
 
-    // Fetch product details
     fetch(`/products/${productId}/edit`)
         .then(response => response.json())
         .then(product => {
+            // Populate form fields
             document.getElementById('updateProductId').value = product._id;
             document.getElementById('updateName').value = product.name;
             document.getElementById('updatePrice').value = product.price;
             document.getElementById('updateCategory').value = product.category;
             document.getElementById('updateDescription').value = product.description;
 
-            // Show or hide Jewelry fields based on category
-            toggleJewelryTable(product.category, true);
+            // Call the function to show/hide jewelry table based on the product category
+            toggleJewelryTable(product.category);
 
-            // Update form action
-            //updateForm.action = `/products/${product._id}`;
-            updateForm.setAttribute("action", `/products/${product._id}`);
+            // Set the form action
+            updateForm.setAttribute("action", `/products/${productId}`);
 
-
-            // Show the update card
+            // Show the update form
             updateCard.classList.remove('hidden');
             updateCard.classList.add('active');
         })
         .catch(error => console.error('Error fetching product details:', error));
 }
 
-function toggleJewelryTable(category, isUpdate = false) {
-    const table = isUpdate ? document.getElementById("update-jewelry-table") : document.getElementById("jewelry-table");
+
+
+function toggleJewelryTable() {
+    const category = document.getElementById("category").value;
+    const jewelryTable = document.getElementById("update-jewelry-table");
+
     if (category === "Jewelry") {
-        table.classList.remove("hidden");
+        jewelryTable.classList.remove("hidden");
     } else {
-        table.classList.add("hidden");
+        jewelryTable.classList.add("hidden");
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    toggleJewelryTable();
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const category = document.getElementById("updateCategory") ? document.getElementById("updateCategory").value : '';
+    toggleJewelryTable(category);
+});
+
 
 function hideUpdateForm() {
     const updateCard = document.getElementById('updateProductCard');
     updateCard.classList.remove('active');
     setTimeout(() => {
         updateCard.classList.add('hidden');
-    }, 400); // Match the duration of the transition
+    }, 400);
 }
 
     </script>
+
+<script src="https://kit.fontawesome.com/ee10af8ca1.js" crossorigin="anonymous"></script>
 </body>
 </html>
+

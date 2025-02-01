@@ -6,6 +6,7 @@ Use MongoDB\Laravel\Eloquent\Model as Eloquent;
 
 class Product extends Eloquent
 {
+    protected $primaryKey = '_id';
     protected $connection = 'mongodb';
     protected $collection = 'products';
 
