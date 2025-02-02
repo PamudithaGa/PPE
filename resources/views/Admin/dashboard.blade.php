@@ -20,6 +20,7 @@
             <li><a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white"><i class="fas fa-tachometer-alt mr-3"></i> Dashboard</a></li>
             <li><a href="{{ route('products.index') }}" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white"><i class="fas fa-box mr-3"></i> Product Management</a></li>
             <li><a href="{{ route('events.index') }}" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white"><i class="fas fa-calendar-alt mr-3"></i> Event Management</a></li>
+            <li><a href="{{ route('orders.index') }}" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white"><i class="fa-solid fa-truck-fast mr-3" style="color: #ffffff; "></i></i> Orders</a></li>
             <li><a href="{{ url('/logout') }}" class="flex items-center px-6 py-3 text-red-400 hover:bg-red-600 hover:text-white"><i class="fas fa-sign-out-alt mr-3"></i> Logout</a></li>
         </ul>
     </nav>

@@ -52,6 +52,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('orders.index') }}" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <i class="fa-solid fa-truck-fast mr-3" style="color: #ffffff; "></i></i> Orders</a>
+                </li>
+            <li>
+            <li>
                 <a href="{{ url('/logout') }}" class="flex items-center rounded-md px-6 py-3 text-red-400 transition hover:bg-red-600 hover:text-white">
                     <i class="fas fa-sign-out-alt mr-3"></i> Logout
                 </a>

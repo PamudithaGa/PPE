@@ -115,7 +115,7 @@
                 <li><a href="{{ route('bookings.store') }}" class="hover:text-gray-300">Booking</a></li>
                 <li><a href="{{ route('eventPage') }}" class="hover:text-gray-300">Upcomings</a></li>
                 <li><a href="{{ route('cart.index') }}" class="hover:text-gray-300">Cart</a></li>
-                <li><a href="{{ route('dashboard') }}" class="hover:text-gray-300">Account</a></li>
+                <li><a href="{{ route('userdashboard') }}" class="hover:text-gray-300">Account</a></li>
             </ul>
         </div>
     </header>

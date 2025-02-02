@@ -1,148 +1,174 @@
-{{-- <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    
-    <nav class="bg-blue-800 p-4">
-        <div class="container mx-auto flex items-center justify-between">
-            <div class="text-lg font-bold text-white">Pearl Princess Events</div>
-            <div>
-                <a href="#" class="mx-2 text-gray-300 hover:text-white">Home</a>
-                <a href="#" class="mx-2 text-gray-300 hover:text-white">Profile</a>
-                
-                <button wire:click="logout" class="w-full text-start">
-                    <x-dropdown-link>
-                        {{ __('Log Out') }}
-                    </x-dropdown-link>
-                </button>
-++            </div>
-        </div>
-    </nav>
+{{-- <x-app-layout>
+    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+        
+        <div class="flex">
 
-            <div class="mb-8 rounded-lg bg-white p-6 shadow">
-                <h2 class="text-2xl font-bold text-gray-700">Welcome, {{ auth()->user()->name }}</h2>
-                <p class="text-gray-500">NIC: {{ auth()->user()->nic ?? '123456789V' }}</p>
-                <p class="text-gray-500">Email: {{ auth()->user()->email }}</p>
-            </div>
-
-
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            
-            <div class="rounded-lg bg-white p-4 shadow">
-                <h3 class="text-lg font-semibold text-gray-800">Upcoming Event 1</h3>
-                <p class="text-gray-600">Date: 2024-12-25</p>
-                <p class="text-gray-600">Venue: Grand Ballroom</p>
-                <button class="mt-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                    View Details
-                </button>
-            </div>
-            
-            <div class="rounded-lg bg-white p-4 shadow">
-                <h3 class="text-lg font-semibold text-gray-800">Upcoming Event 2</h3>
-                <p class="text-gray-600">Date: 2025-01-15</p>
-                <p class="text-gray-600">Venue: Lakeview Gardens</p>
-                <button class="mt-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                    View Details
-                </button>
-            </div>
-        </div>
-
-
-        <div class="mt-8 rounded-lg bg-white p-6 shadow">
-            <h2 class="text-2xl font-bold text-gray-700">Your Tickets</h2>
-            <table class="mt-4 w-full table-auto">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2 text-left">Event</th>
-                        <th class="px-4 py-2 text-left">Date</th>
-                        <th class="px-4 py-2 text-left">Amount</th>
-                        <th class="px-4 py-2 text-left">Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2">Event Name 1</td>
-                        <td class="border px-4 py-2">2024-12-25</td>
-                        <td class="border px-4 py-2">LKR 5000</td>
-                        <td class="border px-4 py-2">2</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Event Name 2</td>
-                        <td class="border px-4 py-2">2025-01-15</td>
-                        <td class="border px-4 py-2">LKR 7500</td>
-                        <td class="border px-4 py-2">5</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</body>
-</html> --}}
-
-
-
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <!-- Navigation Bar -->
-    <nav class="bg-blue-800 p-4">
-        <div class="container mx-auto flex items-center justify-between">
-            <div class="text-lg font-bold text-white">Pearl Princess Events</div>
-            <div class="flex items-center space-x-4">
-                <a href="#" class="text-gray-300 hover:text-white">Home</a>
-                <a href="#" class="text-gray-300 hover:text-white">Profile</a>
-                <!-- Logout Button -->
-                <button wire:click="logout" class="rounded px-4 py-2 text-sm font-medium text-gray-300 hover:bg-blue-700 hover:text-white">
-                    {{ __('Log Out') }}
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Dashboard Content -->
-    <div class="container mx-auto mt-8 px-4">
-        <!-- User Details -->
-        <div class="mb-8 rounded-lg bg-white p-6 shadow">
-            <h2 class="text-2xl font-bold text-gray-700">Welcome, {{ auth()->user()->name }}</h2>
-            <p class="text-gray-500">NIC: {{ auth()->user()->nic ?? '123456789V' }}</p>
-            <p class="text-gray-500">Email: {{ auth()->user()->email }}</p>
-        </div>
-
-        <!-- Upcoming Events -->
-        <h2 class="mb-4 text-2xl font-bold text-gray-700">Upcoming Events</h2>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <!-- Event Card -->
-            @foreach ($upcomingEvents as $event)
-                <div class="rounded-lg bg-white p-4 shadow">
-                    <h3 class="text-lg font-semibold text-gray-800">{{ $event->title }}</h3>
-                    <p class="text-gray-600">Date: {{ $event->date }}</p>
-                    <p class="text-gray-600">Venue: {{ $event->venue }}</p>
-                    <button class="mt-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                        View Details
-                    </button>
+            <div class="h-screen w-64 bg-gray-900 text-white shadow-lg">
+                <div class="mt-12 flex flex-col items-center">
+                    <img class="h-16 w-16 rounded-full" src="https://via.placeholder.com/150" alt="{{ auth()->user()->name }} Profile Picture">
+                    <h3 class="mt-4 text-lg font-bold"> {{ auth()->user()->name }}</h3>
                 </div>
-            @endforeach
-        </div>
+                
+                <nav class="mt-10">
+                    <ul>
+                        <li class="group px-6 py-3 hover:bg-gray-700">
+                            <a href="{{ route('dashboard') }}" class="flex items-center">
+                                <i class="fa-regular fa-user" style="color: #ffffff;"></i>
+                                <span class="ml-4">Profile</span>
+                            </a>
+                        <li class="group px-6 py-3 hover:bg-green-700">
+                            <a href="{{ route('home') }}" class="flex items-center">
+                                <i class="fa-solid fa-right-to-bracket fa-flip-horizontal" style="color: #ffffff;"></i>
+                                <span class="ml-4">Back to Home</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-        <!-- Purchased Tickets -->
-        <div class="mt-8 rounded-lg bg-white p-6 shadow">
-            <h2 class="text-2xl font-bold text-gray-700">Your Tickets</h2>
-            <table class="mt-4 w-full table-auto border-collapse">
-                <thead>
-                    <tr>
-                        <th class="border-b px-4 py-2 text-left">Event</th>
-                        <th class="border-b px-4 py-2 text-left">Date</th>
-                        <th class="border-b px-4 py-2 text-left">Amount</th>
-                        <th class="border-b px-4 py-2 text-left">Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($purchasedTickets as $ticket)
-                        <tr>
-                            <td class="border-b px-4 py-2">{{ $ticket->event_name }}</td>
-                            <td class="border-b px-4 py-2">{{ $ticket->event_date }}</td>
-                            <td class="border-b px-4 py-2">LKR {{ number_format($ticket->amount, 2) }}</td>
-                            <td class="border-b px-4 py-2">{{ $ticket->quantity }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="flex-1 p-6">
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="rounded-lg bg-white p-6 shadow">
+                        <h3 class="text-xl font-semibold">Profile</h3>
+                        <p class="mt-2 text-gray-600"><strong>Name:</strong> {{ auth()->user()->name }}</p>
+                        <p class="mt-1 text-gray-600"><strong>Email:</strong> {{ auth()->user()->email }}</p>
+                        <a href="{{ route('profile') }}">
+                            <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
+                                Update Profile
+                            </button>
+                        </a>                  
+                    </div>
+                </div>            
+            </div>
+            <div class="bg-yellow-700">
+                <a href="{{ route('offerings') }}">
+                    <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
+                        Back To Shop
+                    </button>
+                </a>
+            </div>
         </div>
-    </div>
-</body>
-</html>
+        <script src="https://kit.fontawesome.com/ee10af8ca1.js" crossorigin="anonymous"></script>
+    </body>
+</x-app-layout> --}}
+
+
+<x-app-layout>
+    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+        <div class="flex h-screen">
+            <!-- Sidebar -->
+            <div class="w-64 bg-gray-900 text-white shadow-lg">
+                <div class="mt-12 flex flex-col items-center">
+                    <img class="h-16 w-16 rounded-full border-2 border-white" 
+                         src="https://via.placeholder.com/150" 
+                         alt="{{ auth()->user()->name }} Profile Picture">
+                    <h3 class="mt-4 text-lg font-bold"> {{ auth()->user()->name }}</h3>
+                </div>
+
+                <nav class="mt-10">
+                    <ul>
+                        <li class="group px-6 py-3 hover:bg-gray-700">
+                            <a href="{{ route('dashboard') }}" class="flex items-center">
+                                <i class="fa-regular fa-user" style="color: #ffffff;"></i>
+                                <span class="ml-4">Profile</span>
+                            </a>
+                        </li>
+                        <li class="group px-6 py-3 hover:bg-green-700">
+                            <a href="{{ route('home') }}" class="flex items-center">
+                                <i class="fa-solid fa-right-to-bracket fa-flip-horizontal" style="color: #ffffff;"></i>
+                                <span class="ml-4">Back to Home</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="flex-1 p-6">
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <!-- Profile Card -->
+                    <div class="rounded-lg bg-white p-6 shadow-lg">
+                        <h3 class="text-xl font-semibold text-gray-800">Profile</h3>
+                        <p class="mt-2 text-gray-600"><strong>Name:</strong> {{ auth()->user()->name }}</p>
+                        <p class="mt-1 text-gray-600"><strong>Email:</strong> {{ auth()->user()->email }}</p>
+                        <a href="{{ route('profile') }}">
+                            <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
+                                Update Profile
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="mt-6 w-full">
+                    <a href="{{ route('offerings') }}">
+                        <div class="relative transform overflow-hidden rounded-lg bg-gradient-to-r from-red-500 to-red-700 p-6 shadow-lg hover:scale-90">
+                            <div class="absolute right-2 top-2 text-6xl text-white opacity-20">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            {{-- <h3 class="text-lg font-semibold text-white">Back To Shop</h3> --}}
+                            <p class="text-xl font-bold text-white">🛒 Back To Shop</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-6 w-full">
+                    <a href="{{ route('eventPage') }}">
+                        <div class="relative transform overflow-hidden rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 p-6 shadow-lg hover:scale-90">
+                            <div class="absolute right-2 top-2 text-6xl text-white opacity-20">
+                                <i class="fas fa-ticket-alt"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white">Ticket Purchase</h3>
+                            <p class="text-xl font-bold text-white">🎟️ Buy Tickets</p>
+                        </div>
+                    </a>
+                
+                
+                <div class="grid gap-2 lg:grid-cols-2">
+                <div class="mt-6 w-full">
+                    <a href="{{ route('bookings.store') }}">
+                        <div class="relative transform overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-indigo-700 p-6 shadow-lg hover:scale-90">
+                            <div class="absolute right-2 top-2 text-6xl text-white opacity-20">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white">Event Planning</h3>
+                            <p class="text-xl font-bold text-white">📅 Plan Your Event</p>
+                            <p class="mt-2 text-sm text-white opacity-80">Organize, schedule, and manage events effortlessly.</p>
+                        </div>
+                    </a>
+                </div>
+            
+                <div class="mt-6 w-full">
+                    <a href="{{ route('bookings.store') }}">
+                        <div class="relative transform overflow-hidden rounded-lg bg-gradient-to-r from-pink-500 to-red-600 p-6 shadow-lg hover:scale-90">
+                            <div class="absolute right-2 top-2 text-6xl text-white opacity-20">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white">Manage Participants</h3>
+                            <p class="text-xl font-bold text-white">👥 Invite and Track Guests</p>
+                            <p class="mt-2 text-sm text-white opacity-80">Invite guests and manage your event's participants.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+                
+                <div class="mt-6 w-full">
+                    <a href="{{ route('bookings.store') }}">
+                        <div class="relative transform overflow-hidden rounded-lg bg-gradient-to-r from-yellow-500 to-orange-600 p-6 shadow-lg hover:scale-90">
+                            <div class="absolute right-2 top-2 text-6xl text-white opacity-20">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white">Budget Management</h3>
+                            <p class="text-xl font-bold text-white">💸 Manage Event Budgets</p>
+                            <p class="mt-2 text-sm text-white opacity-80">Set budgets and track your spending for the event.</p>
+                        </div>
+                    </a>
+                </div>
+                
+                
+            </div>
+            
+            
+            <script src="https://kit.fontawesome.com/ee10af8ca1.js" crossorigin="anonymous"></script>
+                </body>
+</x-app-layout>
