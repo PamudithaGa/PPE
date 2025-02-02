@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookings;
+use App\Models\bookings;
 use App\Models\Tickets;
 use App\Models\Order;
 use App\Models\Subscription;
@@ -16,7 +16,7 @@ class AdminDashboardController extends Controller
         $ticketCount = Tickets::count();
         $productCount = Order::count();
         $ordersCount = Order::count();
-        $bookingsCount = Bookings::count();
+        $bookingsCount = bookings::count();
         $totalRevenue = Order::sum('total_amount');
         $subscriptionCount = Subscription::count();
 
