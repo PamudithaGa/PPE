@@ -35,7 +35,7 @@ class AdminController extends Controller
         if (Auth::guard('admin')->attempt($credentials)) {
             
             $request->session()->regenerate();
-            return redirect()->route('products.index');
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors([

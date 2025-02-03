@@ -38,13 +38,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/cart', [CartApiController::class, 'index']); 
     Route::post('/cart/add', [CartApiController::class, 'addToCart']);
     Route::delete('/cart/{id}', [CartApiController::class, 'remove']);
-});
 
-
-Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/checkout', [CheckoutApiController::class, 'checkout']); 
     Route::get('/checkout/success', [CheckoutApiController::class, 'success'])->name('api.checkout.success'); 
     Route::get('/checkout/cancel', [CheckoutApiController::class, 'cancel'])->name('api.checkout.cancel'); 
+
+    Route::post('ticket/create', [TicketsBookingApiController::class, 'create']); 
+    Route::get('ticket/success', [TicketsBookingApiController::class, 'success']);
+    Route::get('ticket/cancel', [TicketsBookingApiController::class, 'cancel']); 
+
 });
 
 
@@ -55,6 +57,3 @@ Route::get('events/{id}', [EventApiController::class, 'show']);
 
 
 
-Route::post('ticket/create', [TicketsBookingApiController::class, 'create']); 
-Route::get('ticket/success', [TicketsBookingApiController::class, 'success']);
-Route::get('ticket/cancel', [TicketsBookingApiController::class, 'cancel']); 

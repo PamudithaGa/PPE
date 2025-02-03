@@ -26,19 +26,21 @@ class LoginForm extends Form
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate()
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
-            RateLimiter::hit($this->throttleKey());
+        if (!Auth::attempt($this->only(['email', 'password']), $this->remember)) {
+            //RateLimiter::hit($this->throttleKey());
 
-            throw ValidationException::withMessages([
-                'form.email' => trans('auth.failed'),
-            ]);
+            session()->flash('error', 'Invalid email or password.');
+            
+            return redirect()->route('login'); 
         }
 
         RateLimiter::clear($this->throttleKey());
+
+        return redirect()->route('dashboard'); 
     }
 
     /**
