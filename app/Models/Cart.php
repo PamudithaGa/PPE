@@ -7,7 +7,7 @@ use Mongodb\Laravel\Eloquent\Model;
 class Cart extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'carts'; // Ensure correct collection name
+    protected $collection = 'carts';
 
     protected $fillable = [
         'user_id',

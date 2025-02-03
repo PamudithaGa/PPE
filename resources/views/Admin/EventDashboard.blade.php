@@ -12,16 +12,14 @@
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <div class="flex">
-            <!-- Sidebar -->
-            <!-- Sidebar -->
+
 <div class="fixed hidden h-screen w-64 bg-gray-900 shadow-lg transition-all duration-300 ease-in-out md:block" id="sidebar">
-    <!-- Profile Section -->
+    
     <div class="mt-10 flex flex-col items-center">
         <img class="h-16 w-16 rounded-full border-2 border-gray-500" src="{{ asset('..\img\admin.png')}}" alt="Admin Profile Picture">
         <h2 class="mt-2 text-lg font-semibold text-white">Admin Panel</h2>
     </div>
 
-    <!-- Navigation -->
     <nav class="mt-6">
         <ul class="space-y-2">
             <li>
@@ -52,12 +50,10 @@
     </nav>
 </div>
 
-<!-- Mobile Toggle Button -->
 <button class="fixed left-4 top-4 rounded-md bg-gray-800 p-2 text-white focus:outline-none md:hidden" id="menu-toggle">
     <i class="fas fa-bars"></i>
 </button>
 
-<!-- JavaScript for Sidebar Toggle -->
 <script>
     document.getElementById('menu-toggle').addEventListener('click', function () {
         let sidebar = document.getElementById('sidebar');
@@ -65,7 +61,6 @@
     });
 </script>
 
-<!-- FontAwesome Icons (Optional) -->
 <script src="https://kit.fontawesome.com/ee10af8ca1.js" crossorigin="anonymous"></script>
 
 
@@ -357,17 +352,16 @@
             const minDate = new Date();
             minDate.setDate(today.getDate() + 10); // Add 10 days
     
-            const minDateString = minDate.toISOString().split('T')[0]; // Convert to yyyy-mm-dd format
+            const minDateString = minDate.toISOString().split('T')[0]; 
             eventDate.min = minDateString;
     
-            // Show or hide the "Artists" section based on the event type
             eventType.addEventListener('change', () => {
                 const selectedType = eventType.value;
                 if (selectedType === 'musical' || selectedType === 'dancing') {
                     artistsSection.classList.remove('hidden');
                 } else {
                     artistsSection.classList.add('hidden');
-                    // Clear artist fields if "Artists" section is hidden
+
                     artistFields.innerHTML = `
                         <div class="flex items-center space-x-4">
                             <input type="text" name="artists[]" placeholder="Enter artist name"
@@ -426,8 +420,8 @@ function closeUpdateForm() {
                                 
 document.querySelector('input[name="ticketPrice"]').addEventListener('input', function (e) {
     if (e.target.value < 1) {
-        e.target.value = 1; // Automatically set the value to 1 if the user enters 0 or a negative number
-    }
+        e.target.value = 1; 
+     }
 });
 
 

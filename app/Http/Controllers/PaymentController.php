@@ -42,7 +42,6 @@ class PaymentController extends Controller
             return redirect()->route('cart.index')->with('error', 'Order not found.');
         }
 
-        // Update order status
         $ordersCollection->updateOne(
             ['_id' => $order->_id],
             ['$set' => ['status' => 'paid', 'payment_method' => $request->payment_method, 'paid_at' => now()]]

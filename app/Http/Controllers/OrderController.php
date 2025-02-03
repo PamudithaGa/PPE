@@ -15,8 +15,7 @@ class OrderController extends Controller
         return view('Admin.orders', compact('orders'));
     }
 
-    
-        public function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'full_name' => 'required|string|max:255',

@@ -6,7 +6,6 @@ use MongoDB\Laravel\Eloquent\Model as Eloquent;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class Tickets extends Eloquent
 {
     protected $connection = 'mongodb'; 

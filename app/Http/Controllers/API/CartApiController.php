@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 
 class CartApiController extends Controller
 {
-    // Get cart items for the authenticated user
     public function index()
     {
         $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
@@ -27,7 +26,6 @@ class CartApiController extends Controller
         ], 200);
     }
 
-    // Add item to cart
     public function addToCart(Request $request)
     {
         Log::info('Add to Cart request received', $request->all());
@@ -53,7 +51,6 @@ class CartApiController extends Controller
         ], 201);
     }
 
-    // Remove item from cart
     public function remove($id)
     {
         $cartItem = Cart::where('user_id', Auth::id())->where('_id', $id)->first();

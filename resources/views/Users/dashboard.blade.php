@@ -1,63 +1,7 @@
-{{-- <x-app-layout>
-    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-        
-        <div class="flex">
-
-            <div class="h-screen w-64 bg-gray-900 text-white shadow-lg">
-                <div class="mt-12 flex flex-col items-center">
-                    <img class="h-16 w-16 rounded-full" src="https://via.placeholder.com/150" alt="{{ auth()->user()->name }} Profile Picture">
-                    <h3 class="mt-4 text-lg font-bold"> {{ auth()->user()->name }}</h3>
-                </div>
-                
-                <nav class="mt-10">
-                    <ul>
-                        <li class="group px-6 py-3 hover:bg-gray-700">
-                            <a href="{{ route('dashboard') }}" class="flex items-center">
-                                <i class="fa-regular fa-user" style="color: #ffffff;"></i>
-                                <span class="ml-4">Profile</span>
-                            </a>
-                        <li class="group px-6 py-3 hover:bg-green-700">
-                            <a href="{{ route('home') }}" class="flex items-center">
-                                <i class="fa-solid fa-right-to-bracket fa-flip-horizontal" style="color: #ffffff;"></i>
-                                <span class="ml-4">Back to Home</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="flex-1 p-6">
-
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <div class="rounded-lg bg-white p-6 shadow">
-                        <h3 class="text-xl font-semibold">Profile</h3>
-                        <p class="mt-2 text-gray-600"><strong>Name:</strong> {{ auth()->user()->name }}</p>
-                        <p class="mt-1 text-gray-600"><strong>Email:</strong> {{ auth()->user()->email }}</p>
-                        <a href="{{ route('profile') }}">
-                            <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
-                                Update Profile
-                            </button>
-                        </a>                  
-                    </div>
-                </div>            
-            </div>
-            <div class="bg-yellow-700">
-                <a href="{{ route('offerings') }}">
-                    <button class="mt-4 w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
-                        Back To Shop
-                    </button>
-                </a>
-            </div>
-        </div>
-        <script src="https://kit.fontawesome.com/ee10af8ca1.js" crossorigin="anonymous"></script>
-    </body>
-</x-app-layout> --}}
-
-
 <x-app-layout>
     <body class="bg-gray-100 font-sans leading-normal tracking-normal">
         <div class="flex h-screen">
-            <!-- Sidebar -->
+            
             <div class="w-64 bg-gray-900 text-white shadow-lg">
                 <div class="mt-12 flex flex-col items-center">
                     <img class="h-16 w-16 rounded-full border-2 border-white" 
@@ -86,7 +30,6 @@
 
             <div class="flex-1 p-6">
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <!-- Profile Card -->
                     <div class="rounded-lg bg-white p-6 shadow-lg">
                         <h3 class="text-xl font-semibold text-gray-800">Profile</h3>
                         <p class="mt-2 text-gray-600"><strong>Name:</strong> {{ auth()->user()->name }}</p>
@@ -105,7 +48,6 @@
                             <div class="absolute right-2 top-2 text-6xl text-white opacity-20">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            {{-- <h3 class="text-lg font-semibold text-white">Back To Shop</h3> --}}
                             <p class="text-xl font-bold text-white">🛒 Back To Shop</p>
                         </div>
                     </a>

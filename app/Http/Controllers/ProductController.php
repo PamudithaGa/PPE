@@ -44,7 +44,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
 
-
     public function index()
     {
         $products = Product::all();
@@ -90,7 +89,6 @@ class ProductController extends Controller
             return response()->json(['error' => 'Product not found'], 404);
         }
     
-        // Validate the request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
@@ -99,10 +97,8 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
     
-        // Update product fields
         $product->update($validated);
     
-        // Handle image upload if provided
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
             $product->image = $imagePath;
@@ -112,8 +108,6 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product updated successfully');
     }
     
-    
-
     public function offerings()
     {
         $productsByCategory = Product::all()->groupBy('category');

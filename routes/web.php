@@ -14,7 +14,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TicketsBookingController;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\AdminDashboardController;
@@ -64,30 +63,25 @@ Route::post('/subscribe', [SubscriptionController::class, 'store'])->middleware(
 
 Route::get('/adlogin', [AdminController::class, 'login'])->name('adlogin');
 Route::post('/adlogin', [AdminController::class, 'authenticate'])->name('admin.authenticate');
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add'); 
     Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove'); 
-});
 
-Route::middleware('auth')->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.index');
     Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
     Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
-});
 
-Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
-});
 
-Route::middleware('auth')->group(function () {
     Route::post('create', [TicketsBookingController::class, 'create'])->name('booking.create');
     Route::get('success', [TicketsBookingController::class, 'success'])->name('booking.success');
     Route::get('cancel', [TicketsBookingController::class, 'cancel'])->name('booking.cancel');
 });
 
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
 
 require __DIR__.'/auth.php';

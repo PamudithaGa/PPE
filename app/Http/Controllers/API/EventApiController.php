@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 
 class EventApiController extends Controller
 {
-    // Fetch all events
     public function index()
     {
         $events = Event::all();
@@ -18,7 +17,6 @@ class EventApiController extends Controller
         ], 200);
     }
 
-    // Fetch a specific event by ID
     public function show($id)
     {
         $event = Event::find($id);

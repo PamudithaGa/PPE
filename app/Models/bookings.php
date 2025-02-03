@@ -7,8 +7,8 @@ use MongoDB\Laravel\Eloquent\Model as Eloquent;
 
 class bookings extends Eloquent
 {
-    protected $connection = 'mongodb'; // MongoDB connection
-    protected $collection = 'bookings'; // Collection name
+    protected $connection = 'mongodb';
+    protected $collection = 'bookings';
 
     protected $fillable = [
         'name',

@@ -39,7 +39,6 @@ class AuthController extends Controller
 
     public function register(Request $request): JsonResponse
     {
-        // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
@@ -47,16 +46,13 @@ class AuthController extends Controller
         ]);
     
         try {
-            // Create the new user
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
     
-            // Check if the user is created successfully
             if ($user) {
-                // Create a token for the user
                 $token = $user->createToken($user->email.'Auth-Token')->plainTextToken;
     
                 return response()->json([
@@ -70,7 +66,6 @@ class AuthController extends Controller
                 ], 500);
             }
         } catch (\Exception $e) {
-            // Catch any unexpected errors and return them
             return response()->json([
                 'message' => 'Something went wrong: ' . $e->getMessage(),
             ], 500);

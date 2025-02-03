@@ -14,12 +14,10 @@ use Illuminate\Support\Facades\Log;
 
 class TicketsBookingApiController extends Controller
 {
-    // API to initiate ticket booking and create a Stripe session
     public function create(Request $request)
     {
         Log::info($request->all());
         
-        // Validate the form data
         $validated = $request->validate([
             'nic' => 'required|string|max:20',
             'email' => 'required|email',
@@ -28,11 +26,9 @@ class TicketsBookingApiController extends Controller
             'ticket_quantity' => 'required|integer|min:1',
         ]);
 
-        // Find the event
         $event = Event::findOrFail($validated['event_id']);
         $totalPrice = $event->ticketPrice * $validated['ticket_quantity'];
 
-        // Save ticket details to the database
         $ticket = Tickets::create([
             'user_nic' => $validated['nic'],
             'user_email' => $validated['email'],
@@ -42,7 +38,6 @@ class TicketsBookingApiController extends Controller
             'total_price' => $totalPrice,
         ]);
 
-        // Initialize Stripe session
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = StripeSession::create([
@@ -54,7 +49,7 @@ class TicketsBookingApiController extends Controller
                         'product_data' => [
                             'name' => $event->eventName,
                         ],
-                        'unit_amount' => $event->ticketPrice * 100, // In cents
+                        'unit_amount' => $event->ticketPrice * 100, 
                     ],
                     'quantity' => $validated['ticket_quantity'],
                 ],
@@ -70,12 +65,10 @@ class TicketsBookingApiController extends Controller
         ], 200);
     }
 
-    // API for success (email confirmation sent after successful payment)
     public function success(Request $request)
     {
         $ticket = Tickets::findOrFail($request->ticket);
 
-        // Send confirmation email
         Mail::to($ticket->user_email)->send(new TicketConfirmationMail($ticket));
 
         return response()->json([
@@ -84,7 +77,6 @@ class TicketsBookingApiController extends Controller
         ], 200);
     }
 
-    // API for cancel (when payment is canceled)
     public function cancel()
     {
         return response()->json([

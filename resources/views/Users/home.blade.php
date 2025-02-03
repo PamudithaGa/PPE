@@ -209,37 +209,6 @@
             <img class="h-[300px] md:h-[400px] lg:h-[450px]" src="{{ asset('img/flower.png') }}" alt="Flower">
         </div>
     </div>
-    
-
-    {{-- <div class="pb-[50px] pt-[90px]">
-        <div class="flex items-center justify-between">
-          <h2 class="ml-[80px] font-serif text-[36px]">Upcoming Events</h2>
-        </div>        
-        
-        <div class="grid grid-cols-1 place-items-center gap-6 pl-[170px] pr-[170px] pt-10 sm:grid-cols-2 lg:grid-cols-4">     
-            <!-- Repeat for other events -->
-            <div class="group relative overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-2xl">
-                <img class="h-[350px] w-[250px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105" src="../img/dancer.jpg" alt="Event Image"/>
-                  
-                <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-purple-700 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                    <div class="p-4 text-white">
-                        <h3 class="text-xl font-bold">SL 2 World</h3>
-                        <p class="text-sm">1st January 2025</p>
-                        <div class="mt-3 flex space-x-2">
-                            <a href="#" class="text-white hover:text-gray-300"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="text-white hover:text-gray-300"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="text-white hover:text-gray-300"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="text-white hover:text-gray-300"><i class="fab fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>          
-        <!-- Add Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-    </div> --}}
-    
 
     <div class="flex flex-wrap items-center justify-center gap-6 p-6 pb-[170px] pt-[170px]">
         <div class="group relative h-96 w-72 overflow-hidden rounded-lg shadow-lg">

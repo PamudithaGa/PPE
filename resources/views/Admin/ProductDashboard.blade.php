@@ -242,13 +242,10 @@
             document.getElementById('updateCategory').value = product.category;
             document.getElementById('updateDescription').value = product.description;
 
-            // Call the function to show/hide jewelry table based on the product category
             toggleJewelryTable(product.category);
 
-            // Set the form action
             updateForm.setAttribute("action", `/products/${productId}`);
 
-            // Show the update form
             updateCard.classList.remove('hidden');
             updateCard.classList.add('active');
         })

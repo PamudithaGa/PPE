@@ -181,10 +181,9 @@
     </div>
     
     <div class="relative mb-[100px] mt-[100px] h-[450px] overflow-hidden bg-[#3A3D56] shadow-xl" data-aos="fade-up">
-        <!-- Decorative Overlay -->
+        
         <div class="absolute inset-0 bg-gradient-to-r from-black via-[#3A3D56] to-black opacity-70"></div>
     
-        <!-- Content Area -->
         <div class="relative z-10 flex h-full items-center justify-center px-6 text-center sm:px-20">
             <div>
                 <h2 class="font-serif text-[40px] leading-snug text-white sm:text-[54px]" data-aos="zoom-in">
@@ -198,7 +197,6 @@
             </div>
         </div>
     
-        <!-- Decorative Elements -->
         <div class="absolute left-0 top-0 h-[150px] w-[150px] rounded-full bg-yellow-400 opacity-30 blur-xl" data-aos="fade-in"></div>
         <div class="absolute bottom-0 right-0 h-[200px] w-[200px] rounded-full bg-yellow-400 opacity-20 blur-[80px]" data-aos="fade-in" data-aos-delay="300"></div>
     </div>

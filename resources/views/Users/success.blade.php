@@ -1,13 +1,3 @@
-{{-- @extends('layout')
-@section('content')
-<div class="container mx-auto mt-20 text-center">
-    <h1 class="text-3xl font-bold text-green-600">Payment Successful!</h1>
-    <p class="mt-4 text-lg">Thank you for your purchase. Your order has been placed successfully.</p>
-    <a href="{{ route('cart.index') }}" class="mt-6 inline-block bg-black px-6 py-2 text-white">Back to Shop</a>
-</div>
-@endsection --}}
-
-
 @extends('layout')
 
 @section('content')
@@ -39,11 +29,5 @@
         </div>
     </div>
 
-
-
-    
-
-
-<!-- Optional: Add animation library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
 @endsection

@@ -1,15 +1,13 @@
-{{-- resources\views\Users\cart.blade.php --}}
 @extends('layout')
-
 @section('content')
 
 <body class="bg-gray-50 font-sans text-gray-800">
   <div class="container mx-auto p-6">
-    <!-- Page Title -->
+    
     <h1 class="mb-6 mt-[100px] text-2xl font-bold">My Shopping Bag</h1>
 
     <div class="flex flex-col gap-8 lg:flex-row">
-      <!-- Shopping Bag Items -->
+      
       <div class="flex-1 rounded-lg bg-white p-6 shadow-md">
         <table class="w-full table-auto">
           <thead>
@@ -19,7 +17,6 @@
               <th class="pb-4">Total</th>
             </tr>
           </thead>
-
 
           <tbody>
             @forelse($cartItems as $cartItem)
@@ -55,7 +52,6 @@
         </table>
       </div>
 
-
       <div class="w-full rounded-lg bg-white p-6 shadow-md lg:w-1/3">
         <h2 class="mb-4 text-lg font-semibold">Summary</h2>
         <div class="mb-4">
@@ -79,9 +75,7 @@
             <span>LKR {{ number_format($total, 2) }}</span>
           </div>
         </div>
-        
-
-
+  
 <!-- Alpine.js Modal -->
 <div x-data="{ showModal: false }">
   <button @click="showModal = true" class="mt-4 w-full rounded bg-black py-3 text-sm font-bold uppercase text-white">
@@ -112,24 +106,10 @@
       </div>
   </div>
 </div>
-
-
-
         <p class="mt-4 text-sm text-gray-500">Need help? Contact us at <a href="tel:+94726442538" class="text-indigo-600 hover:underline">0784722795</a></p>
       </div>
     </div>
   </div>
-
-
-
-
-
-  
-  
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
-
-  
 </body>
-
 @endsection 

@@ -30,7 +30,6 @@ class BookingController extends Controller
         'services' => 'nullable|array',
         'services.*' => 'string',
         'notes' => 'nullable|string|max:1000',
-        //'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
 
 
@@ -54,7 +53,7 @@ class BookingController extends Controller
     $booking->budget = $request->budget;
     $booking->services = $request->services;
     $booking->notes = $request->notes;
-    //$booking->image = $imageName ? 'img/' . $imageName : null;    $booking->save();
+
 
     Mail::to($request->email)->send(new BookingConfirmation($booking));
 

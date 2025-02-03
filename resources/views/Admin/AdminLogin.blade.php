@@ -10,17 +10,14 @@
 
     <div class="w-full max-w-md rounded-lg bg-white px-8 py-6 shadow-lg">
         
-        <!-- Header Section -->
         <div class="mb-6 text-center">
             <h1 class="text-2xl font-bold text-indigo-600">Admin Login</h1>
             <p class="text-sm text-gray-600">Welcome back! Please log in to continue.</p>
         </div>
 
-        <!-- Login Form -->
         <form method="POST" action="{{ route('admin.authenticate') }}">
             @csrf
 
-            <!-- Email Field -->
             <div class="mb-4">
                 <label for="email" class="mb-2 block text-sm font-semibold text-gray-600">Email Address</label>
                 <input 
@@ -37,7 +34,6 @@
                 @enderror
             </div>
         
-            <!-- Password Field -->
             <div class="mb-4">
                 <label for="password" class="mb-2 block text-sm font-semibold text-gray-600">Password</label>
                 <input 
@@ -53,7 +49,6 @@
                 @enderror
             </div>
         
-            <!-- Remember Me and Forgot Password -->
             <div class="mb-6 flex items-center justify-between">
                 <label class="inline-flex items-center">
                     <input type="checkbox" name="remember" class="form-checkbox h-4 w-4 text-indigo-600">
@@ -64,7 +59,6 @@
                 </a>
             </div>
         
-            <!-- Submit Button -->
             <button 
                 type="submit" 
                 class="w-full rounded-lg bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700">
@@ -72,7 +66,6 @@
             </button>
         </form>
 
-        <!-- Error Message Section -->
         @if(session('error'))
             <div class="mt-4 text-sm text-red-500">
                 {{ session('error') }}
