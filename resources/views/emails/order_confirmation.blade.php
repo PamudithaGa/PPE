@@ -58,7 +58,7 @@
 
                     <tr>
                         <td align="center" style="background: #f1f1f1; padding: 15px; border-radius: 0 0 8px 8px;">
-                            <p style="color: #555; font-size: 14px; margin: 0;">© {{ date('Y') }} Your Store Name. All Rights Reserved.</p>
+                            <p style="color: #555; font-size: 14px; margin: 0;">© {{ date('Y') }} Pearl Princess Events. All Rights Reserved.</p>
                         </td>
                     </tr>
 
