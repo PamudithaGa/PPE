@@ -52,5 +52,5 @@ Route::get('/product/details/{id}', [ProductApiController::class, 'show']);
 Route::get('events', [EventApiController::class, 'index']);  
 Route::get('events/{id}', [EventApiController::class, 'show']); 
 
-Route::get('/image/{filename}', [ImageController::class, 'getImage']);
+// Route::get('/image/{filename}', [ImageController::class, 'getImage']);
 Route::get('/image/{filename}', [ImageApiController::class, 'getImage']);
