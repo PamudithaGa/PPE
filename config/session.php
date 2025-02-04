@@ -4,6 +4,8 @@ use Illuminate\Support\Str;
 
 return [
 
+    'same_site' => 'none',
+
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver
