@@ -49,7 +49,7 @@
             </div>
         </div>
     
-        {{-- <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center">
             <h2 class="font-mono text-[32px] text-slate-900">SOCIAL GATHERINGS</h2>
             <div class="group relative h-[270px] w-[270px]">
                 <img class="h-full w-full object-cover" src="{{ asset('..\img\socialG.jpg')}}" alt="">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-     --}}
+    
         <div class="flex flex-col items-center">
             <h2 class="font-mono text-[32px] text-slate-900">CORPORATE EVENTS</h2>
             <div class="group relative h-[270px] w-[270px]">
