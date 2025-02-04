@@ -8,6 +8,8 @@ use App\Http\Controllers\API\CartApiController;
 use App\Http\Controllers\API\CheckoutApiController;
 use App\Http\Controllers\API\EventApiController;
 use App\Http\Controllers\API\TicketsBookingApiController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\API\ImageApiController;
 
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
@@ -49,3 +51,6 @@ Route::get('/product/details/{id}', [ProductApiController::class, 'show']);
 
 Route::get('events', [EventApiController::class, 'index']);  
 Route::get('events/{id}', [EventApiController::class, 'show']); 
+
+Route::get('/image/{filename}', [ImageController::class, 'getImage']);
+Route::get('/image/{filename}', [ImageApiController::class, 'getImage']);
